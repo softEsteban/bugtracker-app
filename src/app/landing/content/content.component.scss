@@ -1,8 +1,10 @@
 .wrap-content {
-  height: calc(131vh - 100px);
+  // height: calc(131vh - 100px);
+  height: 600px;
 
   .cls-col {
-    height: calc(131vh - 100px);
+    // height: calc(131vh - 100px);
+    height: 550px;
 
     //Mantis main titles
     .cls-open-tag {
@@ -35,5 +37,15 @@
         text-transform: lowercase;
       }
     }
+  }
+}
+
+.wrap-content2 {
+  // height: calc(131vh - 100px);
+  height: 363px;
+
+  .cls-col {
+    // height: calc(131vh - 100px);
+    height: 363px;
   }
 }
