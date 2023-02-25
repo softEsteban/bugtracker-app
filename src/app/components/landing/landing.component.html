@@ -1,0 +1,58 @@
+<div class="site-page-header-ghost-wrapper">
+  <nz-page-header style="background-color: black" [nzGhost]="false">
+    <nz-page-header-title style="color: white; cursor: pointer" routerLink="/"
+      >Mantis</nz-page-header-title
+    >
+    <nz-page-header-extra>
+      <nz-space>
+        <a *nzSpaceItem style="color: white">Docs</a>
+        <a *nzSpaceItem style="color: white">Sign up</a>
+        <a *nzSpaceItem style="color: white">Our project</a>
+        <a
+          *nzSpaceItem
+          style="color: white; text-decoration: underline"
+          routerLink="/login"
+          >Login</a
+        >
+      </nz-space>
+    </nz-page-header-extra>
+  </nz-page-header>
+</div>
+
+<div nz-row style="height: calc(100vh - 75px)">
+  <div
+    nz-col
+    nzSpan="12"
+    style="margin: 8% 0; font-size: 17px; color: #3e3e3e; padding: 24px"
+  >
+    <p class="cls-open-tag">&#60;body&#62;</p>
+    <h2 style="font-size: 63px; margin: 0">mantis</h2>
+    <p class="cls-subtitle">
+      A bug tracker to manage software projects <br />
+      and connect users with developers
+    </p>
+    <p style="margin-top: 45px">&#60; &#47; body&#62;</p>
+  </div>
+
+  <div nz-col nzSpan="12">
+    <div style="padding: 30px">
+      <div nz-row [nzGutter]="8">
+        <div nz-col [nzSpan]="8">
+          <nz-card nzTitle="Card title">
+            <p>Mantis project</p>
+          </nz-card>
+        </div>
+        <div nz-col [nzSpan]="8">
+          <nz-card nzTitle="Card title">
+            <p>Card content</p>
+          </nz-card>
+        </div>
+        <div nz-col [nzSpan]="8">
+          <nz-card nzTitle="Card title">
+            <p>Card content</p>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+.ant-layout-header {
+  padding: 0 25px;
+}
+.wrap-content {
+  height: 600px;
+
+  .cls-col {
+    height: 550px;
+
+    .cls-open-tag {
+      font-size: 21px;
+    }
+    .cls-title {
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+    .cls-subtitle {
+      font-size: 21px;
+      font-weight: 100;
+      margin-top: 0;
+    }
+    .cls-closing-tag {
+      margin-top: 52px;
+      font-size: 21px;
+    }
+
+    .cls-card {
+      .cls-card-link {
+        color: white;
+        font-weight: 500;
+        font-size: 15px;
+        text-transform: lowercase;
+      }
+    }
+  }
+}
+
+.wrap-content2 {
+  height: 363px;
+
+  .cls-col {
+    height: 363px;
+  }
+}

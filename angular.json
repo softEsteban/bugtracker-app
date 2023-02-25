@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "bug-tracker-app": {
+    "bug-tacker-nz": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/bug-tracker-app",
+            "outputPath": "dist/bug-tacker-nz",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -21,18 +21,17 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/assets/styles"
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css",
-              "node_modules/materialize-css/dist/css/materialize.min.css",
-              "src/assets/styles/global.scss"
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/materialize-css/dist/js/materialize.min.js",
-              "src/assets/js/M-init.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -71,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "bug-tracker-app:build:production"
+              "browserTarget": "bug-tacker-nz:build:production"
             },
             "development": {
-              "browserTarget": "bug-tracker-app:build:development"
+              "browserTarget": "bug-tacker-nz:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +81,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "bug-tracker-app:build"
+            "browserTarget": "bug-tacker-nz:build"
           }
         },
         "test": {
@@ -97,7 +96,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -107,6 +106,6 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": "d094f7a5-7dab-4484-98bf-9a8b89f5e17a"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "bug-tracker-app",
+  "name": "bug-tacker-nz",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -11,17 +11,16 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.2.0",
-    "@angular/cdk": "^14.2.6",
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
     "@angular/core": "^14.2.0",
     "@angular/forms": "^14.2.0",
-    "@angular/material": "^14.2.6",
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
-    "materialize-css": "^1.0.0-rc.2",
+    "ng-zorro-antd": "^14.1.1",
     "rxjs": "~7.5.0",
+    "sweetalert2": "^11.7.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

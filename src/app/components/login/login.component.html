@@ -1,0 +1,34 @@
+<form nz-form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group>
+        <i nz-icon nzType="user"></i>
+        <input formControlName="username" nz-input placeholder="Username" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group>
+        <i nz-icon nzType="lock"></i>
+        <input
+          formControlName="password"
+          nz-input
+          type="password"
+          placeholder="Password"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <input type="checkbox" /><span>Remember me</span>
+      <a class="login-form-forgot" href="">Forgot password?</a>
+      <br />
+      <button nz-button nzType="primary" class="login-form-button">
+        Log in
+      </button>
+      <a href="">Register now!</a>
+    </nz-form-control>
+  </nz-form-item>
+</form>
