@@ -11,7 +11,7 @@
       <div class="sidebar-logo">
         <a href="https://ng.ant.design/" target="_blank">
           <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
-          <h1>Ant Design Of Angular</h1>
+          <h1>Mantis</h1>
         </a>
       </div>
       <ul
@@ -40,6 +40,13 @@
             </li>
           </ul>
         </li>
+        <li
+          nz-submenu
+          nzTitle="Logout"
+          nzOpen
+          nzIcon="logout"
+          (click)="logout()"
+        ></li>
       </ul>
     </nz-sider>
     <nz-layout>
@@ -62,15 +69,3 @@
     </nz-layout>
   </nz-layout>
 </ng-container>
-
-<!-- <ng-container *ngIf="false">
-  <nz-layout class="app-layout" style="background: black">
-    <nz-layout class="cls-layout">
-      <nz-content>
-        <div class="inner-content">
-          <router-outlet></router-outlet>
-        </div>
-      </nz-content>
-    </nz-layout>
-  </nz-layout>
-</ng-container> -->

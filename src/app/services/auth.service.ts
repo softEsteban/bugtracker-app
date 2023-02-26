@@ -31,10 +31,14 @@ export class AuthService {
     }
 
     isAuthenticated(): boolean {
-        return false;
+        return true;
     }
 
     createToken() {
+
+    }
+
+    logout() {
 
     }
 

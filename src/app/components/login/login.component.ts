@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
   public login({ value, valid }: { value: any, valid: boolean }): any {
 
     console.log(value, valid);
-
     // this.authService.login(value).subscribe(resp =>{
     //   console.log(resp);
     //   // this.router.navigate(['users/me']);
@@ -44,17 +43,41 @@ export class LoginComponent implements OnInit {
     // }, error => {
     //   })
 
-    if (value.username != "admin" && value.password != "admin") {
-      return Swal.fire({
-        html: "Inténtalo de nuevo",
+    //Validates empty inputs
+    if (value.username == "" || value.password == "") {
+      Swal.fire({
+        html: "Wanna trick me? Complete the login",
+        icon: "info",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        confirmButtonText: "Ok"
+      });
+      return true;
+    }
+
+
+    if (value.username != "admin" || value.password != "admin") {
+      Swal.fire({
+        html: "Wrong credentials. Have another go!",
         icon: "warning",
         allowEscapeKey: false,
         allowOutsideClick: false,
-        confirmButtonText: "Aceptar"
+        confirmButtonText: "Ok"
       });
+      return true;
     }
-    return this.router.navigate(["/home"]);
+
+
+    this.router.navigate(["/home"]);
+
   }
 
+  public loginWithGoogle() {
+
+  }
+
+  public loginWithGitHub() {
+
+  }
 
 }

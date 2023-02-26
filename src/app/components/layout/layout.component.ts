@@ -28,4 +28,8 @@ export class LayoutComponent implements OnInit {
     this.router.navigate([item.url]);
   }
 
+  logout() {
+    this.router.navigate(["/"]);
+  }
+
 }

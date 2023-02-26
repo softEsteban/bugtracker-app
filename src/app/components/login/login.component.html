@@ -1,34 +1,62 @@
-<form nz-form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
-  <nz-form-item>
-    <nz-form-control>
-      <nz-input-group>
-        <i nz-icon nzType="user"></i>
-        <input formControlName="username" nz-input placeholder="Username" />
-      </nz-input-group>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control>
-      <nz-input-group>
-        <i nz-icon nzType="lock"></i>
-        <input
-          formControlName="password"
-          nz-input
-          type="password"
-          placeholder="Password"
-        />
-      </nz-input-group>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control>
-      <input type="checkbox" /><span>Remember me</span>
-      <a class="login-form-forgot" href="">Forgot password?</a>
-      <br />
-      <button nz-button nzType="primary" class="login-form-button">
-        Log in
-      </button>
-      <a href="">Register now!</a>
-    </nz-form-control>
-  </nz-form-item>
-</form>
+<nz-row class="container">
+  <nz-col nzXs="24" nzSm="8">
+    <h1 class="login-title">Login</h1>
+    <form nz-form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group>
+            <i nz-icon nzType="user"></i>
+            <input
+              formControlName="username"
+              nz-input
+              placeholder="Username"
+              class="form-input"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group>
+            <i nz-icon nzType="lock"></i>
+            <input
+              formControlName="password"
+              nz-input
+              type="password"
+              placeholder="Password"
+              class="form-input"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="login-button">
+        <button nz-button nzType="primary">Log in</button>
+      </nz-form-item>
+
+      <nz-form-item>
+        <button nz-button nzType="default" nzBlock (click)="loginWithGoogle()">
+          <i nz-icon nzType="google"></i> Login with Google
+        </button>
+        <br />
+        <br />
+        <button nz-button nzType="default" nzBlock (click)="loginWithGitHub()">
+          <i nz-icon nzType="github"></i> Login with GitHub
+        </button>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control>
+          <br />
+          <a class="login-form-forgot" href="">Forgot password?</a>
+          <br />
+          <a href="">Create an account!</a>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-col>
+  <nz-col nzXs="24" nzSm="12">
+    <!-- Some image or content -->
+    <!-- <img src="/src/assets/pexels-василь-вовк-4405367.jpg" /> -->
+  </nz-col>
+</nz-row>

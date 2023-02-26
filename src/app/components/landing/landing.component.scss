@@ -1,7 +1,7 @@
 .ant-layout-header {
   padding: 0 25px;
 }
-.wrap-content {
+.content {
   height: 600px;
 
   .cls-col {
@@ -24,14 +24,18 @@
       font-size: 21px;
     }
 
-    .cls-card {
-      .cls-card-link {
-        color: white;
-        font-weight: 500;
-        font-size: 15px;
-        text-transform: lowercase;
-      }
-    }
+    // .cls-card {
+    //   .cls-card-link {
+    //     color: white;
+    //     font-weight: 500;
+    //     font-size: 15px;
+    //     text-transform: lowercase;
+    //   }
+    // }
+  }
+
+  .cl-card {
+    margin: 12px;
   }
 }
 
