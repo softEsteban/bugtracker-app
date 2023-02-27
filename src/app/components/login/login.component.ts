@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '../../services/auth.service';
+import { GithubService } from '../../services/github.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private githubService: GithubService
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +34,6 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  //Authentication
   public login({ value, valid }: { value: any, valid: boolean }): any {
 
     console.log(value, valid);
@@ -77,7 +78,7 @@ export class LoginComponent implements OnInit {
   }
 
   public loginWithGitHub() {
-
+    this.githubService.login();
   }
 
 }
