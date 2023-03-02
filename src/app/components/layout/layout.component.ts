@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../services/layout.service';
 import { GithubService } from '../../services/github.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -18,10 +19,10 @@ export class LayoutComponent implements OnInit {
   status = "system"
   constructor(private router: Router,
     public layoutService: LayoutService,
-    private githubService: GithubService) { }
+    private githubService: GithubService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.githubService.getGithubToken();
     setTimeout(() => {
       this.isCollapsed = true;
     }, 0);
@@ -34,7 +35,7 @@ export class LayoutComponent implements OnInit {
   }
 
   logout() {
-    this.router.navigate(["/"]);
+    this.authService.logout()
   }
 
 }

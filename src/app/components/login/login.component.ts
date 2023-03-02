@@ -12,9 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
-
   public loginForm!: FormGroup;
-
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,17 +32,11 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  public login({ value, valid }: { value: any, valid: boolean }): any {
+  /**
+   * 
+   */
+  async login({ value, valid }: { value: any, valid: boolean }): Promise<any> {
 
-    console.log(value, valid);
-    // this.authService.login(value).subscribe(resp =>{
-    //   console.log(resp);
-    //   // this.router.navigate(['users/me']);
-    //   alert("Welcome")
-    // }, error => {
-    //   })
-
-    //Validates empty inputs
     if (value.username == "" || value.password == "") {
       Swal.fire({
         html: "Wanna trick me? Complete the login",
@@ -53,24 +45,32 @@ export class LoginComponent implements OnInit {
         allowOutsideClick: false,
         confirmButtonText: "Ok"
       });
-      return true;
     }
 
-
-    if (value.username != "admin" || value.password != "admin") {
+    let data = await this.authService.login(value);
+    let user = JSON.parse(JSON.stringify(data))
+    if (user && user["message"] == "The given user email doesn't exist") {
       Swal.fire({
-        html: "Wrong credentials. Have another go!",
+        html: "User email doesn't exist",
         icon: "warning",
         allowEscapeKey: false,
         allowOutsideClick: false,
         confirmButtonText: "Ok"
       });
-      return true;
     }
-
-
-    this.router.navigate(["/home"]);
-
+    if (user["message"] == "User password is incorrect") {
+      Swal.fire({
+        html: "Wrong password. Have another go!",
+        icon: "warning",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        confirmButtonText: "Ok"
+      });
+    }
+    if (user && user["data"]) {
+      localStorage.setItem('token', user["data"][0]["token"]);
+      this.router.navigate(["/home"]);
+    }
   }
 
   public loginWithGoogle() {

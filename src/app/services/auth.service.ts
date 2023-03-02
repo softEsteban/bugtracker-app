@@ -1,10 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-export interface SideBar {
-    size: 'large' | 'default';
-    place: 'right' | 'left';
-    title: string;
-}
+import { Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -12,26 +9,18 @@ export interface SideBar {
 
 export class AuthService {
 
+    constructor(private http: HttpClient,
+        private router: Router) { }
 
-    public view = "landing"; //landing
-
-    //   public title: string = '';
-    //   public type: 'system' | 'full' = 'system';
-    //   public menu: any = [];
-
-    //   public notifications: SideBar = {
-    //     size: 'default',
-    //     place: 'right',
-    //     title: 'Notifications'
-    //   }
-    constructor() { }
-
-    login(user: any) {
-
+    async login(credentials: any) {
+        return await lastValueFrom(this.http.get(`http://localhost:3000/auth/login/${credentials.username}/${credentials.password}`));
     }
 
+
     isAuthenticated(): boolean {
-        return true;
+        let token = localStorage.getItem('token') || '';
+        if (token) { return true }
+        return false;
     }
 
     createToken() {
@@ -39,21 +28,9 @@ export class AuthService {
     }
 
     logout() {
-
+        localStorage.removeItem('token');
+        this.router.navigate(['/login']);
     }
-
-    setView(mode: string) {
-        this.view = mode;
-    }
-
-    //   setType(type: 'system' | 'full'): void {
-
-    //     this.type = type;
-    //   }
-
-    //   getType(): string {
-    //     return this.type;
-    //   }
 
 
 
