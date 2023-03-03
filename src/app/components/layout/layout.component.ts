@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../services/layout.service';
-import { GithubService } from '../../services/github.service';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-layout',
@@ -13,19 +15,41 @@ import { AuthService } from '../../services/auth.service';
 
 export class LayoutComponent implements OnInit {
 
-  isCollapsed = false;
+  profileConfig: any;
+  isCollapsed = true;
   itemCurrent: any;
 
   status = "system"
   constructor(private router: Router,
     public layoutService: LayoutService,
-    private githubService: GithubService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private modalService: NzModalService) { }
 
   ngOnInit(): void {
+    this.getProfileConfig();
     setTimeout(() => {
       this.isCollapsed = true;
     }, 0);
+  }
+
+  showConfirm(): void {
+
+  }
+
+  getProfileConfig() {
+    let config = localStorage.getItem("profile");
+    if (config != null) {
+      this.profileConfig = JSON.parse(config);
+    }
+  }
+
+  executeMethod(name: string) {
+    if (name == null) {
+      return;
+    } else if (name === 'logout') {
+      this.logout();
+    }
+    return;
   }
 
   setItem(item: any): void {
@@ -35,7 +59,12 @@ export class LayoutComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout()
+    const modal: NzModalRef = this.modalService.confirm({
+      nzTitle: 'Confirm',
+      nzContent: 'Do you want to leave?',
+      nzOkText: 'Yes',
+      nzOnOk: () => this.authService.logout()
+    });
   }
 
 }

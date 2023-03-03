@@ -13,6 +13,7 @@ export class GithubService {
 
     private octokit: Octokit;
 
+    host = environment.host;
     clientId = environment.clientId;
     clientSecret = environment.clientSecret;
     redirectUri = environment.redirectUri;
@@ -39,14 +40,13 @@ export class GithubService {
     async getGithubToken() {
         const code1 = new URLSearchParams(window.location.search).get('code');
         try {
-            const response = await this.http.get("http://localhost:3000/auth/getGithubToken/" + code1, { responseType: 'text' }).toPromise();
+            const response = await this.http.get(`${this.host}/auth/getGithubToken/${code1}`, { responseType: 'text' }).toPromise();
             console.log(response);
             return response;
         } catch (error) {
             console.error(error);
             throw error;
         }
-
 
         // Store the access token in local storage
         // localStorage.setItem('access_token', data.access_token);

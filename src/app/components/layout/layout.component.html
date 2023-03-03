@@ -1,5 +1,6 @@
 <ng-container>
   <nz-layout class="app-layout">
+    <!-- Side bar -->
     <nz-sider
       class="menu-sidebar"
       nzCollapsible
@@ -9,53 +10,38 @@
       [nzTrigger]="null"
     >
       <div class="sidebar-logo">
-        <a href="https://ng.ant.design/" target="_blank">
+        <a href="https://github.com/softEsteban/bugtracker-app" target="_blank">
           <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
           <h1>Mantis</h1>
         </a>
       </div>
+
       <ul
+        *ngFor="let menu of profileConfig"
         nz-menu
         nzTheme="dark"
         nzMode="inline"
         [nzInlineCollapsed]="isCollapsed"
       >
-        <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="/welcome">Welcome</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>Monitor</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>Workplace</a>
-            </li>
-          </ul>
-        </li>
-        <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a>Basic Form</a>
-            </li>
-          </ul>
-        </li>
         <li
           nz-submenu
-          nzTitle="Logout"
           nzOpen
-          nzIcon="logout"
-          (click)="logout()"
-        ></li>
-        <li
-          nz-menu-item
-          nzTitle="Report bugs"
-          nzOpen
-          nzIcon="logout"
-          (click)="logout()"
-        ></li>
+          [nzTitle]="menu.title"
+          [nzIcon]="menu.icon"
+          (click)="executeMethod(menu.method || '')"
+        >
+          <div *ngIf="menu.children">
+            <ul *ngFor="let sub of menu.children">
+              <li nz-menu-item nzMatchRouter>
+                <a>{{ sub.title }}</a>
+              </li>
+            </ul>
+          </div>
+        </li>
       </ul>
     </nz-sider>
+
+    <!-- Layout -->
     <nz-layout>
       <nz-header>
         <div class="app-header">
@@ -63,7 +49,7 @@
             <span
               class="trigger"
               nz-icon
-              [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+              [nzType]="isCollapsed ? 'right' : 'left'"
             ></span>
           </span>
         </div>
