@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../services/layout.service';
 import { AuthService } from '../../services/auth.service';
-import Swal from 'sweetalert2';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 
@@ -20,7 +19,8 @@ export class LayoutComponent implements OnInit {
   itemCurrent: any;
 
   status = "system"
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     public layoutService: LayoutService,
     private authService: AuthService,
     private modalService: NzModalService) { }
@@ -44,10 +44,13 @@ export class LayoutComponent implements OnInit {
   }
 
   executeMethod(name: string) {
+    let split = name.split("$");
     if (name == null) {
       return;
     } else if (name === 'logout') {
       this.logout();
+    } else if (split[0] == "router") {
+      this.router.navigate(["home", split[1]]);
     }
     return;
   }

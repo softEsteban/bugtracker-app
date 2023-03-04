@@ -30,6 +30,7 @@ export class GithubService {
     async login() {
         try {
             window.location.href = `https://github.com/login/oauth/authorize?client_id=${this.clientId}&redirect_uri=${this.redirectUri}&scope=${this.scope}`;
+            // TODO - Spinner
             // this.getGithubToken();
         } catch (error) {
             // Handle the error

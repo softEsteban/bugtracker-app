@@ -32,7 +32,11 @@
         >
           <div *ngIf="menu.children">
             <ul *ngFor="let sub of menu.children">
-              <li nz-menu-item nzMatchRouter>
+              <li
+                nz-menu-item
+                nzMatchRouter
+                (click)="executeMethod(sub.method || '')"
+              >
                 <a>{{ sub.title }}</a>
               </li>
             </ul>
