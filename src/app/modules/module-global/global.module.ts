@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgZorroModule } from '../shared/ng-zorro.module';
-import { GlobalModule } from '../modules/module-global/global.module';
+import { SpinComponent } from './spin/spin.component';
+import { NgZorroModule } from 'src/app/shared/ng-zorro.module';
 
 
 
 @NgModule({
   declarations: [
+    SpinComponent
   ],
   imports: [
     CommonModule,
     NgZorroModule,
-    GlobalModule
+  ], exports: [
   ]
+
 })
-export class ComponentsModule { }
+export class GlobalModule { }

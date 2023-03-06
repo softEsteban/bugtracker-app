@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutService } from '../../services/layout.service';
 import { AuthService } from '../../services/auth.service';
+import { GithubService } from '../../services/github.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 
@@ -20,20 +21,19 @@ export class LayoutComponent implements OnInit {
 
   status = "system"
   constructor(
+    private githubService: GithubService,
     private router: Router,
     public layoutService: LayoutService,
     private authService: AuthService,
     private modalService: NzModalService) { }
 
   ngOnInit(): void {
+    this.githubService.loginWithGithub();
     this.getProfileConfig();
+
     setTimeout(() => {
       this.isCollapsed = true;
     }, 0);
-  }
-
-  showConfirm(): void {
-
   }
 
   getProfileConfig() {
@@ -53,12 +53,6 @@ export class LayoutComponent implements OnInit {
       this.router.navigate(["home", split[1]]);
     }
     return;
-  }
-
-  setItem(item: any): void {
-    this.itemCurrent = item;
-    this.layoutService.title = item.title;
-    this.router.navigate([item.url]);
   }
 
   logout() {

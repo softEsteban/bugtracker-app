@@ -14,6 +14,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @NgModule({
   declarations: [],
@@ -33,7 +34,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzCheckboxModule,
     NzIconModule,
     NzAvatarModule,
-    NzModalModule
+    NzModalModule,
+    NzSpinModule
   ],
   exports: [
     NzLayoutModule,
@@ -50,7 +52,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzCheckboxModule,
     NzIconModule,
     NzAvatarModule,
-    NzModalModule
+    NzModalModule,
+    NzSpinModule
   ]
 })
 export class NgZorroModule { }

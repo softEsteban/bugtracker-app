@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
 
   public loginForm!: FormGroup;
+  public showSpinner = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -74,12 +75,23 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   */
+  public async loginWithGitHub() {
+    try {
+      await this.githubService.login();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  /**
+   * 
+   */
   public loginWithGoogle() {
 
   }
-
-  public loginWithGitHub() {
-    this.githubService.login();
-  }
-
 }
+
