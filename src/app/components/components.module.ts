@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgZorroModule } from '../shared/ng-zorro.module';
-import { GlobalModule } from '../modules/module-global/global.module';
-
 
 
 @NgModule({
@@ -10,8 +8,7 @@ import { GlobalModule } from '../modules/module-global/global.module';
   ],
   imports: [
     CommonModule,
-    NgZorroModule,
-    GlobalModule
+    NgZorroModule
   ]
 })
 export class ComponentsModule { }

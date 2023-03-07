@@ -29,11 +29,9 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.githubService.loginWithGithub();
-    this.getProfileConfig();
-
     setTimeout(() => {
-      this.isCollapsed = true;
-    }, 0);
+      this.getProfileConfig();
+    }, 3000);
   }
 
   getProfileConfig() {

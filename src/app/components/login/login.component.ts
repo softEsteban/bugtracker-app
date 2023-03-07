@@ -93,5 +93,9 @@ export class LoginComponent implements OnInit {
   public loginWithGoogle() {
 
   }
+
+  public goToRegister() {
+    this.router.navigate(["/register"]);
+  }
 }
 

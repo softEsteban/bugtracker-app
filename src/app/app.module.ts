@@ -11,9 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsProviderModule } from './icons-provider.module';
 import { AppRoutingModule } from './app-routing.module';
 import { NgZorroModule } from './shared/ng-zorro.module';
-import { LayoutComponent } from './components/layout/layout.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { LayoutComponent } from './components/layout/layout.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 registerLocaleData(en);
 
@@ -22,7 +23,8 @@ registerLocaleData(en);
     AppComponent,
     LayoutComponent,
     LandingComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }
@@ -30,14 +32,14 @@ registerLocaleData(en);
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     IconsProviderModule,
     NgZorroModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AppModule { }
