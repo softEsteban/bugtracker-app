@@ -15,7 +15,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { NzBadgeModule } from 'ng-zorro-antd/badge'; //
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 
 @NgModule({
   declarations: [],
@@ -37,7 +39,9 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge'; //
     NzAvatarModule,
     NzModalModule,
     NzSpinModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NzTagModule,
+    NzPopoverModule
   ],
   exports: [
     NzLayoutModule,
@@ -56,7 +60,9 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge'; //
     NzAvatarModule,
     NzModalModule,
     NzSpinModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NzTagModule,
+    NzPopoverModule
   ]
 })
 export class NgZorroModule { }

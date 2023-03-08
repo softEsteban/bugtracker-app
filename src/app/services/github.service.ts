@@ -62,6 +62,7 @@ export class GithubService {
                 let obj = JSON.parse(response);
                 localStorage.setItem('token', obj.data.token);
                 localStorage.setItem('profile', JSON.stringify(obj.data.pro_config));
+                localStorage.setItem('user', JSON.stringify(obj.data));
             }
 
 

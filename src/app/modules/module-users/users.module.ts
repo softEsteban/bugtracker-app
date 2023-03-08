@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { UsersListComponent } from './users-list/users-list.component';
 
 
-
 @NgModule({
   declarations: [
     UsersListComponent
@@ -12,4 +11,4 @@ import { UsersListComponent } from './users-list/users-list.component';
     CommonModule
   ]
 })
-export class ModuleUsersModule { }
+export class UsersModule { }

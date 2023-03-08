@@ -43,29 +43,53 @@
           </div>
         </li>
       </ul>
+      <span
+        class="header-trigger"
+        (click)="isCollapsed = !isCollapsed"
+        nz-icon
+        [nzType]="isCollapsed ? 'right' : 'left'"
+      ></span>
     </nz-sider>
 
     <!-- Layout -->
     <nz-layout>
-      <nz-header>
-        <div class="app-header">
-          <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <span
-              class="trigger"
-              nz-icon
-              [nzType]="isCollapsed ? 'right' : 'left'"
-            ></span>
-            <div class="avatar">
-              <nz-badge [nzCount]="5" style="margin-right: 24px">
-                <nz-avatar nzIcon="user" [nzShape]="'square'"></nz-avatar>
-              </nz-badge>
-              <nz-badge nzDot>
-                <nz-avatar nzIcon="user" [nzShape]="'square'"></nz-avatar>
-              </nz-badge>
-            </div>
-          </span>
-        </div>
-      </nz-header>
+      <div class="site-page-header-ghost-wrapper">
+        <nz-page-header [nzGhost]="false">
+          <!-- <nz-page-header-title>Title</nz-page-header-title> -->
+          <nz-page-header-subtitle>Project manager</nz-page-header-subtitle>
+          <nz-page-header-extra>
+            <nz-space
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <nz-tag
+                [nzColor]="'blue'"
+                style="height: 25px"
+                nz-button
+                nz-popover
+                [nzPopoverContent]="userSession"
+                nzPopoverPlacement="bottom"
+              >
+                <span>Gary Greenamn</span>
+                <span nz-icon nzType="caretDown"></span>
+              </nz-tag>
+              <ng-template #userSession>
+                <button nz-button nzType="default" (click)="logout()">
+                  <span nz-icon nzType="logout"></span>
+                  Logout
+                </button>
+              </ng-template>
+              <div class="avatar">
+                <!-- <nz-badge [nzCount]="5" style="margin-right: 24px"></nz-badge> -->
+                <nz-avatar nzIcon="user" [nzShape]="'circle'"></nz-avatar>
+              </div>
+            </nz-space>
+          </nz-page-header-extra>
+        </nz-page-header>
+      </div>
 
       <nz-content>
         <div class="inner-content">
