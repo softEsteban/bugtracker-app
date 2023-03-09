@@ -10,6 +10,7 @@ import { ComponentsModule } from './components/components.module';
 import { registerLocaleData } from '@angular/common';
 import { ProjectsModule } from './modules/module-projects/projects.module';
 import { UsersModule } from './modules/module-users/users.module';
+import { KanbanModule } from './modules/module-kanban/kanban.module';
 
 registerLocaleData(en);
 
@@ -24,6 +25,7 @@ registerLocaleData(en);
   imports: [
     ComponentsModule,
     ProjectsModule,
+    KanbanModule,
     UsersModule,
     AppRoutingModule,
     IconsProviderModule,

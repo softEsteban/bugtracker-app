@@ -21,6 +21,8 @@
 }
 
 .header-trigger {
+  position: absolute;
+  bottom: 0;
   height: 64px;
   padding: 20px 24px;
   font-size: 20px;
@@ -83,10 +85,6 @@ nz-header {
     display: flex;
     align-items: center;
   }
-}
-
-nz-content {
-  margin: 24px;
 }
 
 .inner-content {

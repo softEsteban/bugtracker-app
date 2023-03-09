@@ -18,6 +18,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 @NgModule({
   declarations: [],
@@ -41,7 +42,8 @@ import { NzPopoverModule } from 'ng-zorro-antd/popover';
     NzSpinModule,
     NzBadgeModule,
     NzTagModule,
-    NzPopoverModule
+    NzPopoverModule,
+    NzTableModule
   ],
   exports: [
     NzLayoutModule,
@@ -62,7 +64,8 @@ import { NzPopoverModule } from 'ng-zorro-antd/popover';
     NzSpinModule,
     NzBadgeModule,
     NzTagModule,
-    NzPopoverModule
+    NzPopoverModule,
+    NzTableModule
   ]
 })
 export class NgZorroModule { }

@@ -8,6 +8,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ProjectsListComponent } from './modules/module-projects/projects-list/projects-list.component';
 import { UsersListComponent } from './modules/module-users/users-list/users-list.component';
+import { BoardComponent } from './modules/module-kanban/board/board.component';
+import { HomeComponent } from './modules/module-home/home/home.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: LandingComponent },
@@ -15,8 +17,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {
     path: 'home', component: LayoutComponent, canActivate: [AuthGuard], children: [
-      { path: 'projects', component: ProjectsListComponent },
+      { path: 'projects', component: ProjectsListComponent, canActivate: [AuthGuard] },
       { path: 'users', component: UsersListComponent, canActivate: [AuthGuard] },
+      { path: 'kanban', component: BoardComponent, canActivate: [AuthGuard] },
     ]
   },
   {
@@ -24,6 +27,8 @@ const routes: Routes = [
     component: NotFoundComponent,
   }
 ];
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
