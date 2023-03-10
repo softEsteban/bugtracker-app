@@ -48,7 +48,8 @@ export class LoginComponent implements OnInit {
       });
     }
 
-    let data = await this.authService.login(value);
+    let credentials = { use_email: value.username, use_pass: value.password }
+    let data = await this.authService.login(credentials);
     let user = JSON.parse(JSON.stringify(data))
     if (user && user["message"] == "The given user email doesn't exist") {
       Swal.fire({

@@ -14,7 +14,9 @@ export class AuthService {
         private router: Router) { }
 
     async login(credentials: any) {
-        return await lastValueFrom(this.http.get(`${this.host}/auth/login/${credentials.username}/${credentials.password}`));
+        return await lastValueFrom(
+            this.http.post(`${this.host}/auth/login`, credentials)
+        );
     }
 
     isAuthenticated(): boolean {
