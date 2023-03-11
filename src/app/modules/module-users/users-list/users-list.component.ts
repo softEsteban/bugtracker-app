@@ -1,4 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
+import { environment } from '../../../../environments/environment';
+import { UsersService } from '../services/users.service';
+
 
 interface ItemData {
   id: number;
@@ -14,7 +19,9 @@ interface ItemData {
 })
 export class UsersListComponent implements OnInit {
 
-  constructor() { }
+  host = environment.host;
+
+  constructor(private http: HttpClient, private usersService: UsersService) { }
 
   listOfSelection = [
     {
@@ -80,5 +87,12 @@ export class UsersListComponent implements OnInit {
       address: `London, Park Lane no. ${index}`
     }));
 
+    this.getUsers();
+
+  }
+
+  async getUsers() {
+    let data = await this.usersService.getAllUsers();
+    console.log(data)
   }
 }
