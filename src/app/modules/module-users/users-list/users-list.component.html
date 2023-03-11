@@ -1,8 +1,27 @@
 <p>Users list</p>
+
+<div class="options-bar">
+  <nz-input-group
+    style="margin-bottom: 16px; width: 25vw; border-radius: 3px; outline: none"
+  >
+    <input
+      type="text"
+      nz-input
+      placeholder="Search and filter users"
+      [(ngModel)]="searchText"
+      (ngModelChange)="filterData(searchText)"
+    />
+  </nz-input-group>
+
+  <button nz-button nzType="primary" nzShape="circle">
+    <span nz-icon nzType="plus"></span>
+  </button>
+</div>
+
 <nz-table
   #rowSelectionTable
   nzShowSizeChanger
-  [nzData]="listOfData"
+  [nzData]="filteredData"
   (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
 >
   <thead>
@@ -14,19 +33,23 @@
         (nzCheckedChange)="onAllChecked($event)"
       ></th>
       <th>Name</th>
-      <th>Age</th>
-      <th>Address</th>
+      <th>Email</th>
+      <th>Github</th>
+      <th>Type</th>
+      <th>Register date</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let data of rowSelectionTable.data">
       <td
-        [nzChecked]="setOfCheckedId.has(data.id)"
-        (nzCheckedChange)="onItemChecked(data.id, $event)"
+        [nzChecked]="setOfCheckedId.has(data.use_code)"
+        (nzCheckedChange)="onItemChecked(data.use_code, $event)"
       ></td>
-      <td>{{ data.name }}</td>
-      <td>{{ data.age }}</td>
-      <td>{{ data.address }}</td>
+      <td>{{ data.use_name }}</td>
+      <td>{{ data.use_email }}</td>
+      <td>{{ data.use_github }}</td>
+      <td>{{ data.use_type }}</td>
+      <td>{{ data.use_datfor }}</td>
     </tr>
   </tbody>
 </nz-table>

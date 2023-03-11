@@ -16,10 +16,12 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 export class LayoutComponent implements OnInit {
 
   profileConfig: any;
+  userData: any;
+  userName: string = "";
+
   isCollapsed = true;
   itemCurrent: any;
 
-  status = "system"
   constructor(
     private githubService: GithubService,
     private router: Router,
@@ -31,6 +33,7 @@ export class LayoutComponent implements OnInit {
     this.githubService.loginWithGithub();
     setTimeout(() => {
       this.getProfileConfig();
+      this.getUserData();
     }, 3000);
   }
 
@@ -41,6 +44,22 @@ export class LayoutComponent implements OnInit {
     }
   }
 
+  getUserData() {
+    let user = localStorage.getItem("user");
+    if (user != null) {
+      this.userData = JSON.parse(user);
+      this.userName = this.userData.use_name;
+    }
+  }
+
+  /**
+   * Receives configured in "method" key.
+   * Executes a method in the class or navigates
+   * with $ wildcard
+   * @param name 
+   * @returns 
+   * @author Esteban Toro
+   */
   executeMethod(name: string) {
     let split = name.split("$");
     if (name == null) {
@@ -48,7 +67,7 @@ export class LayoutComponent implements OnInit {
     } else if (name === 'logout') {
       this.logout();
     } else if (split[0] == "router") {
-      this.router.navigate(["home", split[1]]);
+      this.router.navigate(["/", split[1]]);
     }
     return;
   }

@@ -11,11 +11,12 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.userType = this.getUserProfile();
+    this.getUserProfile();
   }
 
   getUserProfile() {
     let obj = JSON.parse(localStorage.getItem("user") as string);
-    return obj.use_type;
+    this.userType = obj.use_type;
+    console.log(this.userType)
   }
 }

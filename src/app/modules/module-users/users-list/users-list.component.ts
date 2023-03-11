@@ -1,16 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { UsersService } from '../services/users.service';
 
 
-interface ItemData {
-  id: number;
-  name: string;
-  age: number;
-  address: string;
+interface UserData {
+  [key: string]: any;
+  use_code: number;
+  use_name: string;
+  use_lastname: string;
+  use_email: string;
+  use_type: string;
+  use_github: string;
+  use_datfor: string;
 }
+
 
 @Component({
   selector: 'app-users-list',
@@ -21,7 +25,7 @@ export class UsersListComponent implements OnInit {
 
   host = environment.host;
 
-  constructor(private http: HttpClient, private usersService: UsersService) { }
+  constructor(private usersService: UsersService) { }
 
   listOfSelection = [
     {
@@ -33,23 +37,28 @@ export class UsersListComponent implements OnInit {
     {
       text: 'Select Odd Row',
       onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 !== 0));
+        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.use_code, index % 2 !== 0));
         this.refreshCheckedStatus();
       }
     },
     {
       text: 'Select Even Row',
       onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 === 0));
+        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.use_code, index % 2 === 0));
         this.refreshCheckedStatus();
       }
     }
   ];
   checked = false;
   indeterminate = false;
-  listOfCurrentPageData: readonly ItemData[] = [];
-  listOfData: readonly ItemData[] = [];
+  listOfCurrentPageData: readonly UserData[] = [];
+  listOfData: readonly UserData[] = [];
   setOfCheckedId = new Set<number>();
+
+  users: UserData[] = []; // assume this contains the user data to be filtered
+  filteredUsers: UserData[] = []; // this will be updated with the filtered data
+  filteredData: UserData[] = [];
+  searchText: string = '';
 
   updateCheckedSet(id: number, checked: boolean): void {
     if (checked) {
@@ -65,34 +74,58 @@ export class UsersListComponent implements OnInit {
   }
 
   onAllChecked(value: boolean): void {
-    this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(item.id, value));
+    this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(item.use_code, value));
     this.refreshCheckedStatus();
   }
 
-  onCurrentPageDataChange($event: readonly ItemData[]): void {
+  onCurrentPageDataChange($event: readonly UserData[]): void {
     this.listOfCurrentPageData = $event;
     this.refreshCheckedStatus();
   }
 
   refreshCheckedStatus(): void {
-    this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.id));
-    this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.id)) && !this.checked;
+    this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.use_code));
+    this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.use_code)) && !this.checked;
   }
 
   ngOnInit(): void {
-    this.listOfData = new Array(200).fill(0).map((_, index) => ({
-      id: index,
-      name: `Edward King ${index}`,
-      age: 32,
-      address: `London, Park Lane no. ${index}`
-    }));
-
     this.getUsers();
-
+    // setTimeout(() => {
+    //   this.filteredData = this.listOfData.slice(); // copy of the original data
+    // }, 2000);
   }
 
+  /**
+   * Gets users from API
+   */
   async getUsers() {
-    let data = await this.usersService.getAllUsers();
-    console.log(data)
+    let data: any = await this.usersService.getAllUsers();
+    if (data.data.length > 0) {
+      this.listOfData = data.data;
+      this.filteredData = data.data;
+    }
+  }
+
+  /**
+   * Filters users by all values based on searchString
+   * @param searchString 
+   * @returns 
+   */
+  filterData(searchString: string): void {
+    if (!searchString) {
+      this.filteredData = this.listOfData.slice();
+      return;
+    }
+
+    this.filteredData = this.listOfData.filter(item => {
+      const searchableFields = ['use_code', 'use_email', 'use_name', 'use_lastname', 'use_type', 'use_github'];
+      for (const field of searchableFields) {
+        if (item[field] && item[field].toLowerCase().includes(searchString.toLowerCase())) {
+          return true;
+        }
+      }
+      return false;
+    });
+
   }
 }

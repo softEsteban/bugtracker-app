@@ -1,9 +1,7 @@
-<ng-template #adminContent [ngIf]="userType === 'Admin'">
-  <div>
-    <h1>Welcome, Admin!</h1>
-    <p>You have access to all features and functionality.</p>
-  </div>
-</ng-template>
+<div>
+  <h1>Welcome, Admin!</h1>
+  <p>You have access to all features and functionality.</p>
+</div>
 
 <ng-template #developerContent [ngIf]="userType === 'Developer'">
   <div>
@@ -17,7 +15,7 @@
 
 <ng-template #developerContent [ngIf]="userType === 'User'">
   <div>
-    <h1>Welcome, Developer!</h1>
+    <h1>Welcome, User!</h1>
     <p>
       You have access to all the information of the projects you hire with us
     </p>

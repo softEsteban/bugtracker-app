@@ -59,7 +59,7 @@
           style="border-bottom: 2px solid #e8e8e8"
         >
           <!-- <nz-page-header-title>Title</nz-page-header-title> -->
-          <nz-page-header-subtitle>Project manager</nz-page-header-subtitle>
+          <!-- <nz-page-header-subtitle>Project manager</nz-page-header-subtitle> -->
           <nz-page-header-extra>
             <nz-space
               style="
@@ -76,8 +76,8 @@
                 [nzPopoverContent]="userSession"
                 nzPopoverPlacement="bottom"
               >
-                <span>Gary Greenamn</span>
-                <span nz-icon nzType="caretDown"></span>
+                <span style="padding: 0 0 0 9px">{{ userName }}</span>
+                <!-- <span nz-icon nzType="caretDown"></span> -->
               </nz-tag>
               <ng-template #userSession>
                 <button nz-button nzType="default" (click)="logout()">

@@ -12,22 +12,22 @@ import { BoardComponent } from './modules/module-kanban/board/board.component';
 import { HomeComponent } from './modules/module-home/home/home.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: LandingComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
   {
-    path: 'home', component: LayoutComponent, canActivate: [AuthGuard], children: [
+    path: '', component: LayoutComponent, canActivate: [AuthGuard], children: [
+      { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
       { path: 'projects', component: ProjectsListComponent, canActivate: [AuthGuard] },
       { path: 'users', component: UsersListComponent, canActivate: [AuthGuard] },
       { path: 'kanban', component: BoardComponent, canActivate: [AuthGuard] },
     ]
   },
+  { path: 'landing', component: LandingComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: '**',
     component: NotFoundComponent,
   }
 ];
-
 
 
 @NgModule({
