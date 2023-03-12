@@ -16,8 +16,8 @@ import { CreateUserComponent } from './create-user/create-user.component';
   imports: [
     CommonModule,
     NgZorroModule,
-    FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class UsersModule { }

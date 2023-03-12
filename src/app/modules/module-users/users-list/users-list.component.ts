@@ -141,14 +141,10 @@ export class UsersListComponent implements OnInit {
   createComponentModal(): void {
     const modal = this.modal.create({
       nzTitle: 'Create user',
+      nzWidth: "700px",
       nzContent: CreateUserComponent,
       nzViewContainerRef: this.viewContainerRef,
-      nzComponentParams: {}
-      //  {
-      //   title: 'title in component',
-      //   subtitle: 'component sub title，will be changed after 2 sec'
-      // }
-      ,
+      nzComponentParams: {},
       nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000)),
       nzFooter: [
         // {
@@ -161,9 +157,8 @@ export class UsersListComponent implements OnInit {
     });
     const instance = modal.getContentComponent();
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
-    // Return a result when closed
-    modal.afterClose.subscribe(result => console.log('[afterClose] The result is:', result));
 
+    // Return a result when closed
     // delay until modal instance created
     // setTimeout(() => {
     //   instance.subtitle = 'sub title is changed';

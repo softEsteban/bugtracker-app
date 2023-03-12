@@ -1,36 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.css']
+  styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent implements OnInit {
 
   public userForm!: FormGroup;
 
-  user: string = "";
-  profiles: [] = [];
+  profiles: any = [];
+  userTypes = [
+    {
+      value: "User",
+      text: "User or Customer"
+    },
+    {
+      value: "Developer",
+      text: "Developer"
+    },
+    {
+      value: "Admin",
+      text: "Administrator"
+    }
+  ];
 
   constructor(private formBuilder: FormBuilder,
     private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.initForm();
-    this.getProfilesData()
+    this.getProfilesData();
   }
 
   private initForm(): void {
-    this.userForm = this.formBuilder.group({
-      use_name: ["", [Validators.required]],
-      use_lastname: ["", [Validators.required]],
-      use_email: ["", [Validators.required]],
-      use_type: ["", [Validators.required]],
-      use_github: ["", [Validators.required]],
-      cop_code: ["", [Validators.required]],
-      pro_code: ["", [Validators.required]]
+    this.userForm = new FormGroup({
+      use_name: new FormControl("", Validators.required),
+      use_lastname: new FormControl("", Validators.required),
+      use_email: new FormControl("", [Validators.required, Validators.email]),
+      use_type: new FormControl("", Validators.required),
+      pro_code: new FormControl("", Validators.required),
+      use_github: new FormControl("", Validators.required),
+      cop_code: new FormControl("", Validators.required)
     })
   }
 
@@ -42,8 +55,8 @@ export class CreateUserComponent implements OnInit {
     console.log(this.profiles)
   }
 
-  createUser(user: any) {
-    console.log(user)
+  async createUser({ value, valid }: { value: any, valid: boolean }) {
+    console.log(value)
   }
 
 }

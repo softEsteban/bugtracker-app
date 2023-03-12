@@ -30,7 +30,13 @@ export class LayoutComponent implements OnInit {
     private modalService: NzModalService) { }
 
   ngOnInit(): void {
-    this.githubService.loginWithGithub();
+
+    try {
+      this.githubService.loginWithGithub();
+    } catch (error) {
+      console.log("Another login has been implementent. Not Github")
+    }
+
     setTimeout(() => {
       this.getProfileConfig();
       this.getUserData();

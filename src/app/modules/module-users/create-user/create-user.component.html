@@ -1,5 +1,5 @@
 <div class="container">
-  <nz-form [formGroup]="userForm" (ngSubmit)="createUser(userForm)">
+  <nz-form [formGroup]="userForm">
     <nz-row>
       <nz-col nzXs="12" nzSm="12">
         <h5 nz-typography>Name</h5>
@@ -28,44 +28,74 @@
 
     <nz-row>
       <nz-col nzXs="24" nzSm="8">
+        <h5 nz-typography>User type</h5>
+        <nz-select
+          nzAllowClear
+          nzPlaceHolder="Choose a type"
+          formControlName="use_type"
+        >
+          <ng-container *ngFor="let data of userTypes">
+            <nz-option [nzValue]="data.value" [nzLabel]="data.text"></nz-option>
+          </ng-container>
+        </nz-select>
+      </nz-col>
+      <nz-col nzXs="24" nzSm="8">
         <h5 nz-typography>User profile</h5>
         <nz-select
           nzAllowClear
           formControlName="pro_code"
           nzPlaceHolder="Choose a profile"
         >
-          <nz-option nzValue="User" nzLabel="User or customer"></nz-option>
+          <ng-container *ngFor="let data of profiles">
+            <nz-option
+              [nzValue]="data.pro_code"
+              [nzLabel]="data.pro_name"
+              [nz-tooltip]="data.profiles"
+              >{{ data.pro_name }}</nz-option
+            >
+          </ng-container>
         </nz-select>
       </nz-col>
       <nz-col nzXs="24" nzSm="8">
-        <h5 nz-typography>User type</h5>
+        <h5 nz-typography>User company or dependecy</h5>
         <nz-select
-          [(ngModel)]="user"
           nzAllowClear
-          nzPlaceHolder="Choose a type"
-          formControlName="use_type"
+          formControlName="cop_code"
+          nzPlaceHolder="Choose a company"
         >
-          <nz-option nzValue="User" nzLabel="User or customer"></nz-option>
-          <nz-option nzValue="Developer" nzLabel="Developer"></nz-option>
-          <nz-option nzValue="Admin" nzLabel="Admin"></nz-option>
+          <nz-option nzValue="1" nzLabel="Mantis Group"></nz-option>
+          <nz-option nzValue="2" nzLabel="Chech"></nz-option>
+          <nz-option nzValue="3" nzLabel="Inlanze"></nz-option>
         </nz-select>
       </nz-col>
     </nz-row>
 
-    <nz-row *ngIf="user === 'Developer'">
+    <nz-row *ngIf="userForm.get('use_type')?.value == 'Developer'">
       <nz-col nzXs="24" nzSm="8">
         <h5 nz-typography>Github profile url</h5>
-        <input
-          nz-input
-          formControlName="use_github"
-          placeholder="Type github profile"
-        />
+        <nz-input-group style="display: flex; align-items: center">
+          <span style="margin-right: 10px" nz-prefix>github.com/</span>
+          <input
+            nz-input
+            formControlName="use_github"
+            placeholder="Type github profile"
+          />
+        </nz-input-group>
       </nz-col>
     </nz-row>
 
     <nz-row>
       <nz-col nzXs="24" nzSm="8">
-        <button nz-button nzType="primary" nzBlock>Submit</button>
+        <nz-form-item class="login-button">
+          <button
+            nz-button
+            nzType="primary"
+            (click)="createUser(userForm)"
+            nzBlock
+          >
+            Submit
+          </button>
+        </nz-form-item>
       </nz-col>
     </nz-row>
   </nz-form>

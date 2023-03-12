@@ -65,11 +65,10 @@ export class GithubService {
                 localStorage.setItem('user', JSON.stringify(obj.data));
             }
 
-
             return response;
         } catch (error) {
             console.error(error);
-            throw error;
+            return false;
         }
     }
 
