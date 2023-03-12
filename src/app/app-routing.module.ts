@@ -10,6 +10,7 @@ import { ProjectsListComponent } from './modules/module-projects/projects-list/p
 import { UsersListComponent } from './modules/module-users/users-list/users-list.component';
 import { BoardComponent } from './modules/module-kanban/board/board.component';
 import { HomeComponent } from './modules/module-home/home/home.component';
+import { UserDetailComponent } from './modules/module-users/user-detail/user-detail.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
       { path: 'projects', component: ProjectsListComponent, canActivate: [AuthGuard] },
       { path: 'users', component: UsersListComponent, canActivate: [AuthGuard] },
+      { path: 'user/:userId', component: UserDetailComponent, canActivate: [AuthGuard] },
       { path: 'kanban', component: BoardComponent, canActivate: [AuthGuard] },
     ]
   },

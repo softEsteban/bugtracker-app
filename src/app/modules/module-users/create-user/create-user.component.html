@@ -1,0 +1,72 @@
+<div class="container">
+  <nz-form [formGroup]="userForm" (ngSubmit)="createUser(userForm)">
+    <nz-row>
+      <nz-col nzXs="12" nzSm="12">
+        <h5 nz-typography>Name</h5>
+        <input nz-input formControlName="use_name" placeholder="Type name" />
+      </nz-col>
+      <nz-col nzXs="12" nzSm="12">
+        <h5 nz-typography>Lastname</h5>
+        <input
+          nz-input
+          formControlName="use_lastname"
+          placeholder="Type lastname"
+        />
+      </nz-col>
+    </nz-row>
+
+    <nz-row>
+      <nz-col nzXs="12" nzSm="12">
+        <h5 nz-typography>Email</h5>
+        <input
+          nz-input
+          formControlName="use_email"
+          placeholder="Type valid email"
+        />
+      </nz-col>
+    </nz-row>
+
+    <nz-row>
+      <nz-col nzXs="24" nzSm="8">
+        <h5 nz-typography>User profile</h5>
+        <nz-select
+          nzAllowClear
+          formControlName="pro_code"
+          nzPlaceHolder="Choose a profile"
+        >
+          <nz-option nzValue="User" nzLabel="User or customer"></nz-option>
+        </nz-select>
+      </nz-col>
+      <nz-col nzXs="24" nzSm="8">
+        <h5 nz-typography>User type</h5>
+        <nz-select
+          [(ngModel)]="user"
+          nzAllowClear
+          nzPlaceHolder="Choose a type"
+          formControlName="use_type"
+        >
+          <nz-option nzValue="User" nzLabel="User or customer"></nz-option>
+          <nz-option nzValue="Developer" nzLabel="Developer"></nz-option>
+          <nz-option nzValue="Admin" nzLabel="Admin"></nz-option>
+        </nz-select>
+      </nz-col>
+    </nz-row>
+
+    <nz-row *ngIf="user === 'Developer'">
+      <nz-col nzXs="24" nzSm="8">
+        <h5 nz-typography>Github profile url</h5>
+        <input
+          nz-input
+          formControlName="use_github"
+          placeholder="Type github profile"
+        />
+      </nz-col>
+    </nz-row>
+
+    <nz-row>
+      <nz-col nzXs="24" nzSm="8">
+        <button nz-button nzType="primary" nzBlock>Submit</button>
+      </nz-col>
+    </nz-row>
+  </nz-form>
+</div>

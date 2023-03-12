@@ -1,23 +1,4 @@
 <div>
-  <h1>Welcome, Admin!</h1>
+  <h3 nz-typography>Home</h3>
   <p>You have access to all features and functionality.</p>
 </div>
-
-<ng-template #developerContent [ngIf]="userType === 'Developer'">
-  <div>
-    <h1>Welcome, Developer!</h1>
-    <p>
-      You have access to all features and functionality. Besides you are powered
-      with code, test and deploy tools
-    </p>
-  </div>
-</ng-template>
-
-<ng-template #developerContent [ngIf]="userType === 'User'">
-  <div>
-    <h1>Welcome, User!</h1>
-    <p>
-      You have access to all the information of the projects you hire with us
-    </p>
-  </div>
-</ng-template>

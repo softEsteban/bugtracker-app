@@ -34,7 +34,8 @@ export class LayoutComponent implements OnInit {
     setTimeout(() => {
       this.getProfileConfig();
       this.getUserData();
-    }, 3000);
+    }, 4000);
+    this.router.navigate(['/home'])
   }
 
   getProfileConfig() {

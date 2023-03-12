@@ -1,4 +1,4 @@
-<p>Users list</p>
+<h3 nz-typography>Users</h3>
 
 <div class="options-bar">
   <nz-input-group
@@ -13,7 +13,12 @@
     />
   </nz-input-group>
 
-  <button nz-button nzType="primary" nzShape="circle">
+  <button
+    nz-button
+    nzType="primary"
+    nzShape="circle"
+    (click)="createComponentModal()"
+  >
     <span nz-icon nzType="plus"></span>
   </button>
 </div>
@@ -32,6 +37,7 @@
         [nzIndeterminate]="indeterminate"
         (nzCheckedChange)="onAllChecked($event)"
       ></th>
+      <th>Icon</th>
       <th>Name</th>
       <th>Email</th>
       <th>Github</th>
@@ -45,7 +51,12 @@
         [nzChecked]="setOfCheckedId.has(data.use_code)"
         (nzCheckedChange)="onItemChecked(data.use_code, $event)"
       ></td>
-      <td>{{ data.use_name }}</td>
+      <td>
+        <nz-avatar nzIcon="user" [nzShape]="'circle'"></nz-avatar>
+      </td>
+      <td>
+        <a (click)="viewUserDetail(data)">{{ data.use_name }}</a>
+      </td>
       <td>{{ data.use_email }}</td>
       <td>{{ data.use_github }}</td>
       <td>{{ data.use_type }}</td>

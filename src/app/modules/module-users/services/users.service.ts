@@ -21,5 +21,11 @@ export class UsersService {
         );
     }
 
+    async getAllProfiles() {
+        return await lastValueFrom(
+            this.http.get(`${this.host}/profiles/getAllProfiles`)
+        );
+    }
+
 
 }

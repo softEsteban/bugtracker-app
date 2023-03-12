@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { environment } from '../../../../environments/environment';
+import { CreateUserComponent } from '../create-user/create-user.component';
 import { UsersService } from '../services/users.service';
 
 
@@ -19,13 +22,17 @@ interface UserData {
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.css']
+  styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
 
   host = environment.host;
 
-  constructor(private usersService: UsersService) { }
+  constructor(
+    private usersService: UsersService,
+    private router: Router,
+    private modal: NzModalService,
+    private viewContainerRef: ViewContainerRef) { }
 
   listOfSelection = [
     {
@@ -56,7 +63,6 @@ export class UsersListComponent implements OnInit {
   setOfCheckedId = new Set<number>();
 
   users: UserData[] = []; // assume this contains the user data to be filtered
-  filteredUsers: UserData[] = []; // this will be updated with the filtered data
   filteredData: UserData[] = [];
   searchText: string = '';
 
@@ -90,9 +96,7 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
-    // setTimeout(() => {
-    //   this.filteredData = this.listOfData.slice(); // copy of the original data
-    // }, 2000);
+
   }
 
   /**
@@ -104,6 +108,10 @@ export class UsersListComponent implements OnInit {
       this.listOfData = data.data;
       this.filteredData = data.data;
     }
+  }
+
+  viewUserDetail(user: any) {
+    this.router.navigate(['/user', user.use_code], { state: { user: user } });
   }
 
   /**
@@ -128,4 +136,38 @@ export class UsersListComponent implements OnInit {
     });
 
   }
+
+
+  createComponentModal(): void {
+    const modal = this.modal.create({
+      nzTitle: 'Create user',
+      nzContent: CreateUserComponent,
+      nzViewContainerRef: this.viewContainerRef,
+      nzComponentParams: {}
+      //  {
+      //   title: 'title in component',
+      //   subtitle: 'component sub title，will be changed after 2 sec'
+      // }
+      ,
+      nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000)),
+      nzFooter: [
+        // {
+        //   label: 'change component title from outside',
+        //   onClick: componentInstance => {
+        //     componentInstance!.title = 'title in inner component is changed';
+        //   }
+        // }
+      ]
+    });
+    const instance = modal.getContentComponent();
+    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
+    // Return a result when closed
+    modal.afterClose.subscribe(result => console.log('[afterClose] The result is:', result));
+
+    // delay until modal instance created
+    // setTimeout(() => {
+    //   instance.subtitle = 'sub title is changed';
+    // }, 2000);
+  }
+
 }

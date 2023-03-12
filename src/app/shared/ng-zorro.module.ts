@@ -19,6 +19,7 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @NgModule({
   declarations: [],
@@ -43,7 +44,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     NzBadgeModule,
     NzTagModule,
     NzPopoverModule,
-    NzTableModule
+    NzTableModule,
+    NzSelectModule
   ],
   exports: [
     NzLayoutModule,
@@ -65,7 +67,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     NzBadgeModule,
     NzTagModule,
     NzPopoverModule,
-    NzTableModule
+    NzTableModule,
+    NzSelectModule
   ]
 })
 export class NgZorroModule { }

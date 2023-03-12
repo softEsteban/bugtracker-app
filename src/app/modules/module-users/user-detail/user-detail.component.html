@@ -1,0 +1,27 @@
+<h3 nz-typography>Users detail</h3>
+
+<div *ngIf="!editMode">
+  <p>{{ user.use_code }}</p>
+  <p>{{ user.use_name }}</p>
+  <p>{{ user.use_email }}</p>
+  <button (click)="triggerEdit()">Edit</button>
+</div>
+
+<div *ngIf="editMode">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmitEdit()">
+    <label>
+      User Code:
+      <input type="text" formControlName="use_code" />
+    </label>
+    <label>
+      Name:
+      <input type="text" formControlName="use_name" />
+    </label>
+    <label>
+      Email:
+      <input type="text" formControlName="use_email" />
+    </label>
+    <button type="submit">Save</button>
+    <button (click)="editMode = false">Cancel</button>
+  </form>
+</div>
