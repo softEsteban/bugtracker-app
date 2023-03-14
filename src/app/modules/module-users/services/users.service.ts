@@ -27,5 +27,11 @@ export class UsersService {
         );
     }
 
+    async createUser(user: any) {
+        return await lastValueFrom(
+            this.http.post(`${this.host}/users/createUser`, user)
+        );
+    }
+
 
 }

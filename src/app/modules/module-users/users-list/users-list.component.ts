@@ -141,7 +141,15 @@ export class UsersListComponent implements OnInit {
   createComponentModal(): void {
     const modal = this.modal.create({
       nzTitle: 'Create user',
-      nzWidth: "700px",
+      // nzWidth: "700px",
+      nzStyle: {
+        "@media (max-width: 767px)": {
+          width: "400px"
+        },
+        "@media (min-width: 768px)": {
+          width: "700px"
+        }
+      },
       nzContent: CreateUserComponent,
       nzViewContainerRef: this.viewContainerRef,
       nzComponentParams: {},
