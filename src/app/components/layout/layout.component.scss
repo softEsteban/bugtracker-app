@@ -7,32 +7,19 @@
 
 .app-layout {
   height: 100vh;
-}
-
-.ant-page-header {
-  padding: 6px 12px;
+  display: flex;
 }
 
 .menu-sidebar {
-  position: relative;
   z-index: 10;
   min-height: 100vh;
   box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
-}
+  transition: all 0.2s;
 
-.header-trigger {
-  position: absolute;
-  bottom: 0;
-  height: 64px;
-  padding: 20px 24px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: all 0.3s, padding 0s;
-  color: white;
-}
-
-.trigger:hover {
-  color: #1890ff;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  width: 256px;
 }
 
 .sidebar-logo {
@@ -62,37 +49,40 @@
   vertical-align: middle;
 }
 
-nz-header {
-  padding: 0;
-  width: 100%;
-  z-index: 2;
+.header-trigger {
+  position: absolute;
+  bottom: 0;
+  height: 64px;
+  padding: 20px 24px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s, padding 0s;
+  color: white;
 }
+
+.trigger:hover {
+  color: #1890ff;
+}
+
 .app-header {
   position: relative;
   height: 64px;
   padding: 0;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-
-  .avatar-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-right: 16px;
-  }
-
-  .avatar {
-    display: flex;
-    align-items: center;
-  }
 }
 
 .inner-content {
-  padding: 24px;
+  padding: 24px 24px 24px 110px;
   background: #fff;
   height: 100%;
 }
 
 .ant-layout-header {
   padding: 0;
+}
+
+.ant-table-tbody > tr > td,
+.ant-table-thead > tr > th {
+  padding: 7px;
 }

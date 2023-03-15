@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import Swal from 'sweetalert2';
+import { UserDataService } from '../services/user.data.service';
 
 @Component({
   selector: 'app-create-user',
@@ -28,8 +29,10 @@ export class CreateUserComponent implements OnInit {
     }
   ];
 
-  constructor(private formBuilder: FormBuilder,
-    private usersService: UsersService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private usersService: UsersService,
+    private userDataService: UserDataService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -74,6 +77,7 @@ export class CreateUserComponent implements OnInit {
       let response = JSON.parse(JSON.stringify(data))
 
       if (response && response["message"] === "User has been created") {
+        this.userDataService.setCreatedUser(response.data);
         // User created successfully
         Swal.fire({
           html: "User has been registered!",

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { environment } from '../../../../environments/environment';
 import { CreateUserComponent } from '../create-user/create-user.component';
+import { UserDataService } from '../services/user.data.service';
 import { UsersService } from '../services/users.service';
 
 
@@ -30,6 +31,7 @@ export class UsersListComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
+    private userDataService: UserDataService,
     private router: Router,
     private modal: NzModalService,
     private viewContainerRef: ViewContainerRef) { }
@@ -96,6 +98,9 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+    // this.userDataService.createdUser$.subscribe(user => {
+    //   this.filteredData.push(user);
+    // });
 
   }
 

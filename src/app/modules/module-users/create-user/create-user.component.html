@@ -43,7 +43,7 @@
           formControlName="use_type"
         >
           <ng-container *ngFor="let data of userTypes">
-            <nz-option [nzValue]="data.value" [nzLabel]="data.text"></nz-option>
+            <nz-option [nzValue]="data.text" [nzLabel]="data.text"></nz-option>
           </ng-container>
         </nz-select>
       </nz-col>
