@@ -1,11 +1,12 @@
 <div class="container">
   <nz-form [formGroup]="userForm">
     <nz-row>
-      <nz-col nzXs="12" nzSm="12">
+      <nz-col nzXs="24" nzSm="24">
         <h5 nz-typography>Name</h5>
         <input nz-input formControlName="use_name" placeholder="Type name" />
       </nz-col>
-      <nz-col nzXs="12" nzSm="12">
+
+      <nz-col nzXs="24" nzSm="24">
         <h5 nz-typography>Lastname</h5>
         <input
           nz-input
@@ -16,7 +17,7 @@
     </nz-row>
 
     <nz-row>
-      <nz-col nzXs="12" nzSm="12">
+      <nz-col nzXs="24" nzSm="24">
         <h5 nz-typography>Email</h5>
         <input
           nz-input
@@ -24,7 +25,7 @@
           placeholder="Type valid email"
         />
       </nz-col>
-      <nz-col nzXs="12" nzSm="12">
+      <nz-col nzXs="24" nzSm="24">
         <h5 nz-typography>Password</h5>
         <input
           nz-input
@@ -71,9 +72,11 @@
           formControlName="cop_code"
           nzPlaceHolder="Choose a company"
         >
-          <nz-option nzValue="1" nzLabel="Mantis Group"></nz-option>
-          <nz-option nzValue="2" nzLabel="Chech"></nz-option>
-          <nz-option nzValue="3" nzLabel="Inlanze"></nz-option>
+          <ng-container *ngFor="let data of companies">
+            <nz-option [nzValue]="data.cop_code" [nzLabel]="data.cop_name">{{
+              data.cop_name
+            }}</nz-option>
+          </ng-container>
         </nz-select>
       </nz-col>
     </nz-row>

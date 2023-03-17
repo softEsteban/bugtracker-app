@@ -19,7 +19,7 @@ export class LayoutComponent implements OnInit {
   userData: any;
   userName: string = "";
 
-  isCollapsed = true;
+  isCollapsed = false;
   itemCurrent: any;
 
   constructor(

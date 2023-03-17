@@ -14,6 +14,8 @@ export class CreateUserComponent implements OnInit {
   public userForm!: FormGroup;
 
   profiles: any = [];
+  companies: any = [];
+
   userTypes = [
     {
       value: "User",
@@ -30,13 +32,13 @@ export class CreateUserComponent implements OnInit {
   ];
 
   constructor(
-    private formBuilder: FormBuilder,
     private usersService: UsersService,
     private userDataService: UserDataService) { }
 
   ngOnInit(): void {
     this.initForm();
     this.getProfilesData();
+    this.getCompaniesData();
   }
 
   private initForm(): void {
@@ -59,13 +61,20 @@ export class CreateUserComponent implements OnInit {
     }
   }
 
+  async getCompaniesData() {
+    let data: any = await this.usersService.getAllCompanies();
+    if (data.data.length > 0) {
+      this.companies = data.data;
+    }
+  }
+
   async createUser({ value, valid }: { value: any, valid: boolean }) {
     console.log(value);
     const user = {
       use_name: value.use_name,
       use_lastname: value.use_lastname,
       use_email: value.use_email,
-      use_type: value.pro_code,
+      use_type: value.use_type,
       use_pic: value.use_pic,
       use_github: value.use_github,
       use_pass: value.use_pass,

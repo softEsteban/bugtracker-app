@@ -1,8 +1,20 @@
-.container {
+.ant-modal {
+  top: 40px;
+}
+
+.ccontainer {
   overflow-y: auto;
   max-height: calc(100vh - 200px);
+  top: 49px;
 }
 
 nz-row {
   margin-bottom: 10px;
+}
+
+.ant-modal-wrap {
+  position: fixed;
+  top: -60px;
+  right: 7px;
+  bottom: 0;
 }

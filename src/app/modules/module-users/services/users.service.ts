@@ -27,6 +27,12 @@ export class UsersService {
         );
     }
 
+    async getAllCompanies() {
+        return await lastValueFrom(
+            this.http.get(`${this.host}/domains/getAllCompanies`)
+        );
+    }
+
     async createUser(user: any) {
         return await lastValueFrom(
             this.http.post(`${this.host}/users/createUser`, user)

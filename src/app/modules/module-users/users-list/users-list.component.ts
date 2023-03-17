@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -15,6 +14,7 @@ interface UserData {
   use_lastname: string;
   use_email: string;
   use_type: string;
+  cop_name: string;
   use_github: string;
   use_datfor: string;
 }
@@ -146,13 +146,12 @@ export class UsersListComponent implements OnInit {
   createComponentModal(): void {
     const modal = this.modal.create({
       nzTitle: 'Create user',
-      // nzWidth: "700px",
       nzStyle: {
         "@media (max-width: 767px)": {
-          width: "400px"
+          width: "560px",
         },
         "@media (min-width: 768px)": {
-          width: "700px"
+          width: "700px",
         }
       },
       nzContent: CreateUserComponent,
