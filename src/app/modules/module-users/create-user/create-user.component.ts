@@ -3,6 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { UsersService } from '../services/users.service';
 import Swal from 'sweetalert2';
 import { UserDataService } from '../services/user.data.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalRef } from 'ng-zorro-antd/modal';
+
 
 @Component({
   selector: 'app-create-user',
@@ -33,7 +36,9 @@ export class CreateUserComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
-    private userDataService: UserDataService) { }
+    private userDataService: UserDataService,
+    private message: NzMessageService,
+    private modalRef: NzModalRef) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -52,6 +57,10 @@ export class CreateUserComponent implements OnInit {
       cop_code: new FormControl("", Validators.required),
       use_pass: new FormControl("", Validators.required)
     })
+  }
+
+  createMessage(type: string, text: string): void {
+    this.message.create(type, `${text}`);
   }
 
   async getProfilesData() {
@@ -87,14 +96,17 @@ export class CreateUserComponent implements OnInit {
 
       if (response && response["message"] === "User has been created") {
         this.userDataService.setCreatedUser(response.data);
+        this.modalRef.close();
+        this.createMessage("succes", "User has been created!")
         // User created successfully
-        Swal.fire({
-          html: "User has been registered!",
-          icon: "success",
-          allowEscapeKey: false,
-          allowOutsideClick: false,
-          confirmButtonText: "Ok"
-        });
+        // Swal.fire({
+        //   html: "User has been registered!",
+        //   icon: "success",
+        //   allowEscapeKey: false,
+        //   allowOutsideClick: false,
+        //   confirmButtonText: "Ok"
+        // });
+
       }
     } catch (error) {
       Swal.fire({
