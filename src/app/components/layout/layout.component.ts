@@ -19,7 +19,7 @@ export class LayoutComponent implements OnInit {
   userData: any;
   userName: string = "";
 
-  isCollapsed = false;
+  isCollapsed = true;
   itemCurrent: any;
 
   constructor(
@@ -30,7 +30,6 @@ export class LayoutComponent implements OnInit {
     private modalService: NzModalService) { }
 
   ngOnInit(): void {
-
     try {
       this.githubService.loginWithGithub();
     } catch (error) {
@@ -41,6 +40,7 @@ export class LayoutComponent implements OnInit {
       this.getProfileConfig();
       this.getUserData();
     }, 4000);
+    this.isCollapsed = true;
     this.router.navigate(['/home'])
   }
 

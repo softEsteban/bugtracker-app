@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { GithubService } from '../../services/github.service';
-import Swal from 'sweetalert2';
+import { NzMessageService } from 'ng-zorro-antd/message';
+
 
 @Component({
   selector: 'app-login',
@@ -19,11 +20,16 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private githubService: GithubService
+    private githubService: GithubService,
+    private message: NzMessageService
   ) { }
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  createMessage(type: string, text: string): void {
+    this.message.create(type, `${text}`);
   }
 
   private initForm(): void {
@@ -39,13 +45,7 @@ export class LoginComponent implements OnInit {
   async login({ value, valid }: { value: any, valid: boolean }): Promise<any> {
 
     if (value.username == "" || value.password == "") {
-      Swal.fire({
-        html: "Wanna trick me? Complete the login",
-        icon: "info",
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        confirmButtonText: "Ok"
-      });
+      return this.createMessage("error", "Wanna trick me? Complete the login")
     }
 
     let credentials = { use_email: value.username, use_pass: value.password }
@@ -53,22 +53,10 @@ export class LoginComponent implements OnInit {
     let user = JSON.parse(JSON.stringify(data))
 
     if (user && user["message"] == "The given user email doesn't exist") {
-      Swal.fire({
-        html: "User email doesn't exist",
-        icon: "warning",
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        confirmButtonText: "Ok"
-      });
+      return this.createMessage("warning", "User email doesn't exist")
     }
     if (user["message"] == "User password is incorrect") {
-      Swal.fire({
-        html: "Wrong password. Have another go!",
-        icon: "warning",
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        confirmButtonText: "Ok"
-      });
+      return this.createMessage("error", "Wrong password. Have another go!")
     }
     if (user && user["data"]) {
       localStorage.setItem('token', user["data"][0]["token"]);

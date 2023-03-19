@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
-import Swal from 'sweetalert2';
 import { UserDataService } from '../services/user.data.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef } from 'ng-zorro-antd/modal';
@@ -53,7 +52,7 @@ export class CreateUserComponent implements OnInit {
       use_email: new FormControl("", [Validators.required, Validators.email]),
       use_type: new FormControl("", Validators.required),
       pro_code: new FormControl("", Validators.required),
-      use_github: new FormControl("", Validators.required),
+      use_github: new FormControl(""),
       cop_code: new FormControl("", Validators.required),
       use_pass: new FormControl("", Validators.required)
     })
@@ -97,26 +96,15 @@ export class CreateUserComponent implements OnInit {
       if (response && response["message"] === "User has been created") {
         this.userDataService.setCreatedUser(response.data);
         this.modalRef.close();
-        this.createMessage("succes", "User has been created!")
-        // User created successfully
-        // Swal.fire({
-        //   html: "User has been registered!",
-        //   icon: "success",
-        //   allowEscapeKey: false,
-        //   allowOutsideClick: false,
-        //   confirmButtonText: "Ok"
-        // });
-
+        this.createMessage("success", "User has been created!")
+      } else if (response["message"] === "A user with this email already exists") {
+        this.createMessage("error", "Email already belongs to one user")
+      } else if (response["message"] === "A user with this GitHub account already exists") {
+        this.createMessage("error", "Github profile already belongs to one user")
       }
     } catch (error) {
-      Swal.fire({
-        html: "A error has ocurred",
-        icon: "error",
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        confirmButtonText: "Ok"
-      });
-      console.error("Error creating user:", error);
+      this.modalRef.close();
+      this.createMessage("error", "An error has ocurred")
     }
   }
 

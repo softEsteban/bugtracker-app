@@ -155,6 +155,10 @@ export class UsersListComponent implements OnInit {
         }
       },
       nzContent: CreateUserComponent,
+      nzOnCancel: () => {
+        // Call the getAllUsers method here
+        this.getUsers();
+      },
       nzViewContainerRef: this.viewContainerRef,
       nzComponentParams: {},
       nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000)),

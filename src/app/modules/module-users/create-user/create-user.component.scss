@@ -2,10 +2,15 @@
   top: 40px;
 }
 
-.ccontainer {
+.container {
   overflow-y: auto;
   max-height: calc(100vh - 200px);
   top: 49px;
+}
+
+.validation-message {
+  color: #ff4d4f;
+  font-size: 12px;
 }
 
 nz-row {

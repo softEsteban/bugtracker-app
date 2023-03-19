@@ -1,98 +1,180 @@
 <div class="container">
   <nz-form [formGroup]="userForm">
     <nz-row>
-      <nz-col nzXs="24" nzSm="24">
-        <h5 nz-typography>Name</h5>
-        <input nz-input formControlName="use_name" placeholder="Type name" />
-      </nz-col>
-
-      <nz-col nzXs="24" nzSm="24">
-        <h5 nz-typography>Lastname</h5>
-        <input
-          nz-input
-          formControlName="use_lastname"
-          placeholder="Type lastname"
-        />
-      </nz-col>
+      <nz-form-control>
+        <nz-col nzXs="24" nzSm="24">
+          <h5 nz-typography>Name*</h5>
+          <input nz-input formControlName="use_name" placeholder="Type name" />
+          <div
+            class="validation-message"
+            *ngIf="
+              userForm.get('use_name')!.invalid &&
+              userForm.get('use_name')!.touched
+            "
+            nz-form-explain
+          >
+            Please enter a name.
+          </div>
+        </nz-col>
+      </nz-form-control>
+      <nz-form-control>
+        <nz-col nzXs="24" nzSm="24">
+          <h5 nz-typography>Lastname*</h5>
+          <input
+            nz-input
+            formControlName="use_lastname"
+            placeholder="Type lastname"
+          />
+          <div
+            class="validation-message"
+            *ngIf="
+              userForm.get('use_lastname')!.invalid &&
+              userForm.get('use_lastname')!.touched
+            "
+            nz-form-explain
+          >
+            Please enter a lastname.
+          </div>
+        </nz-col>
+      </nz-form-control>
     </nz-row>
 
     <nz-row>
-      <nz-col nzXs="24" nzSm="24">
-        <h5 nz-typography>Email</h5>
-        <input
-          nz-input
-          formControlName="use_email"
-          placeholder="Type valid email"
-        />
-      </nz-col>
-      <nz-col nzXs="24" nzSm="24">
-        <h5 nz-typography>Password</h5>
-        <input
-          nz-input
-          formControlName="use_pass"
-          placeholder="Type valid password"
-        />
-      </nz-col>
+      <nz-form-control>
+        <nz-col nzXs="24" nzSm="24">
+          <h5 nz-typography>Email*</h5>
+          <input
+            nz-input
+            formControlName="use_email"
+            placeholder="Type valid email"
+          />
+          <div
+            class="validation-message"
+            *ngIf="
+              userForm.get('use_email')!.invalid &&
+              userForm.get('use_email')!.touched
+            "
+            nz-form-explain
+          >
+            Please enter a valid email address.
+          </div>
+        </nz-col>
+      </nz-form-control>
+      <nz-form-control>
+        <nz-col nzXs="24" nzSm="24">
+          <h5 nz-typography>Password*</h5>
+          <input
+            nz-input
+            formControlName="use_pass"
+            placeholder="Type valid password"
+          />
+          <div
+            class="validation-message"
+            *ngIf="
+              userForm.get('use_pass')!.invalid &&
+              userForm.get('use_pass')!.touched
+            "
+            nz-form-explain
+          >
+            Please enter a password.
+          </div>
+        </nz-col>
+      </nz-form-control>
     </nz-row>
 
     <nz-row>
-      <nz-col nzXs="24" nzSm="8">
-        <h5 nz-typography>User type</h5>
-        <nz-select
-          nzAllowClear
-          nzPlaceHolder="Choose a type"
-          formControlName="use_type"
-        >
-          <ng-container *ngFor="let data of userTypes">
-            <nz-option [nzValue]="data.text" [nzLabel]="data.text"></nz-option>
-          </ng-container>
-        </nz-select>
-      </nz-col>
-      <nz-col nzXs="24" nzSm="8">
-        <h5 nz-typography>User profile</h5>
-        <nz-select
-          nzAllowClear
-          formControlName="pro_code"
-          nzPlaceHolder="Choose a profile"
-        >
-          <ng-container *ngFor="let data of profiles">
-            <nz-option
-              [nzValue]="data.pro_code"
-              [nzLabel]="data.pro_name"
-              [nz-tooltip]="data.profiles"
-              >{{ data.pro_name }}</nz-option
-            >
-          </ng-container>
-        </nz-select>
-      </nz-col>
-      <nz-col nzXs="24" nzSm="8">
-        <h5 nz-typography>User company or dependecy</h5>
-        <nz-select
-          nzAllowClear
-          formControlName="cop_code"
-          nzPlaceHolder="Choose a company"
-        >
-          <ng-container *ngFor="let data of companies">
-            <nz-option [nzValue]="data.cop_code" [nzLabel]="data.cop_name">{{
-              data.cop_name
-            }}</nz-option>
-          </ng-container>
-        </nz-select>
-      </nz-col>
+      <nz-form-control>
+        <nz-col nzXs="12" nzSm="24">
+          <h5 nz-typography>User type*</h5>
+          <nz-select
+            nzAllowClear
+            nzPlaceHolder="Choose a type"
+            formControlName="use_type"
+          >
+            <ng-container *ngFor="let data of userTypes">
+              <nz-option
+                [nzValue]="data.text"
+                [nzLabel]="data.text"
+              ></nz-option>
+            </ng-container>
+          </nz-select>
+          <div
+            class="validation-message"
+            *ngIf="
+              userForm.get('use_type')!.invalid &&
+              userForm.get('use_type')!.touched
+            "
+            nz-form-explain
+          >
+            Please enter a user type.
+          </div>
+        </nz-col>
+      </nz-form-control>
+
+      <nz-form-control>
+        <nz-col nzXs="12" nzSm="24">
+          <h5 nz-typography>User profile*</h5>
+          <nz-select
+            nzAllowClear
+            formControlName="pro_code"
+            nzPlaceHolder="Choose a profile"
+          >
+            <ng-container *ngFor="let data of profiles">
+              <nz-option
+                [nzValue]="data.pro_code"
+                [nzLabel]="data.pro_name"
+                [nz-tooltip]="data.profiles"
+                >{{ data.pro_name }}</nz-option
+              >
+            </ng-container>
+          </nz-select>
+          <div
+            class="validation-message"
+            *ngIf="
+              userForm.get('pro_code')!.invalid &&
+              userForm.get('pro_code')!.touched
+            "
+            nz-form-explain
+          >
+            Please enter a user profile config.
+          </div>
+        </nz-col>
+      </nz-form-control>
+    </nz-row>
+
+    <nz-row>
+      <nz-form-control>
+        <nz-col nzXs="24" nzSm="24">
+          <h5 nz-typography>User company or dependecy*</h5>
+          <nz-select
+            nzAllowClear
+            formControlName="cop_code"
+            nzPlaceHolder="Choose a company"
+          >
+            <ng-container *ngFor="let data of companies">
+              <nz-option [nzValue]="data.cop_code" [nzLabel]="data.cop_name">{{
+                data.cop_name
+              }}</nz-option>
+            </ng-container>
+          </nz-select>
+        </nz-col>
+      </nz-form-control>
     </nz-row>
 
     <nz-row *ngIf="userForm.get('use_type')?.value == 'Developer'">
-      <nz-col nzXs="24" nzSm="8">
-        <h5 nz-typography>Github profile url</h5>
-        <nz-input-group style="display: flex; align-items: center">
-          <span style="margin-right: 10px" nz-prefix>github.com/</span>
-          <input
-            nz-input
-            formControlName="use_github"
-            placeholder="Type github profile"
-          />
-        </nz-input-group>
-      </nz-col>
+      <nz-form-control>
+        <nz-col nzXs="24" nzSm="24">
+          <h5 nz-typography>Github profile url</h5>
+          <nz-input-group style="display: flex; align-items: center">
+            <span style="margin-right: 10px" nz-prefix>github.com/</span>
+            <input
+              nz-input
+              formControlName="use_github"
+              placeholder="Type github profile"
+            />
+          </nz-input-group>
+        </nz-col>
+      </nz-form-control>
     </nz-row>
 
     <nz-row>
@@ -101,6 +183,7 @@
           <button
             nz-button
             nzType="primary"
+            [disabled]="userForm.invalid"
             (click)="createUser(userForm)"
             nzBlock
           >
