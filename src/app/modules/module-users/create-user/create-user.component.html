@@ -65,6 +65,7 @@
           <h5 nz-typography>Password*</h5>
           <input
             nz-input
+            type="password"
             formControlName="use_pass"
             placeholder="Type valid password"
           />
@@ -157,6 +158,16 @@
               }}</nz-option>
             </ng-container>
           </nz-select>
+          <div
+            class="validation-message"
+            *ngIf="
+              userForm.get('cop_code')!.invalid &&
+              userForm.get('cop_code')!.touched
+            "
+            nz-form-explain
+          >
+            Please enter a company.
+          </div>
         </nz-col>
       </nz-form-control>
     </nz-row>

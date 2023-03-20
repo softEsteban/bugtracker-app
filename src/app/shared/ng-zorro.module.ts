@@ -22,6 +22,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 @NgModule({
   declarations: [],
@@ -49,7 +51,9 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     NzTableModule,
     NzSelectModule,
     NzToolTipModule,
-    NzMessageModule
+    NzMessageModule,
+    NzDropDownModule,
+    NzDividerModule
   ],
   exports: [
     NzLayoutModule,
@@ -74,7 +78,9 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     NzTableModule,
     NzSelectModule,
     NzToolTipModule,
-    NzMessageModule
+    NzMessageModule,
+    NzDropDownModule,
+    NzDividerModule
   ]
 })
 export class NgZorroModule { }
