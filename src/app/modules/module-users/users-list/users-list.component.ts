@@ -149,9 +149,11 @@ export class UsersListComponent implements OnInit {
       nzStyle: {
         "@media (max-width: 767px)": {
           width: "560px",
+          top: '0px'
         },
         "@media (min-width: 768px)": {
           width: "700px",
+          top: '0px'
         }
       },
       nzContent: CreateUserComponent,
