@@ -14,15 +14,48 @@
         User Code:
         <input type="text" formControlName="use_code" />
       </label>
-      <label>
-        Name:
-        <input type="text" formControlName="use_name" />
-      </label>
-      <label>
-        Email:
-        <input type="text" formControlName="use_email" />
-      </label>
+
+      <nz-form-control>
+        <nz-col nzXs="24" nzSm="24">
+          <h5 nz-typography>Name*</h5>
+          <input nz-input formControlName="use_name" />
+        </nz-col>
+      </nz-form-control>
+
+      <nz-form-control>
+        <nz-col nzXs="24" nzSm="24">
+          <h5 nz-typography>Lastname*</h5>
+          <input nz-input formControlName="use_lastname" />
+        </nz-col>
+      </nz-form-control>
+
+      <nz-form-control>
+        <nz-col nzXs="24" nzSm="24">
+          <h5 nz-typography>Email*</h5>
+          <input nz-input formControlName="use_email" [disabled]="true" />
+        </nz-col>
+      </nz-form-control>
+
+      <nz-form-control>
+        <nz-col nzXs="12" nzSm="24">
+          <h5 nz-typography>User type*</h5>
+          <nz-select
+            nzAllowClear
+            nzPlaceHolder="Choose a type"
+            formControlName="use_type"
+          >
+            <ng-container *ngFor="let data of userTypes">
+              <nz-option
+                [nzValue]="data.text"
+                [nzLabel]="data.text"
+              ></nz-option>
+            </ng-container>
+          </nz-select>
+        </nz-col>
+      </nz-form-control>
+
       <button type="submit">Save</button>
+
       <button (click)="editMode = false">Cancel</button>
     </form>
   </div>
@@ -31,17 +64,14 @@
 <nz-divider></nz-divider>
 
 <div class="projects-container">
-  <!-- <h3 nz-typography>Projects</h3> -->
-
   <nz-page-header class="site-page-header">
     <nz-avatar
       nz-page-header-avatar
       nzSrc="https://avatars0.githubusercontent.com/u/22736418?s=88&v=4"
     ></nz-avatar>
     <nz-page-header-title class="custom-title">Projects</nz-page-header-title>
-    <!-- <h3 nz-typography>Projects</h3> -->
     <nz-page-header-tags>
-      <nz-tag [nzColor]="'blue'">{{ projectsCount }}</nz-tag>
+      <nz-tag [nzColor]="'blue'">{{ projectsCount }} </nz-tag>
     </nz-page-header-tags>
 
     <nz-page-header-extra>
@@ -73,28 +103,8 @@
 
     <!--content-->
     <nz-page-header-content>
-      <div nz-row>
-        <div class="content">
-          <p nz-paragraph>
-            Ant Design interprets the color system into two levels: a
-            system-level color system and a product-level color system.
-          </p>
-          <div class="content-link">
-            <a>
-              <img
-                src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg"
-                alt="start"
-              />
-              Quick Start
-            </a>
-          </div>
-        </div>
-        <div class="content-image">
-          <img
-            src="https://gw.alipayobjects.com/zos/antfincdn/K%24NnlsB%26hz/pageHeader.svg"
-            alt="content"
-          />
-        </div>
+      <div nz-row *ngFor="let data of projects">
+        <p>{{ data.pro_title }}</p>
       </div>
     </nz-page-header-content>
   </nz-page-header>

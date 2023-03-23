@@ -12,53 +12,73 @@ export class UserDetailComponent implements OnInit {
   user: any;
   public editMode = false;
   public projectsCount = 0;
+  public projects: any = [];
 
-  public userForm = new FormGroup({
-    use_code: new FormControl(),
-    use_name: new FormControl(),
-    use_email: new FormControl()
+  public userForm = this.formBuilder.group({
+    use_code: [''],
+    use_name: [''],
+    use_lastname: [''],
+    use_email: [''],
+    use_type: [''],
   });
 
+  userTypes = [
+    {
+      value: "User",
+      text: "User or Customer"
+    },
+    {
+      value: "Developer",
+      text: "Developer"
+    },
+    {
+      value: "Admin",
+      text: "Administrator"
+    }
+  ];
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder) { }
 
 
   ngOnInit(): void {
     this.user = history.state.user;
+    if (this.user && this.user.use_projects) {
+      this.projects = this.user.use_projects;
+      this.projectsCount = this.projects.length;
 
-    this.userForm = this.formBuilder.group({
-      use_code: [''],
-      use_name: [''],
-      use_email: [''],
-    });
+      this.userForm = this.formBuilder.group({
+        use_code: [''],
+        use_name: [''],
+        use_lastname: [''],
+        use_email: [''],
+        use_type: [''],
+      });
 
-    this.userForm.patchValue({
-      use_code: this.user.use_code,
-      use_name: this.user.use_name,
-      use_email: this.user.use_email,
-    });
+      this.userForm.patchValue({
+        use_code: this.user.use_code,
+        use_name: this.user.use_name,
+        use_lastname: this.user.use_lastname,
+        use_email: this.user.use_email,
+        use_type: this.user.use_type,
+      });
 
-    // const use_code = + this.route.snapshot.paramMap.get('use_code');
-    // if (use_code) {
-    //   this.editMode = true;
-    //   this.userService.getUser(use_code).subscribe(user => {
-    //     this.user = user;
-    //     this.userForm.patchValue({
-    //       use_code: user.use_code,
-    //       use_name: user.use_name,
-    //       use_email: user.use_email,
-    //     });
-    //   });
-    // } else {
-    //   this.editMode = false;
-    //   this.user = null;
-    // }
+      //Sets use_type
+      let useTypeControl = this.userForm.get('use_type');
+      if (useTypeControl) {
+        const userType = this.userTypes.find(type => type.value === this.user.use_type);
+        useTypeControl.setValue(userType ? userType.text : null);
+      }
+
+
+
+
+
+    }
   }
 
 
   triggerEdit() {
     this.editMode = true;
-
   }
 
   onSubmitEdit(): void {
