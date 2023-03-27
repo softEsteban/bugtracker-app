@@ -39,5 +39,10 @@ export class UsersService {
         );
     }
 
+    async updateUser(use_code: string, user: any) {
+        return await lastValueFrom(
+            this.http.put(`${this.host}/users/updateUser/${use_code}`, user)
+        );
+    }
 
 }

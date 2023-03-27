@@ -1,118 +1,132 @@
-<div class="detail-container">
-  <h3 nz-typography>Users detail</h3>
+<div nz-row>
+  <div nz-col nzXs="24" nzSm="8">
+    <div class="detail-container">
+      <h3 nz-typography>Users detail</h3>
 
-  <div *ngIf="!editMode">
-    <p>{{ user?.use_code }}</p>
-    <p>{{ user?.use_name }}</p>
-    <p>{{ user?.use_email }}</p>
-    <button nz-button nzType="primary" (click)="triggerEdit()">
-      Edit user
-    </button>
-  </div>
-
-  <div *ngIf="editMode">
-    <form [formGroup]="userForm" (ngSubmit)="onSubmitEdit()">
-      <nz-form-control>
-        <nz-col nzXs="24" nzSm="24">
-          <h5 nz-typography>Name*</h5>
-          <input nz-input formControlName="use_name" />
-        </nz-col>
-      </nz-form-control>
-      <div
-        class="validation-message"
-        *ngIf="
-          userForm.get('use_name')!.invalid && userForm.get('use_name')!.touched
-        "
-        nz-form-explain
-      >
-        Please enter a user name
+      <div *ngIf="!editMode">
+        <p>{{ user?.use_code }}</p>
+        <p>{{ user?.use_name }}</p>
+        <p>{{ user?.use_email }}</p>
+        <button nz-button nzType="primary" (click)="triggerEdit()">
+          Edit user
+        </button>
       </div>
 
-      <nz-form-control>
-        <nz-col nzXs="24" nzSm="24">
-          <h5 nz-typography>Lastname*</h5>
-          <input nz-input formControlName="use_lastname" />
-        </nz-col>
-      </nz-form-control>
-
-      <nz-form-control>
-        <nz-col nzXs="24" nzSm="24">
-          <h5 nz-typography>Email*</h5>
-          <input nz-input formControlName="use_email" [disabled]="true" />
-        </nz-col>
-      </nz-form-control>
-
-      <nz-form-control>
-        <nz-col nzXs="12" nzSm="24">
-          <h5 nz-typography>User type*</h5>
-          <nz-select
-            nzAllowClear
-            nzPlaceHolder="Choose a type"
-            formControlName="use_type"
-          >
-            <ng-container *ngFor="let data of userTypes">
-              <nz-option
-                [nzValue]="data.text"
-                [nzLabel]="data.text"
-              ></nz-option>
-            </ng-container>
-          </nz-select>
-        </nz-col>
-      </nz-form-control>
-
-      <nz-form-control>
-        <nz-col nzXs="12" nzSm="24">
-          <h5 nz-typography>User profile*</h5>
-          <nz-select
-            nzAllowClear
-            nzPlaceHolder="Choose a profile config"
-            formControlName="pro_code"
-          >
-            <ng-container *ngFor="let data of profiles">
-              <nz-option
-                [nzValue]="data.pro_code"
-                [nzLabel]="data.pro_name"
-              ></nz-option>
-            </ng-container>
-          </nz-select>
+      <div *ngIf="editMode">
+        <form [formGroup]="userForm" (ngSubmit)="updateUser(userForm)">
+          <nz-form-control>
+            <nz-col nzXs="24" nzSm="24">
+              <h5 nz-typography>Name*</h5>
+              <input nz-input formControlName="use_name" />
+            </nz-col>
+          </nz-form-control>
           <div
             class="validation-message"
             *ngIf="
-              userForm.get('pro_code')!.invalid &&
-              userForm.get('pro_code')!.touched
+              userForm.get('use_name')!.invalid &&
+              userForm.get('use_name')!.touched
             "
             nz-form-explain
           >
-            Please enter a user profile config.
+            Please enter a user name
           </div>
-        </nz-col>
-      </nz-form-control>
 
-      <nz-form-control style="margin-bottom: 15px">
-        <nz-col nzXs="12" nzSm="24">
-          <h5 nz-typography>User company*</h5>
-          <nz-select
-            nzAllowClear
-            formControlName="cop_code"
-            nzPlaceHolder="Choose a company"
+          <nz-form-control>
+            <nz-col nzXs="24" nzSm="24">
+              <h5 nz-typography>Lastname*</h5>
+              <input nz-input formControlName="use_lastname" />
+            </nz-col>
+          </nz-form-control>
+
+          <nz-form-control>
+            <nz-col nzXs="24" nzSm="24">
+              <h5 nz-typography>Email*</h5>
+              <input nz-input formControlName="use_email" [disabled]="true" />
+            </nz-col>
+          </nz-form-control>
+
+          <nz-form-control>
+            <nz-col nzXs="12" nzSm="24">
+              <h5 nz-typography>User type*</h5>
+              <nz-select
+                nzAllowClear
+                nzPlaceHolder="Choose a type"
+                formControlName="use_type"
+              >
+                <ng-container *ngFor="let data of userTypes">
+                  <nz-option
+                    [nzValue]="data.text"
+                    [nzLabel]="data.text"
+                  ></nz-option>
+                </ng-container>
+              </nz-select>
+            </nz-col>
+          </nz-form-control>
+
+          <nz-form-control>
+            <nz-col nzXs="12" nzSm="24">
+              <h5 nz-typography>User profile*</h5>
+              <nz-select
+                nzAllowClear
+                nzPlaceHolder="Choose a profile config"
+                formControlName="pro_code"
+              >
+                <ng-container *ngFor="let data of profiles">
+                  <nz-option
+                    [nzValue]="data.pro_code"
+                    [nzLabel]="data.pro_name"
+                  ></nz-option>
+                </ng-container>
+              </nz-select>
+              <div
+                class="validation-message"
+                *ngIf="
+                  userForm.get('pro_code')!.invalid &&
+                  userForm.get('pro_code')!.touched
+                "
+                nz-form-explain
+              >
+                Please enter a user profile config.
+              </div>
+            </nz-col>
+          </nz-form-control>
+
+          <nz-form-control style="margin-bottom: 15px">
+            <nz-col nzXs="12" nzSm="24">
+              <h5 nz-typography>User company*</h5>
+              <nz-select
+                nzAllowClear
+                formControlName="cop_code"
+                nzPlaceHolder="Choose a company"
+              >
+                <ng-container *ngFor="let data of companies">
+                  <nz-option
+                    [nzValue]="data.cop_code"
+                    [nzLabel]="data.cop_name"
+                  ></nz-option>
+                </ng-container>
+              </nz-select>
+            </nz-col>
+          </nz-form-control>
+
+          <button
+            nz-button
+            nzType="primary"
+            (click)="updateUser(userForm)"
+            style="margin-right: 15px"
           >
-            <ng-container *ngFor="let data of companies">
-              <nz-option
-                [nzValue]="data.cop_code"
-                [nzLabel]="data.cop_name"
-              ></nz-option>
-            </ng-container>
-          </nz-select>
-        </nz-col>
-      </nz-form-control>
+            Save
+          </button>
+          <button nz-button nzType="default" (click)="editMode = false">
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 
-      <button nz-button nzType="primary" style="margin-right: 15px">
-        Save
-      </button>
-      <button nz-button nzType="default" (click)="editMode = false">
-        Cancel
-      </button>
-    </form>
+  <div nz-col nzXs="24" nzSm="8">
+    <nz-avatar [nzSize]="64" nzIcon="user"></nz-avatar>
   </div>
 </div>
 

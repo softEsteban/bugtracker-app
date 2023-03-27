@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 interface Profile {
   pro_code: string;
@@ -53,7 +54,8 @@ export class UserDetailComponent implements OnInit {
   ];
   constructor(
     private usersService: UsersService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private message: NzMessageService) { }
 
   async ngOnInit(): Promise<void> {
     await this.getProfilesData();
@@ -106,6 +108,9 @@ export class UserDetailComponent implements OnInit {
     }
   }
 
+  createMessage(type: string, text: string): void {
+    this.message.create(type, `${text}`);
+  }
 
   async getProfilesData() {
     let data: any = await this.usersService.getAllProfiles();
@@ -125,7 +130,31 @@ export class UserDetailComponent implements OnInit {
     this.editMode = true;
   }
 
-  onSubmitEdit(): void {
 
+  async updateUser({ value, valid }: { value: any, valid: boolean }) {
+    if (!valid) {
+      return this.createMessage("error", "Some fileds are not valid")
+    }
+    const user = {
+      use_name: value.use_name,
+      use_lastname: value.use_lastname,
+      use_type: value.use_type,
+      use_pic: value.use_pic,
+      use_github: value.use_github,
+      pro_code: value.pro_code,
+      cop_code: value.cop_code
+    };
+    try {
+      const data = await this.usersService.updateUser(this.user.use_code, user);
+      let response = JSON.parse(JSON.stringify(data))
+
+      if (response && response["message"] === "User has been updated!") {
+        this.createMessage("success", "User has been updated!")
+      } else {
+        this.createMessage("error", "Some data doesn't match!")
+      }
+    } catch (error) {
+      this.createMessage("error", "An error has ocurred")
+    }
   }
 }

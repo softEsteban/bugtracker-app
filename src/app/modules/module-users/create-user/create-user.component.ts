@@ -77,7 +77,6 @@ export class CreateUserComponent implements OnInit {
   }
 
   async createUser({ value, valid }: { value: any, valid: boolean }) {
-    console.log(value);
     const user = {
       use_name: value.use_name,
       use_lastname: value.use_lastname,
