@@ -91,7 +91,7 @@ export class UserDetailComponent implements OnInit {
       let useTypeControl = this.userForm.get('use_type');
       if (useTypeControl) {
         const userType = this.userTypes.find(type => type.value === this.user.use_type);
-        useTypeControl.setValue(userType ? userType.text : null);
+        useTypeControl.setValue(userType ? userType.value : null);
       }
 
       let procodeControl = this.userForm.get('pro_code');

@@ -18,6 +18,7 @@ export class LayoutComponent implements OnInit {
   profileConfig: any;
   userData: any;
   userName: string = "";
+  userPic: string = "";
 
   isCollapsed = true;
   itemCurrent: any;
@@ -56,6 +57,7 @@ export class LayoutComponent implements OnInit {
     if (user != null) {
       this.userData = JSON.parse(user);
       this.userName = this.userData.use_name;
+      this.userPic = this.userData.use_pic;
     }
   }
 

@@ -40,6 +40,7 @@
       <th>Icon</th>
       <th>Name</th>
       <th>Email</th>
+      <th>Type</th>
       <th>Github</th>
       <th>Type</th>
       <th>Company</th>
@@ -53,12 +54,19 @@
         (nzCheckedChange)="onItemChecked(data.use_code, $event)"
       ></td>
       <td>
-        <nz-avatar nzIcon="user" [nzShape]="'circle'"></nz-avatar>
+        <nz-avatar
+          [nzSrc]="
+            data?.use_pic ||
+            'https://firebasestorage.googleapis.com/v0/b/mantis-project-7c277.appspot.com/o/avataaars-example.png?alt=media&token=0e4ce4f4-10cd-4009-af54-71137fe4e676'
+          "
+          [nzShape]="'circle'"
+        ></nz-avatar>
       </td>
       <td>
         <a (click)="viewUserDetail(data)">{{ data.use_name }}</a>
       </td>
       <td>{{ data.use_email }}</td>
+      <td>{{ data.use_type }}</td>
       <td>{{ data.use_github }}</td>
       <td>{{ data.use_type }}</td>
       <td>{{ data.cop_name }}</td>

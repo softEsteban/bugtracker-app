@@ -14,6 +14,7 @@ interface UserData {
   use_lastname: string;
   use_email: string;
   use_type: string;
+  use_pic: string;
   cop_name: string;
   use_github: string;
   use_datfor: string;

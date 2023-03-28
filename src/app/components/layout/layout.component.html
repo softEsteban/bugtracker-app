@@ -87,7 +87,13 @@
               </ng-template>
               <div class="avatar">
                 <!-- <nz-badge [nzCount]="5" style="margin-right: 24px"></nz-badge> -->
-                <nz-avatar nzIcon="user" [nzShape]="'circle'"></nz-avatar>
+                <nz-avatar
+                  [nzSrc]="
+                    userPic ||
+                    'https://firebasestorage.googleapis.com/v0/b/mantis-project-7c277.appspot.com/o/avataaars-example.png?alt=media&token=0e4ce4f4-10cd-4009-af54-71137fe4e676'
+                  "
+                  [nzShape]="'circle'"
+                ></nz-avatar>
               </div>
             </nz-space>
           </nz-page-header-extra>
