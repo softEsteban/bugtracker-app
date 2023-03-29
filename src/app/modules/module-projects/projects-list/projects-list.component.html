@@ -1,1 +1,44 @@
-<p>projects-list works!</p>
+<h3 nz-typography>Projects</h3>
+
+<div class="options-bar">
+  <nz-input-group
+    style="margin-bottom: 16px; width: 25vw; border-radius: 3px; outline: none"
+  >
+    <input
+      type="text"
+      nz-input
+      placeholder="Search and filter projects"
+      [(ngModel)]="searchText"
+      (ngModelChange)="filterData(searchText)"
+    />
+  </nz-input-group>
+
+  <button nz-button nzType="primary" nzShape="circle">
+    <span nz-icon nzType="plus"></span>
+  </button>
+</div>
+
+<div class="projects-container">
+  <div nz-row>
+    <div
+      class="project-card"
+      nz-col
+      nzSpan="8"
+      *ngFor="let data of filteredData; let i = index"
+    >
+      <p>{{ data.pro_code }}</p>
+      <p>{{ data.pro_title }}</p>
+      <p>{{ data.pro_descri }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="projects-container">
+  <div nz-row *ngFor="let data of filteredData">
+    <p>{{ data.pro_code }}</p>
+    <p>{{ data.pro_title }}</p>
+    <p>{{ data.pro_title }}</p>
+  </div>
+</div> -->
+
+<!-- <nz-divider></nz-divider> -->
