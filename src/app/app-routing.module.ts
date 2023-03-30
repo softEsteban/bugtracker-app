@@ -11,12 +11,14 @@ import { UsersListComponent } from './modules/module-users/users-list/users-list
 import { BoardComponent } from './modules/module-kanban/board/board.component';
 import { HomeComponent } from './modules/module-home/home/home.component';
 import { UserDetailComponent } from './modules/module-users/user-detail/user-detail.component';
+import { ProjectDetailComponent } from './modules/module-projects/project-detail/project-detail.component';
 
 const routes: Routes = [
   {
     path: '', component: LayoutComponent, canActivate: [AuthGuard], children: [
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
       { path: 'projects', component: ProjectsListComponent, canActivate: [AuthGuard] },
+      { path: 'project/:projectId', component: ProjectDetailComponent, canActivate: [AuthGuard] },
       { path: 'users', component: UsersListComponent, canActivate: [AuthGuard] },
       { path: 'user/:userId', component: UserDetailComponent, canActivate: [AuthGuard] },
       { path: 'kanban', component: BoardComponent, canActivate: [AuthGuard] },

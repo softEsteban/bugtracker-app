@@ -28,8 +28,6 @@ interface UserData {
 })
 export class UsersListComponent implements OnInit {
 
-  host = environment.host;
-
   constructor(
     private usersService: UsersService,
     private userDataService: UserDataService,

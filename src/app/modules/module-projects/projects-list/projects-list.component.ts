@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ProjectsService } from '../services/projects.service';
+import { Router } from '@angular/router';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { CreateProjectComponent } from '../create-project/create-project.component';
 
 interface UserData {
   use_code: string;
@@ -17,6 +20,7 @@ interface ProjectData {
   pro_datstart: string;
   pro_datend: string;
   pro_users: UserData[];
+  counts_string: string;
 }
 
 @Component({
@@ -32,7 +36,11 @@ export class ProjectsListComponent implements OnInit {
   filteredData: ProjectData[] = [];
   searchText: string = '';
 
-  constructor(private projectsService: ProjectsService) { }
+  constructor(
+    private projectsService: ProjectsService,
+    private router: Router,
+    private modal: NzModalService,
+    private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit(): void {
     this.getProjects();
@@ -70,6 +78,36 @@ export class ProjectsListComponent implements OnInit {
       return false;
     });
 
+  }
+
+  viewProjectDetail(project: any) {
+    this.router.navigate(['/project', project.pro_code], { state: { project: project } });
+  }
+
+  createComponentModal(): void {
+    const modal = this.modal.create({
+      nzTitle: 'Create project',
+      nzStyle: {
+        "@media (max-width: 767px)": {
+          width: "560px",
+          top: '0px'
+        },
+        "@media (min-width: 768px)": {
+          width: "700px",
+          top: '0px'
+        }
+      },
+      nzContent: CreateProjectComponent,
+      nzOnCancel: () => {
+        this.getProjects();
+      },
+      nzViewContainerRef: this.viewContainerRef,
+      nzComponentParams: {},
+      nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000)),
+      nzFooter: []
+    });
+    const instance = modal.getContentComponent();
+    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
   }
 
 

@@ -13,7 +13,12 @@
     />
   </nz-input-group>
 
-  <button nz-button nzType="primary" nzShape="circle">
+  <button
+    nz-button
+    nzType="primary"
+    nzShape="circle"
+    (click)="createComponentModal()"
+  >
     <span nz-icon nzType="plus"></span>
   </button>
 </div>
@@ -26,9 +31,18 @@
       nzSpan="8"
       *ngFor="let data of filteredData; let i = index"
     >
-      <p>{{ data.pro_code }}</p>
-      <p>{{ data.pro_title }}</p>
-      <p>{{ data.pro_descri }}</p>
+      <a
+        (click)="viewProjectDetail(data)"
+        [ngStyle]="{
+          'font-size': '16px',
+          color: 'black',
+          'text-decoration': 'underline',
+          'font-weight': '300'
+        }"
+      >
+        {{ data.pro_title }}
+      </a>
+      <p [ngStyle]="{ 'font-size': '11px' }">{{ data.counts_string }}</p>
     </div>
   </div>
 </div>

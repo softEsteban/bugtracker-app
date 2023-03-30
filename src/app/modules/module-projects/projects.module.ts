@@ -3,12 +3,16 @@ import { CommonModule } from '@angular/common';
 import { ProjectsListComponent } from './projects-list/projects-list.component';
 import { NgZorroModule } from '../../shared/ng-zorro.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 
 
 
 @NgModule({
   declarations: [
-    ProjectsListComponent
+    ProjectsListComponent,
+    ProjectDetailComponent,
+    CreateProjectComponent
   ],
   imports: [
     CommonModule,
