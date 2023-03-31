@@ -21,5 +21,11 @@ export class ProjectsService {
         );
     }
 
+    async getDevelopersSelect() {
+        return await lastValueFrom(
+            this.http.get(`${this.host}/users/getDevelopersSelect`)
+        );
+    }
+
 
 }

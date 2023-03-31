@@ -75,6 +75,64 @@
     </nz-row>
 
     <nz-row>
+      <nz-form-control>
+        <nz-col nzXs="12" nzSm="24">
+          <h5 nz-typography>Start date*</h5>
+          <nz-date-picker formControlName="pro_datstart"></nz-date-picker>
+          <div
+            class="validation-message"
+            *ngIf="
+              projectForm.get('pro_datstart')!.invalid &&
+              projectForm.get('pro_datstart')!.touched
+            "
+            nz-form-explain
+          >
+            Please enter a valid start date
+          </div>
+        </nz-col>
+      </nz-form-control>
+    </nz-row>
+
+    <nz-row>
+      <nz-form-control>
+        <nz-col nzXs="12" nzSm="24">
+          <h5 nz-typography>End date*</h5>
+          <nz-date-picker formControlName="pro_datend"></nz-date-picker>
+          <div
+            class="validation-message"
+            *ngIf="
+              projectForm.get('pro_datend')!.invalid &&
+              projectForm.get('pro_datend')!.touched
+            "
+            nz-form-explain
+          >
+            Please enter a valid end date
+          </div>
+        </nz-col>
+      </nz-form-control>
+    </nz-row>
+
+    <nz-row>
+      <nz-form-control>
+        <nz-col nzXs="12" nzSm="24">
+          <h5 nz-typography>Team</h5>
+          <nz-select
+            [(ngModel)]="multipleValue"
+            formControlName="pro_users"
+            nzMode="multiple"
+            nzPlaceHolder="Select the users group"
+          >
+            <nz-option
+              *ngFor="let option of developerSelect"
+              [nzLabel]="option.use_name"
+              [nzValue]="option.use_code"
+            ></nz-option>
+          </nz-select>
+        </nz-col>
+      </nz-form-control>
+    </nz-row>
+
+    <nz-row>
       <nz-col nzXs="24" nzSm="8">
         <nz-form-item class="submit-button">
           <button

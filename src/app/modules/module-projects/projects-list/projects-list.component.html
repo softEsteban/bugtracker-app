@@ -23,12 +23,13 @@
   </button>
 </div>
 
-<div class="projects-container">
+<div nz-col nzXs="24" nzSm="24" class="projects-container">
   <div nz-row>
     <div
       class="project-card"
       nz-col
-      nzSpan="8"
+      nzXs="24"
+      nzSm="5"
       *ngFor="let data of filteredData; let i = index"
     >
       <a
@@ -46,13 +47,3 @@
     </div>
   </div>
 </div>
-
-<!-- <div class="projects-container">
-  <div nz-row *ngFor="let data of filteredData">
-    <p>{{ data.pro_code }}</p>
-    <p>{{ data.pro_title }}</p>
-    <p>{{ data.pro_title }}</p>
-  </div>
-</div> -->
-
-<!-- <nz-divider></nz-divider> -->
