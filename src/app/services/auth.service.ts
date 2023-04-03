@@ -29,6 +29,13 @@ export class AuthService {
 
     }
 
+    getSessionId() {
+        const user = localStorage.getItem('user') || {} as any;
+        if (user) {
+            return JSON.parse(user)["use_code"];
+        }
+    }
+
     logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('profile');

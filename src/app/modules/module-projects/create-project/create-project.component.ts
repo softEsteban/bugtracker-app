@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProjectsService } from '../services/projects.service'
+import { AuthService } from '../../../services/auth.service';
+import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-create-project',
@@ -11,7 +14,6 @@ export class CreateProjectComponent implements OnInit {
 
   public projectForm!: FormGroup;
   developerSelect: any = [];
-  multipleValue: any;
 
   projectStatuses = [
     {
@@ -40,9 +42,12 @@ export class CreateProjectComponent implements OnInit {
     }
   ];
 
-
   constructor(
-    private projectsService: ProjectsService
+    private projectsService: ProjectsService,
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private message: NzMessageService,
+    private modalRef: NzModalRef
   ) { }
 
   ngOnInit(): void {
@@ -51,77 +56,73 @@ export class CreateProjectComponent implements OnInit {
   }
 
   private initForm(): void {
-    this.projectForm = new FormGroup({
-      pro_title: new FormControl("", Validators.required),
-      pro_descri: new FormControl("", Validators.required),
-      pro_status: new FormControl("", Validators.required),
-      pro_datstart: new FormControl("", Validators.required),
-      pro_datend: new FormControl("", Validators.required),
-      pro_users: new FormArray([])
-    })
+    this.projectForm = this.fb.group({
+      pro_title: ['', Validators.required],
+      pro_descri: ['', Validators.required],
+      pro_status: ['', Validators.required],
+      pro_datstart: ['', Validators.required],
+      pro_datend: ['', Validators.required],
+      pro_users: [[]]
+    });
   }
 
   async getDevelopersData() {
     let data: any = await this.projectsService.getDevelopersSelect();
     if (data.data.length > 0) {
       this.developerSelect = data.data;
+      this.projectForm.patchValue({
+        pro_users: []
+      });
     }
   }
 
   formatUsers(users: any[]): any[] {
     return users.map((user: any) => {
+      const selectedDeveloper = this.developerSelect.find((developer: any) => developer.use_code === user);
       return {
-        use_code: user.use_code,
-        use_name: user.use_name
-      }
+        use_code: user,
+        use_name: selectedDeveloper ? selectedDeveloper.use_name : ""
+      };
     });
+  }
+
+  createMessage(type: string, text: string): void {
+    this.message.create(type, `${text}`);
   }
 
   async createProject({ value, valid }: { value: any, valid: boolean }) {
 
-    const formData = this.projectForm.value;
-    const formattedUsers = this.formatUsers(formData.pro_users);
-    const apiObject = {
-      pro_title: formData.pro_title,
-      pro_descri: formData.pro_descri,
-      pro_status: formData.pro_status,
-      pro_datstart: formData.pro_datstart,
-      pro_datend: formData.pro_datend,
-      pro_users: formattedUsers,
-      use_code: ""
+    const dateStart = new Date(this.projectForm.get('pro_datstart')?.value);
+    const dateStartStr = dateStart.toISOString();
+    const dateEnd = new Date(this.projectForm.get('pro_datend')?.value);
+    const dateEndStr = dateEnd.toISOString();
+
+    const userId = this.authService.getSessionId();
+
+    const projectData = {
+      pro_title: this.projectForm.get('pro_title')?.value,
+      pro_descri: this.projectForm.get('pro_descri')?.value,
+      pro_status: this.projectForm.get('pro_status')?.value,
+      pro_datstart: dateStartStr,
+      pro_datend: dateEndStr,
+      pro_users: this.projectForm.get('pro_users')?.value || [],
+      use_code: userId
     };
-    // send the API object to the server
 
-    console.log(apiObject)
-    console.log(this.multipleValue);
-    // const project = {
-    //   pro_title: value.pro_title,
-    //   pro_descri: value.pro_descri,
-    //   pro_status: value.pro_status,
-    //   use_code: value.use_code,
-    //   pro_code: value.pro_code,
-    //   pro_datstart: value.pro_datstart,
-    //   pro_datend: value.pro_datend
-    // };
+    try {
+      const data = await this.projectsService.createProject(projectData);
+      let response = JSON.parse(JSON.stringify(data))
 
-    // console.log(project)
-    // try {
-    //   const data = await this.usersService.createUser(user);
-    //   let response = JSON.parse(JSON.stringify(data))
-
-    //   if (response && response["message"] === "User has been created") {
-    //     this.userDataService.setCreatedUser(response.data);
-    //     this.modalRef.close();
-    //     this.createMessage("success", "User has been created!")
-    //   } else if (response["message"] === "A user with this email already exists") {
-    //     this.createMessage("error", "Email already belongs to one user")
-    //   } else if (response["message"] === "A user with this GitHub account already exists") {
-    //     this.createMessage("error", "Github profile already belongs to one user")
-    //   }
-    // } catch (error) {
-    //   this.modalRef.close();
-    //   this.createMessage("error", "An error has ocurred")
-    // }
+      if (response && response["message"] === "Project has been created") {
+        this.modalRef.close();
+        this.createMessage("success", "Project has been created")
+      } else if (response["message"] === "Couldn't create the project") {
+        this.createMessage("error", "There was a problem creating the project")
+      }
+    } catch (error) {
+      this.modalRef.close();
+      this.createMessage("error", "An error has ocurred")
+    }
   }
 
 }

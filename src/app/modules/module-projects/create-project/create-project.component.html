@@ -1,7 +1,7 @@
 <div class="container">
   <nz-form [formGroup]="projectForm">
     <nz-row>
-      <nz-form-control>
+      <nz-form-control nzHasFeedback>
         <nz-col nzXs="24" nzSm="24">
           <h5 nz-typography>Title*</h5>
           <input
@@ -22,7 +22,7 @@
         </nz-col>
       </nz-form-control>
 
-      <nz-form-control>
+      <nz-form-control nzHasFeedback>
         <nz-col nzXs="24" nzSm="24">
           <h5 nz-typography>Description*</h5>
           <input
@@ -33,12 +33,12 @@
           <div
             class="validation-message"
             *ngIf="
-              projectForm.get('pro_title')!.invalid &&
-              projectForm.get('pro_title')!.touched
+              projectForm.get('pro_descri')!.invalid &&
+              projectForm.get('pro_descri')!.touched
             "
             nz-form-explain
           >
-            Please enter a title
+            Please enter a description
           </div>
         </nz-col>
       </nz-form-control>
@@ -46,7 +46,7 @@
 
     <nz-row>
       <nz-form-control>
-        <nz-col nzXs="12" nzSm="24">
+        <nz-col nzXs="24" nzSm="24">
           <h5 nz-typography>Status*</h5>
           <nz-select
             nzAllowClear
@@ -76,7 +76,7 @@
 
     <nz-row>
       <nz-form-control>
-        <nz-col nzXs="12" nzSm="24">
+        <nz-col nzXs="11" nzSm="11">
           <h5 nz-typography>Start date*</h5>
           <nz-date-picker formControlName="pro_datstart"></nz-date-picker>
           <div
@@ -91,11 +91,8 @@
           </div>
         </nz-col>
       </nz-form-control>
-    </nz-row>
-
-    <nz-row>
       <nz-form-control>
-        <nz-col nzXs="12" nzSm="24">
+        <nz-col nzXs="11" nzSm="11">
           <h5 nz-typography>End date*</h5>
           <nz-date-picker formControlName="pro_datend"></nz-date-picker>
           <div
@@ -114,19 +111,21 @@
 
     <nz-row>
       <nz-form-control>
-        <nz-col nzXs="12" nzSm="24">
+        <nz-col nzXs="24" nzSm="24">
           <h5 nz-typography>Team</h5>
           <nz-select
-            [(ngModel)]="multipleValue"
-            formControlName="pro_users"
+            nzAllowClear
             nzMode="multiple"
             nzPlaceHolder="Select the users group"
+            formControlName="pro_users"
           >
             <nz-option
-              *ngFor="let option of developerSelect"
-              [nzLabel]="option.use_name"
-              [nzValue]="option.use_code"
-            ></nz-option>
+              *ngFor="let user of developerSelect"
+              [nzLabel]="user.use_name"
+              [nzValue]="user"
+            >
+              {{ user.use_name }}
+            </nz-option>
           </nz-select>
         </nz-col>
       </nz-form-control>

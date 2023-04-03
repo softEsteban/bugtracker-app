@@ -27,5 +27,11 @@ export class ProjectsService {
         );
     }
 
+    async createProject(user: any) {
+        return await lastValueFrom(
+            this.http.post(`${this.host}/projects/createProject`, user)
+        );
+    }
+
 
 }
