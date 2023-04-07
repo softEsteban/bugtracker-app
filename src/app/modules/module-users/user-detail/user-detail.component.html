@@ -32,6 +32,7 @@
       </nz-dropdown-menu>
     </nz-page-header-extra>
   </nz-page-header>
+
   <div nz-row *ngIf="!editMode">
     <div nz-col nzXs="24" nzSm="8">
       <nz-avatar
@@ -76,38 +77,21 @@
 
   <div class="edit-form" *ngIf="editMode">
     <form [formGroup]="userForm" (ngSubmit)="updateUser(userForm)">
-      <nz-form-control>
-        <nz-col nzXs="24" nzSm="24">
-          <h5 nz-typography>Name*</h5>
-          <input nz-input formControlName="use_name" />
-        </nz-col>
-      </nz-form-control>
-      <div
-        class="validation-message"
-        *ngIf="
-          userForm.get('use_name')!.invalid && userForm.get('use_name')!.touched
-        "
-        nz-form-explain
-      >
-        Please enter a user name
-      </div>
+      <nz-row>
+        <nz-form-control>
+          <nz-col nzXs="24" nzSm="12">
+            <h5 nz-typography>Name*</h5>
+            <input nz-input formControlName="use_name" />
+          </nz-col>
+          <nz-col nzXs="24" nzSm="12">
+            <h5 nz-typography>Lastname*</h5>
+            <input nz-input formControlName="use_lastname" />
+          </nz-col>
+        </nz-form-control>
+      </nz-row>
 
       <nz-form-control>
-        <nz-col nzXs="24" nzSm="24">
-          <h5 nz-typography>Lastname*</h5>
-          <input nz-input formControlName="use_lastname" />
-        </nz-col>
-      </nz-form-control>
-
-      <nz-form-control>
-        <nz-col nzXs="24" nzSm="24">
-          <h5 nz-typography>Email*</h5>
-          <input nz-input formControlName="use_email" [disabled]="true" />
-        </nz-col>
-      </nz-form-control>
-
-      <nz-form-control>
-        <nz-col nzXs="12" nzSm="24">
+        <nz-col nzXs="24" nzSm="8">
           <h5 nz-typography>User type*</h5>
           <nz-select
             nzAllowClear
@@ -121,6 +105,13 @@
               ></nz-option>
             </ng-container>
           </nz-select>
+        </nz-col>
+      </nz-form-control>
+
+      <nz-form-control>
+        <nz-col nzXs="24" nzSm="24">
+          <h5 nz-typography>Email*</h5>
+          <input nz-input formControlName="use_email" [disabled]="true" />
         </nz-col>
       </nz-form-control>
 
@@ -224,14 +215,15 @@
         </ul>
       </nz-dropdown-menu>
     </nz-page-header-extra>
-
-    <!--content-->
-    <nz-page-header-content>
-      <div nz-row *ngFor="let data of projects">
-        <p>{{ data.pro_title }}</p>
-      </div>
-    </nz-page-header-content>
   </nz-page-header>
+
+  <nz-table #basicTable [nzData]="projects">
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.pro_title }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
 </div>
 
 <nz-divider></nz-divider>
