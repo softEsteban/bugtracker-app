@@ -65,6 +65,7 @@
         [cdkDropListData]="column.cards"
         class="example-list"
         (cdkDropListDropped)="drop($event, column)"
+        (click)="showCardInput = true"
         style="background-color: #f4f4f4; height: 45vh; overflow-y: scroll"
       >
         <div
@@ -80,6 +81,14 @@
           "
         >
           {{ card.title }}
+        </div>
+        <div *ngIf="showCardInput">
+          <input
+            type="text"
+            placeholder="Enter card title"
+            [(ngModel)]="newCardTitle"
+            (keyup.enter)="insertCard(column)"
+          />
         </div>
       </div>
     </nz-col>

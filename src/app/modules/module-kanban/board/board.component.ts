@@ -28,6 +28,9 @@ export class BoardComponent implements OnInit {
 
   searchText: string = '';
 
+  showCardInput: boolean = false;
+  newCardTitle: string = "";
+
   constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -106,6 +109,18 @@ export class BoardComponent implements OnInit {
     };
     this.board.push(newBoard);
     this.showInputBox = false;
+  }
+
+  insertCard(column: any) {
+    let columnId = column.id;
+    const selectedColumn = this.board.find(column => column.id === columnId);
+    if (!selectedColumn) return;
+
+    const card = { id: selectedColumn.cards.length + 1, title: this.newCardTitle, description: 'Do task 1' };
+    selectedColumn.cards.push(card);
+
+    console.log("Columnn", column)
+    console.log("Insert String", this.newCardTitle)
   }
 
 
