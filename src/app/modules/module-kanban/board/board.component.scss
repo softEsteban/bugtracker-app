@@ -1,4 +1,11 @@
 .options-bar {
   display: flex;
   justify-content: space-between;
+
+  .inputs-bar {
+    display: inherit;
+  }
+
+  .buttons-bar {
+  }
 }

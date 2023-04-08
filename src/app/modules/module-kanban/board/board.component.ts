@@ -26,6 +26,8 @@ interface Board {
 
 export class BoardComponent implements OnInit {
 
+  searchText: string = '';
+
   constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -87,6 +89,41 @@ export class BoardComponent implements OnInit {
   }
 
   createBoard() {
+
+  }
+
+  showInputBox: boolean = false;
+
+  showInput() {
+    this.showInputBox = true;
+  }
+
+  addBoard(title: string) {
+    const newBoard = {
+      id: this.board.length + 1,
+      title,
+      cards: []
+    };
+    this.board.push(newBoard);
+    this.showInputBox = false;
+  }
+
+
+  filterData(searchString: string): void {
+    // if (!searchString) {
+    //   this.filteredData = this.listOfData.slice();
+    //   return;
+    // }
+
+    // this.filteredData = this.listOfData.filter(item => {
+    //   const searchableFields = ['pro_code', 'pro_title'];
+    //   for (const field of searchableFields) {
+    //     if (item[field] && item[field].toLowerCase().includes(searchString.toLowerCase())) {
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // });
 
   }
 }
