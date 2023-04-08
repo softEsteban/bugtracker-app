@@ -1,5 +1,5 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { CdkDragDrop, CdkDropList, DragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 
 interface BoardColumn {
   id: number;
@@ -21,7 +21,7 @@ interface Board {
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.css']
+  styleUrls: ['./board.component.scss']
 })
 
 export class BoardComponent implements OnInit {
@@ -29,6 +29,7 @@ export class BoardComponent implements OnInit {
   constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+
   }
 
   boardsList = [
@@ -43,7 +44,6 @@ export class BoardComponent implements OnInit {
       "board_descri": "This is my work board"
     }
   ]
-
   board: BoardColumn[] = [
     {
       id: 1,
@@ -71,33 +71,22 @@ export class BoardComponent implements OnInit {
     }
   ];
 
-
-  // drop(event: CdkDragDrop<BoardColumn>) {
-  //   if (event.previousContainer === event.container) {
-  //     moveItemInArray(
-  //       event.container.data as any,
-  //       event.previousIndex,
-  //       event.currentIndex)
-  //   } else {
-  //     transferArrayItem(
-  //       event.previousContainer.data as any,
-  //       event.container.data as any,
-  //       event.previousIndex,
-  //       event.currentIndex)
-  //   }
-
-  // }
-
-  drop(event: CdkDragDrop<BoardColumn[]>) {
-    const prevIndex = event.previousIndex;
-    const newIndex = event.currentIndex;
-
-    // Update the order of items in the list
-    const card = event.container.data.splice(prevIndex, 1)[0];
-    event.container.data.splice(newIndex, 0, card);
-
-    // Trigger change detection to update the view
-    this.cd.detectChanges();
+  drop(event: CdkDragDrop<any>, column: any) {
+    let cards = column.cards;
+    if (event.previousContainer === event.container) {
+      moveItemInArray(cards, event.previousIndex, event.currentIndex);
+    }
+    else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
   }
 
+  createBoard() {
+
+  }
 }

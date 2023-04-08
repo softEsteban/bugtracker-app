@@ -1,44 +1,81 @@
 <h3 nz-typography>Kanban</h3>
 
-<div style="display: inline">
-  <nz-form-control>
-    <nz-col nzXs="12" nzSm="24">
-      <nz-select
-        nzAllowClear
-        nzPlaceHolder="Select a kanban board:"
-        formControlName="use_type"
-      >
-        <ng-container *ngFor="let board of boardsList">
-          <nz-option
-            [nzValue]="board.board_id"
-            [nzLabel]="board.board_title"
-          ></nz-option>
-        </ng-container>
-      </nz-select>
-    </nz-col>
-  </nz-form-control>
+<div class="options-bar">
+  <nz-input-group
+    style="
+      margin-bottom: 16px;
+      width: 25vw;
+      border-radius: 3px;
+      outline: none;
+      width: 30%;
+    "
+  >
+    <nz-form-control>
+      <nz-col nzXs="12" nzSm="24">
+        <nz-select
+          nzAllowClear
+          nzPlaceHolder="Select a kanban board"
+          formControlName="use_type"
+        >
+          <ng-container *ngFor="let board of boardsList">
+            <nz-option
+              [nzValue]="board.board_id"
+              [nzLabel]="board.board_title"
+            ></nz-option>
+          </ng-container>
+        </nz-select>
+      </nz-col>
+    </nz-form-control>
+  </nz-input-group>
+
+  <button nz-button nzType="primary" nzShape="circle">
+    <span nz-icon nzType="share-alt"></span>
+  </button>
+
+  <button nz-button nzType="primary" nzShape="circle" (click)="createBoard()">
+    <span nz-icon nzType="plus"></span>
+  </button>
+
+  <!-- <button nz-button nzType="primary" nzShape="circle" (click)="addBoard()">
+    <span nz-icon nzType="plus"></span>
+  </button> -->
 </div>
 
 <nz-divider></nz-divider>
 
-<div style="display: flex">
-  <nz-col *ngFor="let column of board" [nzSpan]="8">
-    <div class="column-container">
+<div cdkDropListGroup>
+  <div class="example-container" style="display: flex; overflow-x: scroll">
+    <nz-col *ngFor="let column of board" [nzSpan]="8" style="width: 200px">
       <h2>{{ column.title }}</h2>
-      <nz-card nzType="inner" cdkDropList (cdkDropListDropped)="drop($event)">
+      <div
+        cdkDropList
+        [cdkDropListData]="column.cards"
+        class="example-list"
+        (cdkDropListDropped)="drop($event, column)"
+        style="background-color: #f4f4f4; height: 45vh; overflow-y: scroll"
+      >
         <div
+          class="example-box"
           *ngFor="let card of column.cards"
-          nz-row
           cdkDrag
-          #cardRef="cdkDrag"
+          style="
+            background-color: white;
+            padding: 5px;
+            border-radius: 7px;
+            margin-bottom: 7px;
+            cursor: grab;
+          "
         >
-          <nz-col [nzSpan]="24">
-            <nz-card nzTitle="{{ card.title }}" nzExtraIcon="ellipsis">
-              <p>{{ card.description }}</p>
-            </nz-card>
-          </nz-col>
+          {{ card.title }}
         </div>
-      </nz-card>
-    </div>
-  </nz-col>
+      </div>
+    </nz-col>
+
+    <nz-col [nzSpan]="8" style="width: 200px">
+      <!-- <h2>{{ column.title }}</h2> -->
+      <div style="background-color: #f4f4f4; height: 45vh">
+        <p>Add new board</p>
+      </div>
+    </nz-col>
+  </div>
 </div>

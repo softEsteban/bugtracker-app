@@ -13,7 +13,8 @@ import { NgZorroModule } from 'src/app/shared/ng-zorro.module';
   imports: [
     CommonModule,
     NgZorroModule,
-    DragDropModule,
-  ]
+    DragDropModule
+  ],
+  providers: []
 })
 export class KanbanModule { }
