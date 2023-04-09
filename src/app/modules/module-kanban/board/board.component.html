@@ -54,19 +54,32 @@
   </div>
 </div>
 
-<nz-divider></nz-divider>
-
-<div cdkDropListGroup>
+<div
+  cdkDropListGroup
+  cdkDropList
+  [cdkDropListData]="board"
+  (cdkDropListDropped)="dropBoard($event)"
+>
   <div class="example-container" style="display: flex; overflow-x: scroll">
-    <nz-col *ngFor="let column of board" [nzSpan]="8" style="width: 200px">
-      <h4 nz-typography>{{ column.title }}</h4>
+    <nz-col
+      cdkDrag
+      *ngFor="let column of board"
+      [nzSpan]="8"
+      style="width: 200px; margin-right: 20px"
+    >
+      <h4 style="cursor: grab" nz-typography>{{ column.title }}</h4>
       <div
         cdkDropList
         [cdkDropListData]="column.cards"
         class="example-list"
         (cdkDropListDropped)="drop($event, column)"
-        (click)="showCardInput = true"
-        style="background-color: #f4f4f4; height: 45vh; overflow-y: scroll"
+        (click)="setNewCard()"
+        style="
+          background-color: #f4f4f4;
+          height: 45vh;
+          overflow-y: scroll;
+          border-radius: 9px;
+        "
       >
         <div
           class="example-box"
@@ -84,6 +97,8 @@
         </div>
         <div *ngIf="showCardInput">
           <input
+            #cardInput
+            style="margin: 7px; border: none; border-radius: 5px"
             type="text"
             placeholder="Enter card title"
             [(ngModel)]="newCardTitle"
@@ -94,16 +109,28 @@
     </nz-col>
     <nz-col [nzSpan]="8" style="height: 48.5vh; width: 200px">
       <h4 nz-typography></h4>
-      <div style="background-color: #f4f4f4; height: 45vh">
-        <p (click)="showInput()">Add new board</p>
-        <div *ngIf="showInputBox">
-          <input
-            type="text"
-            #inputBox
-            placeholder="Enter board title"
-            (keyup.enter)="addBoard(inputBox.value)"
-          />
-          <!-- <button >Submit</button> -->
+      <div
+        style="
+          background-color: #f4f4f4;
+          height: 48vh;
+          width: 190px;
+          border-radius: 15px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <div style="display: inline">
+          <p (click)="showInput()">Add new board</p>
+          <div *ngIf="showInputBox">
+            <input
+              type="text"
+              #inputBox
+              style="margin: 7px; border: none; border-radius: 5px"
+              placeholder="Enter board title"
+              (keyup.enter)="addBoard(inputBox.value)"
+            />
+          </div>
         </div>
       </div>
     </nz-col>

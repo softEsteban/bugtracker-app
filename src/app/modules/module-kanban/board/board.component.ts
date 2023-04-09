@@ -1,5 +1,5 @@
 import { CdkDragDrop, CdkDropList, DragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
 interface BoardColumn {
   id: number;
@@ -26,6 +26,8 @@ interface Board {
 
 export class BoardComponent implements OnInit {
 
+  @ViewChild('cardInput', { static: true }) cardInput: ElementRef | undefined = undefined;
+
   searchText: string = '';
 
   showCardInput: boolean = false;
@@ -35,6 +37,12 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  ngAfterViewInit() {
+    if (this.cardInput) {
+      this.cardInput.nativeElement.focus();
+    }
   }
 
   boardsList = [
@@ -91,6 +99,10 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  dropBoard(event: CdkDragDrop<any>) {
+    moveItemInArray(this.board, event.previousIndex, event.currentIndex);
+  }
+
   createBoard() {
 
   }
@@ -99,6 +111,15 @@ export class BoardComponent implements OnInit {
 
   showInput() {
     this.showInputBox = true;
+  }
+
+  setNewCard() {
+    if (this.showCardInput) {
+      this.showCardInput = false;
+    }
+    else {
+      this.showCardInput = true;
+    }
   }
 
   addBoard(title: string) {
@@ -112,15 +133,15 @@ export class BoardComponent implements OnInit {
   }
 
   insertCard(column: any) {
+
     let columnId = column.id;
     const selectedColumn = this.board.find(column => column.id === columnId);
     if (!selectedColumn) return;
-
-    const card = { id: selectedColumn.cards.length + 1, title: this.newCardTitle, description: 'Do task 1' };
+    const card = { id: selectedColumn.cards.length + 1, title: this.newCardTitle, description: '' };
     selectedColumn.cards.push(card);
 
-    console.log("Columnn", column)
-    console.log("Insert String", this.newCardTitle)
+    this.showCardInput = false;
+    this.newCardTitle = "";
   }
 
 
