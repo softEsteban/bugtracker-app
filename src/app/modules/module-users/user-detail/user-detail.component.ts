@@ -34,6 +34,7 @@ export class UserDetailComponent implements OnInit {
     use_lastname: [''],
     use_email: [''],
     use_type: [''],
+    use_github: [''],
     pro_code: [''],
     cop_code: [''],
   });
@@ -73,6 +74,7 @@ export class UserDetailComponent implements OnInit {
         use_lastname: ['', Validators.required],
         use_email: [{ value: '', disabled: true }],
         use_type: ['', Validators.required],
+        use_github: [''],
         pro_code: ['', Validators.required],
         cop_code: ['', Validators.required],
       });
@@ -84,6 +86,7 @@ export class UserDetailComponent implements OnInit {
         use_email: this.user.use_email,
         pro_code: this.user.pro_code,
         cop_code: this.user.cop_code,
+        use_github: this.user?.use_github,
       });
 
       //Sets use_type, pro_code and cop_code

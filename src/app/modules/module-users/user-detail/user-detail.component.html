@@ -143,6 +143,17 @@
         </nz-col>
       </nz-form-control>
 
+      <nz-form-control>
+        <nz-col
+          nzXs="24"
+          nzSm="24"
+          *ngIf="userForm.get('use_type')?.value == 'Developer'"
+        >
+          <h5 nz-typography>Github profile</h5>
+          <input nz-input formControlName="use_github" [disabled]="true" />
+        </nz-col>
+      </nz-form-control>
+
       <nz-form-control style="margin-bottom: 15px">
         <nz-col nzXs="12" nzSm="24">
           <h5 nz-typography>User company*</h5>
