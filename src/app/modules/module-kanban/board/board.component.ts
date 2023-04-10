@@ -7,6 +7,8 @@ interface BoardColumn {
   cards: {
     id: number;
     title: string;
+    use_name: string;
+    card_datins: string;
     description: string;
   }[];
 }
@@ -28,10 +30,15 @@ export class BoardComponent implements OnInit {
 
   @ViewChild('cardInput', { static: true }) cardInput: ElementRef | undefined = undefined;
 
+  selectedColumn: any;
+
   searchText: string = '';
 
   showCardInput: boolean = false;
   newCardTitle: string = "";
+
+  visible: boolean = false;
+
 
   constructor(private cd: ChangeDetectorRef) { }
 
@@ -62,24 +69,24 @@ export class BoardComponent implements OnInit {
       id: 1,
       title: 'To Do',
       cards: [
-        { id: 1, title: 'Task 1', description: 'Do task 1' },
-        { id: 2, title: 'Task 2', description: 'Do task 2' },
-        { id: 3, title: 'Task 3', description: 'Do task 3' }
+        { id: 1, title: 'Task 1', description: 'Do task 1', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM" },
+        { id: 2, title: 'Task 2', description: 'Do task 2', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM" },
+        { id: 3, title: 'Task 3', description: 'Do task 3', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM" }
       ]
     },
     {
       id: 2,
       title: 'In Progress',
       cards: [
-        { id: 4, title: 'Task 4', description: 'Do task 4' },
-        { id: 5, title: 'Task 5', description: 'Do task 5' }
+        { id: 4, title: 'Task 4', description: 'Do task 4', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM" },
+        { id: 5, title: 'Task 5', description: 'Do task 5', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM" }
       ]
     },
     {
       id: 3,
       title: 'Done',
       cards: [
-        { id: 6, title: 'Task 6', description: 'Do task 6' }
+        { id: 6, title: 'Task 6', description: 'Do task 6', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM" }
       ]
     }
   ];
@@ -103,6 +110,21 @@ export class BoardComponent implements OnInit {
     moveItemInArray(this.board, event.previousIndex, event.currentIndex);
   }
 
+  close(): void {
+    this.visible = false;
+  }
+
+  deleteBoard(boardId: any) {
+    const index = this.board.findIndex(board => board.id == boardId);
+    if (index !== -1) {
+      this.board.splice(index, 1);
+    }
+  }
+
+  change(value: boolean): void {
+    console.log(value);
+  }
+
   createBoard() {
 
   }
@@ -113,12 +135,29 @@ export class BoardComponent implements OnInit {
     this.showInputBox = true;
   }
 
-  setNewCard() {
+  setNewCard(column: any) {
     if (this.showCardInput) {
       this.showCardInput = false;
+      this.selectedColumn = column;
     }
     else {
       this.showCardInput = true;
+      this.selectedColumn = column;
+    }
+  }
+
+  selectCard(card: any) {
+    // this.newCardTitle = card.title;
+    // this.showCardInput = true;
+    if (this.showCardInput) {
+      this.showCardInput = false;
+      this.newCardTitle = card.title;
+
+    }
+    else {
+      this.showCardInput = true;
+      this.newCardTitle = card.title;
+
     }
   }
 
@@ -137,13 +176,23 @@ export class BoardComponent implements OnInit {
     let columnId = column.id;
     const selectedColumn = this.board.find(column => column.id === columnId);
     if (!selectedColumn) return;
-    const card = { id: selectedColumn.cards.length + 1, title: this.newCardTitle, description: '' };
+    const card = {
+      id: selectedColumn.cards.length + 1, title: this.newCardTitle, description: '', use_name: "Esteban Toro",
+      card_datins: "09 april 2023 10:22PM"
+    };
     selectedColumn.cards.push(card);
 
     this.showCardInput = false;
     this.newCardTitle = "";
   }
 
+  onRightClick(event: MouseEvent, card: any) {
+    // Prevent the default context menu from appearing
+    event.preventDefault();
+
+    // Execute your desired code
+    console.log('Right-clicked on card:', card);
+  }
 
   filterData(searchString: string): void {
     // if (!searchString) {

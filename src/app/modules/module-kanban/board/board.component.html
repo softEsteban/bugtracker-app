@@ -67,13 +67,55 @@
       [nzSpan]="8"
       style="width: 200px; margin-right: 20px"
     >
-      <h4 style="cursor: grab" nz-typography>{{ column.title }}</h4>
+      <div style="display: flex; justify-content: space-between">
+        <h4 style="cursor: grab" nz-typography>{{ column.title }}</h4>
+
+        <nz-space>
+          <button
+            *nzSpaceItem
+            nz-button
+            nzNoAnimation
+            nz-dropdown
+            [nzDropdownMenu]="menu"
+            nzPlacement="bottomRight"
+            style="border: none; padding: 0"
+          >
+            <span
+              nz-icon
+              nzType="more"
+              nzTheme="outline"
+              style="font-size: 20px; vertical-align: top"
+            ></span>
+          </button>
+        </nz-space>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li
+              nz-menu-item
+              nz-popover
+              nzPopoverTitle="Are you sure?"
+              (nzPopoverVisibleChange)="change($event)"
+              nzPopoverTrigger="click"
+              [nzPopoverContent]="contentTemplate"
+            >
+              Delete
+            </li>
+            <li nz-menu-item>Edit</li>
+          </ul>
+
+          <ng-template #contentTemplate>
+            <a (click)="deleteBoard(column.id)">Yes</a>
+            <a (click)="close()">No</a>
+          </ng-template>
+        </nz-dropdown-menu>
+      </div>
+
       <div
         cdkDropList
         [cdkDropListData]="column.cards"
         class="example-list"
         (cdkDropListDropped)="drop($event, column)"
-        (click)="setNewCard()"
+        (click)="setNewCard(column)"
         style="
           background-color: #f4f4f4;
           height: 45vh;
@@ -92,10 +134,24 @@
             margin: 7px;
             cursor: grab;
           "
+          (contextmenu)="onRightClick($event, card)"
         >
-          {{ card.title }}
+          <p
+            style="
+              font-size: 12px;
+              white-space: pre-wrap;
+              word-wrap: break-word;
+              overflow-wrap: break-word;
+              max-width: 100%;
+            "
+          >
+            {{ card.title }}
+          </p>
+          <p style="font-size: 10px; display: flex; justify-content: flex-end">
+            {{ card.use_name }} - {{ card.card_datins }}
+          </p>
         </div>
-        <div *ngIf="showCardInput">
+        <div *ngIf="showCardInput && selectedColumn.id === column.id">
           <input
             #cardInput
             style="margin: 7px; border: none; border-radius: 5px"
