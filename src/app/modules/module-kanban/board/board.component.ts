@@ -9,6 +9,7 @@ interface BoardColumn {
     title: string;
     use_name: string;
     card_datins: string;
+    card_type: string;
     description: string;
   }[];
 }
@@ -69,24 +70,27 @@ export class BoardComponent implements OnInit {
       id: 1,
       title: 'To Do',
       cards: [
-        { id: 1, title: 'Task 1', description: 'Do task 1', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM" },
-        { id: 2, title: 'Task 2', description: 'Do task 2', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM" },
-        { id: 3, title: 'Task 3', description: 'Do task 3', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM" }
+        { id: 1, title: 'Create  getProducts endpoint', description: '', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM", card_type: "ToDo" },
+        { id: 2, title: 'Read documentations', description: '', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM", card_type: "ToDo" },
+        { id: 3, title: 'Refactor affected functions', description: '', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM", card_type: "ToDo" },
+        { id: 3, title: 'Load domains into database', description: '', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM", card_type: "Issue" }
       ]
     },
     {
       id: 2,
       title: 'In Progress',
       cards: [
-        { id: 4, title: 'Task 4', description: 'Do task 4', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM" },
-        { id: 5, title: 'Task 5', description: 'Do task 5', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM" }
+        { id: 4, title: 'Update views', description: '', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM", card_type: "ToDo" },
+        { id: 5, title: 'Create docs', description: '', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM", card_type: "ToDo" },
+        { id: 5, title: 'User seacrh box doesnt work properly. Fix it, please!', description: '', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM", card_type: "Ticket" }
+
       ]
     },
     {
       id: 3,
       title: 'Done',
       cards: [
-        { id: 6, title: 'Task 6', description: 'Do task 6', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM" }
+        { id: 6, title: 'Review Angular decorators', description: '', use_name: "Esteban Toro", card_datins: "09 april 2023 10:22PM", card_type: "ToDo" }
       ]
     }
   ];
@@ -178,12 +182,25 @@ export class BoardComponent implements OnInit {
     if (!selectedColumn) return;
     const card = {
       id: selectedColumn.cards.length + 1, title: this.newCardTitle, description: '', use_name: "Esteban Toro",
-      card_datins: "09 april 2023 10:22PM"
+      card_datins: "09 april 2023 10:22PM", card_type: "ToDo"
     };
     selectedColumn.cards.push(card);
 
     this.showCardInput = false;
     this.newCardTitle = "";
+  }
+
+  getCardColor(cardType: string): string {
+    switch (cardType) {
+      case 'Issue':
+        return '#C5DFF4'; // blue
+      case 'Ticket':
+        return '#FFC7C3'; // red
+      case 'ToDo':
+        return '#C9F2CB'; // green
+      default:
+        return '#FFFFFF'; // white (default)
+    }
   }
 
   onRightClick(event: MouseEvent, card: any) {

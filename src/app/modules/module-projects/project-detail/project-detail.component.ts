@@ -9,6 +9,18 @@ export class ProjectDetailComponent implements OnInit {
 
   project: any;
 
+  tickets = [
+    { title: 'Ticket 1', state: 'Open', date: '2023-04-01', assigned: 'John Doe' },
+    { title: 'Ticket 2', state: 'In progress', date: '2023-04-02', assigned: 'Jane Smith' },
+    { title: 'Ticket 3', state: 'Closed', date: '2023-04-03', assigned: 'John Doe' }
+  ];
+
+  issues = [
+    { title: 'Issue 1', state: 'Open', date: '2023-04-01', assigned: 'John Doe' },
+    { title: 'Issue 2', state: 'In progress', date: '2023-04-02', assigned: 'Jane Smith' },
+    { title: 'Issue 3', state: 'Closed', date: '2023-04-03', assigned: 'John Doe' }
+  ];
+
   constructor() { }
 
   ngOnInit(): void {

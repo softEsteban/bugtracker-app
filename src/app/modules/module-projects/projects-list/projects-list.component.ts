@@ -103,7 +103,14 @@ export class ProjectsListComponent implements OnInit {
       },
       nzViewContainerRef: this.viewContainerRef,
       nzComponentParams: {},
-      nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000)),
+      nzOnOk: () => {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            this.getProjects();
+            resolve();
+          }, 1000);
+        });
+      },
       nzFooter: []
     });
     const instance = modal.getContentComponent();

@@ -127,13 +127,8 @@
           class="example-box"
           *ngFor="let card of column.cards"
           cdkDrag
-          style="
-            background-color: white;
-            padding: 5px;
-            border-radius: 7px;
-            margin: 7px;
-            cursor: grab;
-          "
+          [ngStyle]="{ 'background-color': getCardColor(card.card_type) }"
+          style="padding: 5px; border-radius: 7px; margin: 7px; cursor: grab"
           (contextmenu)="onRightClick($event, card)"
         >
           <p
