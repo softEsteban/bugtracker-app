@@ -2,81 +2,136 @@
   <h3 nz-typography>{{ project?.pro_title }}</h3>
   <p>{{ project?.pro_descri }}</p>
 
-  <nz-row style="margin: 27px 0">
-    <nz-col nzXs="24" nzSm="12" nzMd="6">
+  <nz-row class="buttons-bar" style="margin: 27px 0">
+    <nz-col nzXs="24" nzSm="12" nzMd="4">
       <nz-card nzHoverable>
-        <i nz-icon nzType="dashboard" nzTheme="outline"></i>
+        <i nz-icon nzType="file-text" nzTheme="outline"></i>
+        <span>Docs</span>
+      </nz-card>
+    </nz-col>
+    <nz-col nzXs="24" nzSm="12" nzMd="4">
+      <nz-card nzHoverable>
+        <i nz-icon nzType="down-square" nzTheme="outline"></i>
         <span>Kanban</span>
       </nz-card>
     </nz-col>
-    <nz-col nzXs="24" nzSm="12" nzMd="6">
+    <nz-col nzXs="24" nzSm="12" nzMd="4">
       <nz-card nzHoverable>
-        <i nz-icon nzType="file" nzTheme="outline"></i>
+        <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
+        <span>Analytics</span>
+      </nz-card>
+    </nz-col>
+    <nz-col nzXs="24" nzSm="12" nzMd="4">
+      <nz-card nzHoverable>
+        <i nz-icon nzType="code" nzTheme="outline"></i>
         <span>Repositories</span>
       </nz-card>
     </nz-col>
-    <nz-col nzXs="24" nzSm="12" nzMd="6">
+    <nz-col nzXs="24" nzSm="12" nzMd="4">
       <nz-card nzHoverable>
-        <i nz-icon nzType="mail" nzTheme="outline"></i>
+        <i nz-icon nzType="check" nzTheme="outline"></i>
         <span>Testing</span>
       </nz-card>
     </nz-col>
-    <nz-col nzXs="24" nzSm="12" nzMd="6">
+    <nz-col nzXs="24" nzSm="12" nzMd="4">
       <nz-card nzHoverable>
-        <i nz-icon nzType="calendar" nzTheme="outline"></i>
+        <i nz-icon nzType="cloud-upload" nzTheme="outline"></i>
         <span>Deploy</span>
       </nz-card>
     </nz-col>
   </nz-row>
 
-  <div nz-row>
+  <div
+    nz-row
+    style="background-color: #f6f6f6; padding: 10px; border-radius: 6px"
+  >
     <div nz-col nzXs="24" nzSm="12">
-      <h4>Tickets</h4>
-
+      <h3 nz-typography>Tickets</h3>
       <nz-list nzItemLayout="horizontal">
-        <nz-list-item *ngFor="let item of tickets">
-          <nz-list-item-meta
-            nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+        <nz-list-item *ngFor="let item of displayedTickets">
+          <nz-skeleton
+            [nzLoading]="loading"
+            [nzActive]="true"
+            [nzAvatar]="true"
           >
-            <nz-list-item-meta-title>
-              <a href="https://ng.ant.design">{{ item.title }}</a>
-            </nz-list-item-meta-title>
-          </nz-list-item-meta>
+            <nz-list-item-meta
+              nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              [nzTitle]="item.item_title"
+              [nzDescription]="item.item_descri"
+            >
+            </nz-list-item-meta>
+          </nz-skeleton>
         </nz-list-item>
       </nz-list>
+      <nz-pagination
+        [nzPageIndex]="pageIndexT"
+        [nzTotal]="totalTickets"
+        (nzPageIndexChange)="onPageIndexChangeT($event)"
+      ></nz-pagination>
     </div>
 
     <div nz-col nzXs="24" nzSm="12">
-      <h4>Issues</h4>
-
+      <h3 nz-typography>Issues</h3>
       <nz-list nzItemLayout="horizontal">
-        <nz-list-item *ngFor="let item of issues">
-          <nz-list-item-meta
-            nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+        <nz-list-item *ngFor="let item of displayedIssues">
+          <nz-skeleton
+            [nzLoading]="loading"
+            [nzActive]="true"
+            [nzAvatar]="true"
           >
-            <nz-list-item-meta-title>
-              <a href="https://ng.ant.design">{{ item.title }}</a>
-            </nz-list-item-meta-title>
-          </nz-list-item-meta>
+            <nz-list-item-meta
+              nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              [nzTitle]="item.item_title"
+              [nzDescription]="item.item_descri"
+            >
+            </nz-list-item-meta>
+          </nz-skeleton>
         </nz-list-item>
       </nz-list>
+      <nz-pagination
+        [nzPageIndex]="pageIndexI"
+        [nzTotal]="totalIssues"
+        (nzPageIndexChange)="onPageIndexChangeI($event)"
+      ></nz-pagination>
     </div>
   </div>
 
-  <div nz-row>
-    <div nz-col nzXs="24" nzSm="24">
-      <h4>Users</h4>
-      <nz-list nzItemLayout="horizontal">
-        <nz-list-item *ngFor="let item of tickets">
-          <nz-list-item-meta
-            nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-          >
-            <nz-list-item-meta-title>
-              <a href="https://ng.ant.design">{{ item.title }}</a>
-            </nz-list-item-meta-title>
-          </nz-list-item-meta>
-        </nz-list-item>
-      </nz-list>
+  <div class="users-container" style="margin: 27px 0">
+    <div
+      style="display: flex; justify-content: space-between; margin-bottom: 15px"
+    >
+      <h3 nz-typography>Users</h3>
+      <nz-space>
+        <button *nzSpaceItem nz-button nzType="primary">Add user</button>
+        <button
+          *nzSpaceItem
+          nz-button
+          nzNoAnimation
+          nz-dropdown
+          [nzDropdownMenu]="menu"
+          nzPlacement="bottomRight"
+          style="border: none; padding: 0"
+        >
+          <span
+            nz-icon
+            nzType="more"
+            nzTheme="outline"
+            style="font-size: 20px; vertical-align: top"
+          ></span>
+        </button>
+      </nz-space>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item>Option 1</li>
+        </ul>
+      </nz-dropdown-menu>
     </div>
+    <nz-table #basicTable [nzData]="project.pro_users">
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{ data.use_name }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
   </div>
 </div>

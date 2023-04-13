@@ -26,6 +26,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzListModule } from 'ng-zorro-antd/list';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 @NgModule({
   declarations: [],
@@ -57,7 +59,9 @@ import { NzListModule } from 'ng-zorro-antd/list';
     NzDropDownModule,
     NzDividerModule,
     NzDatePickerModule,
-    NzListModule
+    NzListModule,
+    NzSkeletonModule,
+    NzPaginationModule
   ],
   exports: [
     NzLayoutModule,
@@ -86,7 +90,9 @@ import { NzListModule } from 'ng-zorro-antd/list';
     NzDropDownModule,
     NzDividerModule,
     NzDatePickerModule,
-    NzListModule
+    NzListModule,
+    NzSkeletonModule,
+    NzPaginationModule
   ]
 })
 export class NgZorroModule { }

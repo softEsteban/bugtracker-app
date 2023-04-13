@@ -147,12 +147,16 @@ export class UserDetailComponent implements OnInit {
       pro_code: value.pro_code,
       cop_code: value.cop_code
     };
+
     try {
       const data = await this.usersService.updateUser(this.user.use_code, user);
       let response = JSON.parse(JSON.stringify(data))
 
       if (response && response["message"] === "User has been updated!") {
         this.createMessage("success", "User has been updated!")
+
+        //Update detail data
+        this.user = user;
       } else {
         this.createMessage("error", "Some data doesn't match!")
       }

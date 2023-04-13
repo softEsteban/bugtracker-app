@@ -27,9 +27,21 @@ export class ProjectsService {
         );
     }
 
-    async createProject(user: any) {
+    async createProject(project: any) {
         return await lastValueFrom(
-            this.http.post(`${this.host}/projects/createProject`, user)
+            this.http.post(`${this.host}/projects/createProject`, project)
+        );
+    }
+
+    async getAllTicketsByProject(projectId: string) {
+        return await lastValueFrom(
+            this.http.get(`${this.host}/items/getAllTicketsByProject/${projectId}`)
+        );
+    }
+
+    async getAllIssuesByProject(projectId: string) {
+        return await lastValueFrom(
+            this.http.get(`${this.host}/items/getAllIssuesByProject/${projectId}`)
         );
     }
 

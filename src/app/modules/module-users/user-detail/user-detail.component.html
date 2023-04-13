@@ -1,37 +1,37 @@
 <div class="view-user">
-  <nz-page-header class="site-page-header">
-    <nz-page-header-title class="custom-title"
-      >Users detail</nz-page-header-title
-    >
-    <nz-page-header-extra>
-      <nz-space>
-        <button *nzSpaceItem nz-button nzType="primary" (click)="triggerEdit()">
-          Edit user
-        </button>
-        <button
-          *nzSpaceItem
-          nz-button
-          nzNoAnimation
-          nz-dropdown
-          [nzDropdownMenu]="menu"
-          nzPlacement="bottomRight"
-          style="border: none; padding: 0"
-        >
-          <span
-            nz-icon
-            nzType="more"
-            nzTheme="outline"
-            style="font-size: 20px; vertical-align: top"
-          ></span>
-        </button>
-      </nz-space>
-      <nz-dropdown-menu #menu="nzDropdownMenu">
-        <ul nz-menu>
-          <li nz-menu-item>Option 1</li>
-        </ul>
-      </nz-dropdown-menu>
-    </nz-page-header-extra>
-  </nz-page-header>
+  <div
+    style="display: flex; justify-content: space-between; margin-bottom: 15px"
+  >
+    <h3 nz-typography>
+      {{ user.use_name + " " + (user?.use_lastname || "") }}
+    </h3>
+    <nz-space>
+      <button *nzSpaceItem nz-button nzType="primary" (click)="triggerEdit()">
+        Edit user
+      </button>
+      <button
+        *nzSpaceItem
+        nz-button
+        nzNoAnimation
+        nz-dropdown
+        [nzDropdownMenu]="menu"
+        nzPlacement="bottomRight"
+        style="border: none; padding: 0"
+      >
+        <span
+          nz-icon
+          nzType="more"
+          nzTheme="outline"
+          style="font-size: 20px; vertical-align: top"
+        ></span>
+      </button>
+    </nz-space>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item>Option 1</li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
 
   <div nz-row *ngIf="!editMode">
     <div nz-col nzXs="24" nzSm="8">
@@ -190,44 +190,39 @@
 <nz-divider></nz-divider>
 
 <div class="projects-container">
-  <nz-page-header class="site-page-header">
-    <nz-avatar
+  <div
+    style="display: flex; justify-content: space-between; margin-bottom: 15px"
+  >
+    <!-- <nz-avatar
       nz-page-header-avatar
       nzSrc="https://avatars0.githubusercontent.com/u/22736418?s=88&v=4"
-    ></nz-avatar>
-    <nz-page-header-title class="custom-title">Projects</nz-page-header-title>
-    <nz-page-header-tags>
-      <nz-tag [nzColor]="'blue'">{{ projectsCount }} </nz-tag>
-    </nz-page-header-tags>
-
-    <nz-page-header-extra>
-      <nz-space>
-        <button *nzSpaceItem nz-button nzType="primary">Add to project</button>
-        <button
-          *nzSpaceItem
-          nz-button
-          nzNoAnimation
-          nz-dropdown
-          [nzDropdownMenu]="menu"
-          nzPlacement="bottomRight"
-          style="border: none; padding: 0"
-        >
-          <span
-            nz-icon
-            nzType="more"
-            nzTheme="outline"
-            style="font-size: 20px; vertical-align: top"
-          ></span>
-        </button>
-      </nz-space>
-      <nz-dropdown-menu #menu="nzDropdownMenu">
-        <ul nz-menu>
-          <li nz-menu-item>Option 1</li>
-        </ul>
-      </nz-dropdown-menu>
-    </nz-page-header-extra>
-  </nz-page-header>
-
+    ></nz-avatar> -->
+    <h3 nz-typography>Projects</h3>
+    <nz-space>
+      <button *nzSpaceItem nz-button nzType="primary">Add to project</button>
+      <button
+        *nzSpaceItem
+        nz-button
+        nzNoAnimation
+        nz-dropdown
+        [nzDropdownMenu]="menu"
+        nzPlacement="bottomRight"
+        style="border: none; padding: 0"
+      >
+        <span
+          nz-icon
+          nzType="more"
+          nzTheme="outline"
+          style="font-size: 20px; vertical-align: top"
+        ></span>
+      </button>
+    </nz-space>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item>Option 1</li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
   <nz-table #basicTable [nzData]="projects">
     <tbody>
       <tr *ngFor="let data of basicTable.data">
