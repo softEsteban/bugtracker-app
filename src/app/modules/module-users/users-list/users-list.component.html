@@ -45,6 +45,7 @@
       <th>Type</th>
       <th>Company</th>
       <th>Register date</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -71,6 +72,11 @@
       <td>{{ data.use_type }}</td>
       <td>{{ data.cop_name }}</td>
       <td>{{ data.use_datfor }}</td>
+      <td>
+        <button nz-button nzType="default" (click)="deleteUser(data.use_code)">
+          Delete
+        </button>
+      </td>
     </tr>
   </tbody>
 </nz-table>

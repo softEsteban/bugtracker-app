@@ -182,4 +182,8 @@ export class UsersListComponent implements OnInit {
     // }, 2000);
   }
 
+  deleteUser(use_code: number) {
+
+  }
+
 }

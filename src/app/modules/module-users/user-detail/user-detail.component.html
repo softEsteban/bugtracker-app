@@ -3,10 +3,15 @@
     style="display: flex; justify-content: space-between; margin-bottom: 15px"
   >
     <h3 nz-typography>
-      {{ user.use_name + " " + (user?.use_lastname || "") }}
+      {{ (user?.use_name || "") + " " + (user?.use_lastname || "") }}
     </h3>
     <nz-space>
-      <button *nzSpaceItem nz-button nzType="primary" (click)="triggerEdit()">
+      <button
+        *ngIf="!editMode"
+        nz-button
+        nzType="primary"
+        (click)="triggerEdit()"
+      >
         Edit user
       </button>
       <button
@@ -64,7 +69,11 @@
         <h5 nz-typography>User type</h5>
         <p>{{ user?.use_type }}</p>
       </nz-col>
-      <nz-col nzXs="24" nzSm="24" *ngIf="user?.use_github !== ''">
+      <nz-col nzXs="24" nzSm="24">
+        <h5 nz-typography>User profile config</h5>
+        <p>{{ user?.pro_name }}</p>
+      </nz-col>
+      <nz-col nzXs="24" nzSm="24" *ngIf="user?.use_type === 'Developer'">
         <h5 nz-typography>User Github</h5>
         <p>{{ user?.use_github }}</p>
       </nz-col>

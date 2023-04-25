@@ -21,6 +21,7 @@ interface Company {
 export class UserDetailComponent implements OnInit {
 
   user: any;
+
   public editMode = false;
   public projectsCount = 0;
   public projects: any = [];
@@ -63,6 +64,7 @@ export class UserDetailComponent implements OnInit {
     await this.getCompaniesData();
 
     this.user = history.state.user;
+    console.log(this.user)
 
     if (this.user && this.user.use_projects) {
       this.projects = this.user.use_projects;
@@ -99,14 +101,12 @@ export class UserDetailComponent implements OnInit {
 
       let procodeControl = this.userForm.get('pro_code');
       if (procodeControl) {
-        const userProfile = this.profiles.find((profile: Profile) => profile.pro_code === this.user.pro_code);
-        procodeControl.setValue(userProfile ? userProfile.pro_code : null);
+        procodeControl.setValue(this.user.pro_code);
       }
 
       let copcodeControl = this.userForm.get('cop_code');
       if (copcodeControl) {
-        const userCompany = this.companies.find((company: Company) => company.cop_code === this.user.cop_code);
-        copcodeControl.setValue(userCompany ? userCompany.cop_code : null);
+        copcodeControl.setValue(this.user.cop_code);
       }
     }
   }
@@ -133,7 +133,6 @@ export class UserDetailComponent implements OnInit {
     this.editMode = true;
   }
 
-
   async updateUser({ value, valid }: { value: any, valid: boolean }) {
     if (!valid) {
       return this.createMessage("error", "Some fileds are not valid")
@@ -142,7 +141,6 @@ export class UserDetailComponent implements OnInit {
       use_name: value.use_name,
       use_lastname: value.use_lastname,
       use_type: value.use_type,
-      use_pic: value.use_pic,
       use_github: value.use_github,
       pro_code: value.pro_code,
       cop_code: value.cop_code
@@ -155,13 +153,33 @@ export class UserDetailComponent implements OnInit {
       if (response && response["message"] === "User has been updated!") {
         this.createMessage("success", "User has been updated!")
 
-        //Update detail data
-        this.user = user;
+        //Updates detail data
+        this.user = Object.assign(this.user, user);
+
+        //Gets values
+        this.user.cop_code = value.cop_code;
+        this.user.cop_name = this.getNameByCode(this.companies, "cop_code", "cop_name", value.cop_code);
+        this.user.pro_code = value.pro_code;
+        this.user.pro_name = this.getNameByCode(this.profiles, "pro_code", "pro_name", value.pro_code);
+
+        //Closes mode
+        this.editMode = false;
+        console.log(this.user)
+
       } else {
         this.createMessage("error", "Some data doesn't match!")
       }
     } catch (error) {
       this.createMessage("error", "An error has ocurred")
+    }
+  }
+
+  getNameByCode(itemsArray: any, keyCode: string, keyName: string, code: string) {
+    const matchingItems = itemsArray.filter((x: any) => x[keyCode] === code);
+    if (matchingItems.length > 0) {
+      return matchingItems[0][keyName];
+    } else {
+      return "";
     }
   }
 }

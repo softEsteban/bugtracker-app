@@ -21,23 +21,22 @@ export class ProjectDetailComponent implements OnInit {
 
   loading = true;
 
-  itemsPerPage = 10;
+  itemsPerPage = 4;
 
   // Calculate the total number of pages based on the length of the array
-  totalTicketsPages = Math.ceil(this.project?.pro_tickets?.length / this.itemsPerPage);
-  totalIssuesPages = Math.ceil(this.project?.pro_issues?.length / this.itemsPerPage);
+  totalTicketsPages = 0;
+  totalIssuesPages = 0;
 
-  // Set the nzTotal property of the nz-pagination components to the total number of pages
-  // for tickets and issues respectively
-  totalTickets = this.totalTicketsPages;
-  totalIssues = this.totalIssuesPages;
 
-  displayedIssues: Item[] = []; // the currently displayed page of issues
-  //totalIssues: number = 0; // the total number of issues
-  pageIndexI = 1; // the current page index
+  // totalTickets = this.totalTicketsPages;
+  // totalIssues = this.totalIssuesPages;
+  totalTickets = this.tickets.length;
+  totalIssues = this.issues.length;
+
+  displayedIssues: Item[] = [];
+  pageIndexI = 1;
 
   displayedTickets: Item[] = [];
-  //totalTickets: number = 0;
   pageIndexT = 1;
 
   constructor(private projectsService: ProjectsService) { }
@@ -47,11 +46,22 @@ export class ProjectDetailComponent implements OnInit {
     if (this.project) {
       this.getProjectItems();
       this.loading = false;
+
+      // this.totalTicketsPages = Math.ceil(parseInt(this.project?.ticket_count) / this.itemsPerPage);
+      // this.totalIssuesPages = Math.ceil(parseInt(this.project?.issue_count) / this.itemsPerPage);
+      this.totalTicketsPages = Math.ceil(this.tickets.length / this.itemsPerPage);
+      this.totalIssuesPages = Math.ceil(this.issues.length / this.itemsPerPage);
     }
 
   }
 
   onPageIndexChangeI(index: number): void {
+
+    console.log(this.totalIssues);
+    console.log(this.pageIndexI);
+    console.log(this.totalIssuesPages);
+    console.log(this.displayedIssues);
+
     this.pageIndexI = index;
     this.updateDisplayedIssues();
   }
@@ -61,8 +71,9 @@ export class ProjectDetailComponent implements OnInit {
       this.displayedIssues = [];
       return;
     }
-    const startIndex = (this.pageIndexI - 1) * 5; // assuming 10 issues per page
-    const endIndex = startIndex + 5;
+    const startIndex = (this.pageIndexI - 1) * this.itemsPerPage; // assuming 10 issues per page
+    // const endIndex = startIndex + 5;
+    const endIndex = startIndex + this.itemsPerPage;
     this.displayedIssues = this.issues.slice(startIndex, endIndex);
   }
 
@@ -76,8 +87,9 @@ export class ProjectDetailComponent implements OnInit {
       this.displayedTickets = [];
       return;
     }
-    const startIndex = (this.pageIndexT - 1) * 5; // assuming 10 issues per page
-    const endIndex = startIndex + 5;
+    const startIndex = (this.pageIndexT - 1) * this.itemsPerPage; // assuming 10 issues per page
+    // const endIndex = startIndex + 5;
+    const endIndex = startIndex + this.itemsPerPage;
     this.displayedTickets = this.tickets.slice(startIndex, endIndex);
   }
 
@@ -92,8 +104,15 @@ export class ProjectDetailComponent implements OnInit {
         this.issues = data2.data;
       }
     }
+    // this.totalIssues = this.issues.length;
+    // this.totalTickets = this.tickets.length;
+    // this.updateDisplayedIssues();
+    // this.updateDisplayedTickets();
+
     this.totalIssues = this.issues.length;
-    this.totalTickets = this.issues.length;
+    this.totalTickets = this.tickets.length;
+    this.totalTicketsPages = Math.ceil(parseInt(this.project?.ticket_count) / this.itemsPerPage);
+    this.totalIssuesPages = Math.ceil(parseInt(this.project?.issue_count) / this.itemsPerPage);
     this.updateDisplayedIssues();
     this.updateDisplayedTickets();
   }
