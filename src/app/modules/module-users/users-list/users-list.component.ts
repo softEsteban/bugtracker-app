@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { environment } from '../../../../environments/environment';
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { UserDataService } from '../services/user.data.service';
 import { UsersService } from '../services/users.service';
@@ -63,7 +62,7 @@ export class UsersListComponent implements OnInit {
   listOfData: readonly UserData[] = [];
   setOfCheckedId = new Set<number>();
 
-  users: UserData[] = []; // assume this contains the user data to be filtered
+  users: UserData[] = [];
   filteredData: UserData[] = [];
   searchText: string = '';
 
@@ -100,7 +99,6 @@ export class UsersListComponent implements OnInit {
     // this.userDataService.createdUser$.subscribe(user => {
     //   this.filteredData.push(user);
     // });
-
   }
 
   /**
@@ -138,11 +136,9 @@ export class UsersListComponent implements OnInit {
       }
       return false;
     });
-
   }
 
-
-  createComponentModal(): void {
+  async createComponentModal(): Promise<any> {
     const modal = this.modal.create({
       nzTitle: 'Create user',
       nzStyle: {
@@ -156,30 +152,17 @@ export class UsersListComponent implements OnInit {
         }
       },
       nzContent: CreateUserComponent,
-      nzOnCancel: () => {
-        // Call the getAllUsers method here
-        this.getUsers();
-      },
       nzViewContainerRef: this.viewContainerRef,
       nzComponentParams: {},
-      nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000)),
-      nzFooter: [
-        // {
-        //   label: 'change component title from outside',
-        //   onClick: componentInstance => {
-        //     componentInstance!.title = 'title in inner component is changed';
-        //   }
-        // }
-      ]
+      nzFooter: null,
+      nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000))
     });
-    const instance = modal.getContentComponent();
+    modal.getContentComponent();
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
 
-    // Return a result when closed
-    // delay until modal instance created
-    // setTimeout(() => {
-    //   instance.subtitle = 'sub title is changed';
-    // }, 2000);
+    await modal.afterClose.subscribe(createdUser => {
+      this.getUsers();
+    });
   }
 
   deleteUser(use_code: number) {

@@ -64,11 +64,16 @@
         </nz-list-item>
       </nz-list>
       <nz-pagination
-        [nzPageIndex]="pageIndexT"
+        [nzPageIndex]="1"
         [nzTotal]="totalTickets"
-        [nzPageSize]="10"
+        [nzPageSize]="4"
         (nzPageIndexChange)="onPageIndexChangeT($event)"
       ></nz-pagination>
+      <!-- <nz-pagination
+        [nzPageIndex]="1"
+        [nzTotal]="totalTickets"
+        [nzPageSize]="4"
+      ></nz-pagination> -->
     </div>
 
     <div nz-col nzXs="24" nzSm="12">
@@ -90,11 +95,16 @@
         </nz-list-item>
       </nz-list>
       <nz-pagination
-        [nzPageIndex]="pageIndexI"
+        [nzPageIndex]="1"
         [nzTotal]="totalIssues"
-        [nzPageSize]="10"
+        [nzPageSize]="4"
         (nzPageIndexChange)="onPageIndexChangeI($event)"
       ></nz-pagination>
+      <!-- <nz-pagination
+        [nzPageIndex]="1"
+        [nzTotal]="totalIssues"
+        [nzPageSize]="4"
+      ></nz-pagination> -->
     </div>
   </div>
 

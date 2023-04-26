@@ -93,8 +93,12 @@ export class CreateUserComponent implements OnInit {
       let response = JSON.parse(JSON.stringify(data))
 
       if (response && response["message"] === "User has been created") {
-        this.userDataService.setCreatedUser(response.data);
-        this.modalRef.close();
+        // this.userDataService.setCreatedUser(response.data);
+        // this.modalRef.close();
+        // this.createMessage("success", "User has been created!")
+        const createdUser = response.data;
+        this.userDataService.setCreatedUser(createdUser);
+        this.modalRef.close(createdUser);
         this.createMessage("success", "User has been created!")
       } else if (response["message"] === "A user with this email already exists") {
         this.createMessage("error", "Email already belongs to one user")

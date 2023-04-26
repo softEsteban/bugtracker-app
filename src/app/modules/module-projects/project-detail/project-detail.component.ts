@@ -47,8 +47,6 @@ export class ProjectDetailComponent implements OnInit {
       this.getProjectItems();
       this.loading = false;
 
-      // this.totalTicketsPages = Math.ceil(parseInt(this.project?.ticket_count) / this.itemsPerPage);
-      // this.totalIssuesPages = Math.ceil(parseInt(this.project?.issue_count) / this.itemsPerPage);
       this.totalTicketsPages = Math.ceil(this.tickets.length / this.itemsPerPage);
       this.totalIssuesPages = Math.ceil(this.issues.length / this.itemsPerPage);
     }
