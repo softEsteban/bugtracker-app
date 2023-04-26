@@ -4,6 +4,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { UserDataService } from '../services/user.data.service';
 import { UsersService } from '../services/users.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 
 interface UserData {
@@ -32,7 +33,8 @@ export class UsersListComponent implements OnInit {
     private userDataService: UserDataService,
     private router: Router,
     private modal: NzModalService,
-    private viewContainerRef: ViewContainerRef) { }
+    private viewContainerRef: ViewContainerRef,
+    private message: NzMessageService) { }
 
   listOfSelection = [
     {
@@ -164,9 +166,24 @@ export class UsersListComponent implements OnInit {
       this.getUsers();
     });
   }
+  createMessage(type: string, text: string): void {
+    this.message.create(type, `${text}`);
+  }
 
-  deleteUser(use_code: number) {
-
+  async deleteUser(use_code: number) {
+    const data = await this.usersService.deleteUser(use_code);
+    let response = JSON.parse(JSON.stringify(data))
+    if (response && response["message"] === "User has been deleted!") {
+      this.createMessage("success", "User has been deleted!");
+      // // Find the index of the user with the given use_code
+      // const userIndex = this.users.findIndex(user => user.use_code.toString() === use_code.toString());
+      // // Remove the user from the users array
+      // if (userIndex >= 0) {
+      //   this.users.splice(userIndex, 1);
+      // }
+    } else if (response && response["message"] === "User has projects related!") {
+      this.createMessage("error", "User has projects related, can´t be removed!");
+    }
   }
 
 }

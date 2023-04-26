@@ -45,4 +45,10 @@ export class UsersService {
         );
     }
 
+    async deleteUser(use_code: number) {
+        return await lastValueFrom(
+            this.http.delete(`${this.host}/users/deleteUser/${use_code}`)
+        );
+    }
+
 }

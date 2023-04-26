@@ -21,15 +21,12 @@ export class ProjectDetailComponent implements OnInit {
 
   loading = true;
 
+  //Pagination
   itemsPerPage = 4;
 
-  // Calculate the total number of pages based on the length of the array
   totalTicketsPages = 0;
   totalIssuesPages = 0;
 
-
-  // totalTickets = this.totalTicketsPages;
-  // totalIssues = this.totalIssuesPages;
   totalTickets = this.tickets.length;
   totalIssues = this.issues.length;
 
@@ -54,12 +51,6 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   onPageIndexChangeI(index: number): void {
-
-    console.log(this.totalIssues);
-    console.log(this.pageIndexI);
-    console.log(this.totalIssuesPages);
-    console.log(this.displayedIssues);
-
     this.pageIndexI = index;
     this.updateDisplayedIssues();
   }
@@ -69,8 +60,7 @@ export class ProjectDetailComponent implements OnInit {
       this.displayedIssues = [];
       return;
     }
-    const startIndex = (this.pageIndexI - 1) * this.itemsPerPage; // assuming 10 issues per page
-    // const endIndex = startIndex + 5;
+    const startIndex = (this.pageIndexI - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     this.displayedIssues = this.issues.slice(startIndex, endIndex);
   }
@@ -85,8 +75,7 @@ export class ProjectDetailComponent implements OnInit {
       this.displayedTickets = [];
       return;
     }
-    const startIndex = (this.pageIndexT - 1) * this.itemsPerPage; // assuming 10 issues per page
-    // const endIndex = startIndex + 5;
+    const startIndex = (this.pageIndexT - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     this.displayedTickets = this.tickets.slice(startIndex, endIndex);
   }
@@ -102,11 +91,6 @@ export class ProjectDetailComponent implements OnInit {
         this.issues = data2.data;
       }
     }
-    // this.totalIssues = this.issues.length;
-    // this.totalTickets = this.tickets.length;
-    // this.updateDisplayedIssues();
-    // this.updateDisplayedTickets();
-
     this.totalIssues = this.issues.length;
     this.totalTickets = this.tickets.length;
     this.totalTicketsPages = Math.ceil(parseInt(this.project?.ticket_count) / this.itemsPerPage);
