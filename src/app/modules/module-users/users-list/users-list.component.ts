@@ -170,17 +170,14 @@ export class UsersListComponent implements OnInit {
     this.message.create(type, `${text}`);
   }
 
-  async deleteUser(use_code: number) {
+  async deleteUser(use_code: any) {
     const data = await this.usersService.deleteUser(use_code);
     let response = JSON.parse(JSON.stringify(data))
     if (response && response["message"] === "User has been deleted!") {
-      this.createMessage("success", "User has been deleted!");
-      // // Find the index of the user with the given use_code
-      // const userIndex = this.users.findIndex(user => user.use_code.toString() === use_code.toString());
-      // // Remove the user from the users array
-      // if (userIndex >= 0) {
-      //   this.users.splice(userIndex, 1);
-      // }
+      this.createMessage('success', 'User deleted successfully');
+      this.filteredData = this.filteredData.filter((user: UserData) => user.use_code !== use_code);
+      this.setOfCheckedId.delete(use_code);
+      this.refreshCheckedStatus();
     } else if (response && response["message"] === "User has projects related!") {
       this.createMessage("error", "User has projects related, can´t be removed!");
     }
