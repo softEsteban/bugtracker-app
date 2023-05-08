@@ -5,6 +5,7 @@ import { NgZorroModule } from '../../shared/ng-zorro.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
+import { CreateItemComponent } from './create-item/create-item.component';
 
 
 
@@ -12,7 +13,8 @@ import { CreateProjectComponent } from './create-project/create-project.componen
   declarations: [
     ProjectsListComponent,
     ProjectDetailComponent,
-    CreateProjectComponent
+    CreateProjectComponent,
+    CreateItemComponent
   ],
   imports: [
     CommonModule,

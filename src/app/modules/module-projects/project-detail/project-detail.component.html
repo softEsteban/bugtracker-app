@@ -43,10 +43,26 @@
 
   <div
     nz-row
+    nzGutter="16"
     style="background-color: #f6f6f6; padding: 10px; border-radius: 6px"
   >
-    <div nz-col nzXs="24" nzSm="12">
-      <h3 nz-typography>Tickets</h3>
+    <div nz-col nzXs="24" nzSm="12" style="margin-top: 30px">
+      <nz-row nzJustify="space-between" nzAlign="middle">
+        <nz-col>
+          <h3 nz-typography>Tickets</h3>
+        </nz-col>
+        <nz-col>
+          <button
+            nz-button
+            nzType="primary"
+            (click)="createComponentModal('Ticket')"
+            nzBlock
+          >
+            Add ticket
+          </button>
+        </nz-col>
+      </nz-row>
+
       <nz-list nzItemLayout="horizontal">
         <nz-list-item *ngFor="let item of displayedTickets">
           <nz-skeleton
@@ -69,15 +85,25 @@
         [nzPageSize]="4"
         (nzPageIndexChange)="onPageIndexChangeT($event)"
       ></nz-pagination>
-      <!-- <nz-pagination
-        [nzPageIndex]="1"
-        [nzTotal]="totalTickets"
-        [nzPageSize]="4"
-      ></nz-pagination> -->
     </div>
 
-    <div nz-col nzXs="24" nzSm="12">
-      <h3 nz-typography>Issues</h3>
+    <div nz-col nzXs="24" nzSm="12" style="margin-top: 30px">
+      <nz-row nzJustify="space-between" nzAlign="middle">
+        <nz-col>
+          <h3 nz-typography>Issues</h3>
+        </nz-col>
+        <nz-col>
+          <button
+            nz-button
+            nzType="primary"
+            (click)="createComponentModal('Issue')"
+            nzBlock
+          >
+            Add issue
+          </button>
+        </nz-col>
+      </nz-row>
+
       <nz-list nzItemLayout="horizontal">
         <nz-list-item *ngFor="let item of displayedIssues">
           <nz-skeleton
@@ -100,11 +126,6 @@
         [nzPageSize]="4"
         (nzPageIndexChange)="onPageIndexChangeI($event)"
       ></nz-pagination>
-      <!-- <nz-pagination
-        [nzPageIndex]="1"
-        [nzTotal]="totalIssues"
-        [nzPageSize]="4"
-      ></nz-pagination> -->
     </div>
   </div>
 

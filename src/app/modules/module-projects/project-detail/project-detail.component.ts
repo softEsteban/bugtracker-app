@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ProjectsService } from '../services/projects.service';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { CreateItemComponent } from '../create-item/create-item.component';
 
 interface Item {
   item_code: string;
@@ -36,7 +38,10 @@ export class ProjectDetailComponent implements OnInit {
   displayedTickets: Item[] = [];
   pageIndexT = 1;
 
-  constructor(private projectsService: ProjectsService) { }
+  constructor(
+    private projectsService: ProjectsService,
+    private modal: NzModalService,
+    private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit(): void {
     this.project = history.state.project;
@@ -97,6 +102,39 @@ export class ProjectDetailComponent implements OnInit {
     this.totalIssuesPages = Math.ceil(parseInt(this.project?.issue_count) / this.itemsPerPage);
     this.updateDisplayedIssues();
     this.updateDisplayedTickets();
+  }
+
+  createComponentModal(item_type: string): void {
+    const modal = this.modal.create({
+      nzTitle: `Create ${item_type.toLowerCase()}`,
+      nzStyle: {
+        "@media (max-width: 767px)": {
+          width: "560px",
+          top: '0px'
+        },
+        "@media (min-width: 768px)": {
+          width: "700px",
+          top: '0px'
+        }
+      },
+      nzContent: CreateItemComponent,
+      nzOnCancel: () => {
+        // this.getProjects();
+      },
+      nzViewContainerRef: this.viewContainerRef,
+      nzComponentParams: {},
+      nzOnOk: () => {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            // this.getProjects();
+            resolve();
+          }, 1000);
+        });
+      },
+      nzFooter: []
+    });
+    const instance = modal.getContentComponent();
+    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
   }
 
 
