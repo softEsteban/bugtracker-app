@@ -2,6 +2,7 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ProjectsService } from '../services/projects.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { CreateItemComponent } from '../create-item/create-item.component';
+import { AddUsersComponent } from '../add-users/add-users.component';
 
 interface Item {
   item_code: string;
@@ -104,7 +105,7 @@ export class ProjectDetailComponent implements OnInit {
     this.updateDisplayedTickets();
   }
 
-  createComponentModal(item_type: string): void {
+  async createComponentModal(item_type: string): Promise<void> {
     const modal = this.modal.create({
       nzTitle: `Create ${item_type.toLowerCase()}`,
       nzStyle: {
@@ -118,23 +119,46 @@ export class ProjectDetailComponent implements OnInit {
         }
       },
       nzContent: CreateItemComponent,
-      nzOnCancel: () => {
-        // this.getProjects();
-      },
+      nzOnCancel: () => { },
       nzViewContainerRef: this.viewContainerRef,
-      nzComponentParams: {},
-      nzOnOk: () => {
-        return new Promise(resolve => {
-          setTimeout(() => {
-            // this.getProjects();
-            resolve();
-          }, 1000);
-        });
+      nzComponentParams: {
+        itemType: item_type,
+        proCode: this.project?.pro_code
       },
+      nzOnOk: () => { },
       nzFooter: []
     });
-    const instance = modal.getContentComponent();
-    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
+    await modal.afterClose.subscribe(createdProject => {
+      this.getProjectItems();
+    });
+  }
+
+  async createComponentModalUsers(): Promise<void> {
+    const modal = this.modal.create({
+      nzTitle: `Add users`,
+      nzStyle: {
+        "@media (max-width: 767px)": {
+          width: "560px",
+          top: '0px'
+        },
+        "@media (min-width: 768px)": {
+          width: "700px",
+          top: '0px'
+        }
+      },
+      nzContent: AddUsersComponent,
+      nzOnCancel: () => { },
+      nzViewContainerRef: this.viewContainerRef,
+      // nzComponentParams: {
+      //   itemType: item_type,
+      //   proCode: this.project?.pro_code
+      // },
+      nzOnOk: () => { },
+      nzFooter: []
+    });
+    await modal.afterClose.subscribe(createdProject => {
+      // this.getProjectItems();
+    });
   }
 
 

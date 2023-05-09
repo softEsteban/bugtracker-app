@@ -97,7 +97,7 @@ export class CreateProjectComponent implements OnInit {
     const dateEnd = new Date(this.projectForm.get('pro_datend')?.value);
     const dateEndStr = dateEnd.toISOString();
 
-    const userId = this.authService.getSessionId();
+    const userId = this.authService.getSessionUserId();
 
     const projectData = {
       pro_title: this.projectForm.get('pro_title')?.value,

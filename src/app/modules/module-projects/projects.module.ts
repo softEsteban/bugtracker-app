@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { CreateItemComponent } from './create-item/create-item.component';
+import { AddUsersComponent } from './add-users/add-users.component';
 
 
 
@@ -14,7 +15,8 @@ import { CreateItemComponent } from './create-item/create-item.component';
     ProjectsListComponent,
     ProjectDetailComponent,
     CreateProjectComponent,
-    CreateItemComponent
+    CreateItemComponent,
+    AddUsersComponent
   ],
   imports: [
     CommonModule,

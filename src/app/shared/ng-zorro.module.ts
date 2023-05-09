@@ -28,6 +28,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 @NgModule({
   declarations: [],
@@ -61,7 +62,8 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     NzDatePickerModule,
     NzListModule,
     NzSkeletonModule,
-    NzPaginationModule
+    NzPaginationModule,
+    NzUploadModule
   ],
   exports: [
     NzLayoutModule,
@@ -92,7 +94,8 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     NzDatePickerModule,
     NzListModule,
     NzSkeletonModule,
-    NzPaginationModule
+    NzPaginationModule,
+    NzUploadModule
   ]
 })
 export class NgZorroModule { }

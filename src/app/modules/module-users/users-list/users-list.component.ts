@@ -161,7 +161,6 @@ export class UsersListComponent implements OnInit {
     });
     modal.getContentComponent();
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
-
     await modal.afterClose.subscribe(createdUser => {
       this.getUsers();
     });

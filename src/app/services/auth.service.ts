@@ -29,7 +29,7 @@ export class AuthService {
 
     }
 
-    getSessionId() {
+    getSessionUserId() {
         const user = localStorage.getItem('user') || {} as any;
         if (user) {
             return JSON.parse(user)["use_code"];

@@ -84,7 +84,7 @@ export class ProjectsListComponent implements OnInit {
     this.router.navigate(['/project', project.pro_code], { state: { project: project } });
   }
 
-  createComponentModal(): void {
+  async createComponentModal(): Promise<void> {
     const modal = this.modal.create({
       nzTitle: 'Create project',
       nzStyle: {
@@ -98,23 +98,16 @@ export class ProjectsListComponent implements OnInit {
         }
       },
       nzContent: CreateProjectComponent,
-      nzOnCancel: () => {
-        this.getProjects();
-      },
+      nzOnCancel: () => { },
       nzViewContainerRef: this.viewContainerRef,
       nzComponentParams: {},
-      nzOnOk: () => {
-        return new Promise(resolve => {
-          setTimeout(() => {
-            this.getProjects();
-            resolve();
-          }, 1000);
-        });
-      },
+      nzOnOk: () => { },
       nzFooter: []
     });
     const instance = modal.getContentComponent();
-    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
+    await modal.afterClose.subscribe(createdProject => {
+      this.getProjects();
+    });
   }
 
 

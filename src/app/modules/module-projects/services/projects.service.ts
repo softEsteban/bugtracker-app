@@ -45,5 +45,11 @@ export class ProjectsService {
         );
     }
 
+    async createItem(item: any) {
+        return await lastValueFrom(
+            this.http.post(`${this.host}/items/createItem`, item)
+        );
+    }
+
 
 }

@@ -135,7 +135,14 @@
     >
       <h3 nz-typography>Users</h3>
       <nz-space>
-        <button *nzSpaceItem nz-button nzType="primary">Add user</button>
+        <button
+          *nzSpaceItem
+          nz-button
+          nzType="primary"
+          (click)="createComponentModalUsers()"
+        >
+          Add users
+        </button>
         <button
           *nzSpaceItem
           nz-button
