@@ -11,12 +11,14 @@ import { registerLocaleData } from '@angular/common';
 import { ProjectsModule } from './modules/module-projects/projects.module';
 import { UsersModule } from './modules/module-users/users.module';
 import { KanbanModule } from './modules/module-kanban/kanban.module';
+import { ChatComponent } from './modules/module-chat/chat/chat.component';
+import { ChatModule } from './modules/module-chat/chat.module';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }
@@ -27,6 +29,7 @@ registerLocaleData(en);
     ProjectsModule,
     KanbanModule,
     UsersModule,
+    ChatModule,
     AppRoutingModule,
     IconsProviderModule,
     NgZorroModule
