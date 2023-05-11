@@ -1,4 +1,12 @@
-<div>
+<div
+  style="
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #fcfcfc;
+  "
+>
   <button (click)="toggleContent()">▲</button>
   <div *ngIf="showContent">
     <ul class="chat-list">
