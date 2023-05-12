@@ -25,14 +25,17 @@ export class AuthService {
         return false;
     }
 
-    createToken() {
-
-    }
-
     getSessionUserId() {
         const user = localStorage.getItem('user') || {} as any;
         if (user) {
             return JSON.parse(user)["use_code"];
+        }
+    }
+
+    getSessionToken() {
+        const token = localStorage.getItem('token') || {} as any;
+        if (token) {
+            return token;
         }
     }
 
