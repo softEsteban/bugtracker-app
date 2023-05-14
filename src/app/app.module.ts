@@ -11,8 +11,8 @@ import { registerLocaleData } from '@angular/common';
 import { ProjectsModule } from './modules/module-projects/projects.module';
 import { UsersModule } from './modules/module-users/users.module';
 import { KanbanModule } from './modules/module-kanban/kanban.module';
-import { ChatComponent } from './modules/module-chat/chat/chat.component';
 import { ChatModule } from './modules/module-chat/chat.module';
+import { HomeModule } from './modules/module-home/home.module';
 
 registerLocaleData(en);
 
@@ -29,6 +29,7 @@ registerLocaleData(en);
     ProjectsModule,
     KanbanModule,
     UsersModule,
+    HomeModule,
     ChatModule,
     AppRoutingModule,
     IconsProviderModule,

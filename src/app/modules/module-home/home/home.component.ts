@@ -7,7 +7,8 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  @ViewChild('myChart') chartElement!: ElementRef;
+  @ViewChild('projectsXUserChart') chartElement!: ElementRef;
+  @ViewChild('ticketsAndIsssuesChart') chartElement2!: ElementRef;
 
   userType = "";
   constructor() { }
@@ -19,6 +20,29 @@ export class HomeComponent implements OnInit {
     const ctx = this.chartElement.nativeElement.getContext('2d');
 
     new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+
+
+    const ctx2 = this.chartElement2.nativeElement.getContext('2d');
+
+    new Chart(ctx2, {
       type: 'bar',
       data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],

@@ -1,8 +1,17 @@
 <div>
-  <h3 nz-typography>Home</h3>
+  <h3 nz-typography>Dashboard</h3>
   <p>You have access to all features and functionality.</p>
 
-  <div>
-    <canvas #myChart></canvas>
-  </div>
+  <nz-row>
+    <nz-col nzXs="24" nzSm="12">
+      <div>
+        <canvas #projectsXUserChart></canvas>
+      </div>
+    </nz-col>
+    <nz-col nzXs="24" nzSm="12">
+      <div>
+        <canvas #ticketsAndIsssuesChart></canvas>
+      </div>
+    </nz-col>
+  </nz-row>
 </div>
