@@ -1,8 +1,10 @@
-.chat-container {
-  width: 20vw;
-  height: 60vh;
+.chat-header {
   position: fixed;
-  bottom: 0;
+  background-color: rgb(244, 244, 244);
+  border-radius: 10px 0px;
+  cursor: pointer;
+  width: 20%;
   right: 0;
-  overflow-y: auto;
+  bottom: 0;
+  z-index: 1;
 }

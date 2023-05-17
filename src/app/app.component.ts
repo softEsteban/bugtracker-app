@@ -15,6 +15,12 @@ export class AppComponent {
   ) {
 
   }
+  showContent = false;
+
+  toggleContent() {
+    this.showContent = !this.showContent;
+  }
+
 
   // ngOnInit(): void {
   //   this.view = this.authService.view;

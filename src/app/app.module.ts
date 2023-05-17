@@ -7,7 +7,7 @@ import { IconsProviderModule } from './icons-provider.module';
 import { AppRoutingModule } from './app-routing.module';
 import { NgZorroModule } from './shared/ng-zorro.module';
 import { ComponentsModule } from './components/components.module';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { ProjectsModule } from './modules/module-projects/projects.module';
 import { UsersModule } from './modules/module-users/users.module';
 import { KanbanModule } from './modules/module-kanban/kanban.module';
@@ -25,6 +25,7 @@ registerLocaleData(en);
   ],
   bootstrap: [AppComponent],
   imports: [
+    CommonModule,
     ComponentsModule,
     ProjectsModule,
     KanbanModule,
