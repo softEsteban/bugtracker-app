@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChatComponent } from './chat/chat.component';
+import { NgZorroModule } from 'src/app/shared/ng-zorro.module';
 
 
 @NgModule({
@@ -8,7 +9,8 @@ import { ChatComponent } from './chat/chat.component';
     ChatComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NgZorroModule
   ],
   exports: [
     ChatComponent

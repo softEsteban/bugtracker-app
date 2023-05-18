@@ -1,12 +1,16 @@
 <div class="container">
   <router-outlet></router-outlet>
 
-  <div
-    class="chat-header"
-    [ngStyle]="{ 'height.px': showContent ? 300 : 45 }"
-    (click)="toggleContent()"
-  >
-    <div style="display: flex; justify-content: space-between; padding: 12px">
+  <div class="chat-header" [ngStyle]="{ 'height.px': showContent ? 300 : 45 }">
+    <div
+      style="
+        display: flex;
+        justify-content: space-between;
+        padding: 12px;
+        cursor: pointer;
+      "
+      (click)="toggleContent()"
+    >
       <p>Chat</p>
       <span
         nz-icon
@@ -14,7 +18,6 @@
         nzTheme="outline"
       ></span>
     </div>
+    <app-chat *ngIf="showContent" class="chat-container"></app-chat>
   </div>
-
-  <!-- <app-chat *ngIf="showContent" class="chat-container"></app-chat> -->
 </div>
