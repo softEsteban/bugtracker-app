@@ -1,8 +1,6 @@
 .container {
-  display: flex;
-  align-items: center;
   padding: 25px;
-  width: 85vw;
+  width: 30vw; /* fallback width for larger screens */
   height: 80vh;
   background-color: #fafaff;
   margin: auto;
@@ -17,10 +15,6 @@
   .login-title {
     text-align: start;
     margin-bottom: 33px;
-  }
-
-  .form {
-    margin-top: 68px;
   }
 
   .form-input {
@@ -39,5 +33,10 @@
     border-collapse: separate;
     border-spacing: 0;
     align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    /* Adjust the width for smaller screens */
+    width: 80vw;
   }
 }

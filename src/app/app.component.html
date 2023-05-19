@@ -1,7 +1,11 @@
 <div class="container">
   <router-outlet></router-outlet>
 
-  <div class="chat-header" [ngStyle]="{ 'height.px': showContent ? 300 : 45 }">
+  <div
+    *ngIf="isAuthenticated$ | async"
+    class="chat-header"
+    [ngStyle]="{ 'height.px': showContent ? 300 : 45 }"
+  >
     <div
       style="
         display: flex;

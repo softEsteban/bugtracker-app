@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { lastValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, lastValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 @Injectable({
     providedIn: 'root'
@@ -10,13 +10,23 @@ import { environment } from '../../environments/environment';
 export class AuthService {
     host = environment.host;
 
+    private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+
     constructor(private http: HttpClient,
         private router: Router) { }
 
     async login(credentials: any) {
-        return await lastValueFrom(
+        const response = await lastValueFrom(
             this.http.post(`${this.host}/auth/login`, credentials)
         );
+
+        // Update authentication status
+        this.isAuthenticatedSubject.next(true);
+        return response;
+    }
+
+    get isAuthenticated$(): Observable<boolean> {
+        return this.isAuthenticatedSubject.asObservable();
     }
 
     isAuthenticated(): boolean {
@@ -43,10 +53,9 @@ export class AuthService {
         localStorage.removeItem('token');
         localStorage.removeItem('profile');
         localStorage.removeItem('user');
+
+        // Update authentication status
+        this.isAuthenticatedSubject.next(false);
         this.router.navigate(['/login']);
     }
-
-
-
-
 }
