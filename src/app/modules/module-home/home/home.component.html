@@ -2,16 +2,11 @@
   <h3 nz-typography>Dashboard</h3>
   <p>You have access to all features and functionality.</p>
 
-  <nz-row>
-    <nz-col nzXs="24" nzSm="12">
-      <div>
-        <canvas #projectsXUserChart></canvas>
-      </div>
-    </nz-col>
-    <nz-col nzXs="24" nzSm="12">
-      <div>
-        <canvas #ticketsAndIsssuesChart></canvas>
-      </div>
-    </nz-col>
-  </nz-row>
+  <ng-container *ngIf="userType === 'Admin'">
+    <app-admin-dashboard></app-admin-dashboard>
+  </ng-container>
+
+  <ng-container *ngIf="userType != 'Admin'">
+    <h1>You are not admin</h1>
+  </ng-container>
 </div>

@@ -12,6 +12,7 @@ import { BoardComponent } from './modules/module-kanban/board/board.component';
 import { HomeComponent } from './modules/module-home/home/home.component';
 import { UserDetailComponent } from './modules/module-users/user-detail/user-detail.component';
 import { ProjectDetailComponent } from './modules/module-projects/project-detail/project-detail.component';
+import { ChatGptComponent } from './modules/module-chat-gpt/chat-gpt/chat-gpt.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'users', component: UsersListComponent, canActivate: [AuthGuard] },
       { path: 'user/:userId', component: UserDetailComponent, canActivate: [AuthGuard] },
       { path: 'kanban', component: BoardComponent, canActivate: [AuthGuard] },
+      { path: 'chat-gpt', component: ChatGptComponent, canActivate: [AuthGuard] },
     ]
   },
   { path: 'landing', component: LandingComponent },

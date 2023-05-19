@@ -42,6 +42,13 @@ export class AuthService {
         }
     }
 
+    getSessionUserType() {
+        const user = localStorage.getItem('user') || {} as any;
+        if (user) {
+            return JSON.parse(user)["use_type"];
+        }
+    }
+
     getSessionToken() {
         const token = localStorage.getItem('token') || {} as any;
         if (token) {

@@ -13,6 +13,7 @@ import { UsersModule } from './modules/module-users/users.module';
 import { KanbanModule } from './modules/module-kanban/kanban.module';
 import { ChatModule } from './modules/module-chat/chat.module';
 import { HomeModule } from './modules/module-home/home.module';
+import { DashboardModule } from './modules/module-dashboard/dashboard.module';
 
 registerLocaleData(en);
 
@@ -32,6 +33,7 @@ registerLocaleData(en);
     UsersModule,
     HomeModule,
     ChatModule,
+    DashboardModule,
     AppRoutingModule,
     IconsProviderModule,
     NgZorroModule
