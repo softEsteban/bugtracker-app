@@ -1,3 +1,32 @@
+<h3 nz-typography>Dashboard</h3>
+
+<nz-row nzGutter="10" style="margin-bottom: 35px">
+  <nz-col nzXs="8" nzSm="4">
+    <nz-card
+      style="border-radius: 23px; cursor: pointer"
+      routerLink="/projects"
+    >
+      <h3>{{ proCount }}</h3>
+      <i nz-icon nzType="project" nzTheme="outline"></i>
+      <span>Projects</span>
+    </nz-card>
+  </nz-col>
+  <nz-col nzXs="8" nzSm="4">
+    <nz-card style="border-radius: 23px; cursor: pointer" routerLink="/users">
+      <h3>{{ cliCount }}</h3>
+      <i nz-icon nzType="user" nzTheme="outline"></i>
+      <span>Clients</span>
+    </nz-card>
+  </nz-col>
+  <nz-col nzXs="8" nzSm="4">
+    <nz-card style="border-radius: 23px; cursor: pointer" routerLink="/users">
+      <h3>{{ devCount }}</h3>
+      <i nz-icon nzType="team" nzTheme="outline"></i>
+      <span>Developers</span>
+    </nz-card>
+  </nz-col>
+</nz-row>
+
 <nz-row>
   <nz-col nzXs="24" nzSm="12">
     <div>
@@ -5,7 +34,7 @@
     </div>
   </nz-col>
   <nz-col nzXs="24" nzSm="12">
-    <div>
+    <div style="width: 50%; margin: 0 auto">
       <canvas #ticketsAndIsssuesChart></canvas>
     </div>
   </nz-col>

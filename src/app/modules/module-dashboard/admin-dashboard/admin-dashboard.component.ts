@@ -26,9 +26,15 @@ export class AdminDashboardComponent implements OnInit {
   projectsCountXUserData: ProjectsCount[] = [];
   itemsCountData: ItemsCount[] = [];
 
+  dashboardCounts: any = [];
+  proCount = 0;
+  devCount = 0;
+  cliCount = 0;
+
   constructor(private dashboardsService: DashboardsService) { }
 
   ngOnInit(): void {
+    this.getDashCountstData()
     this.getProjectsCountData();
     this.getItemsCountData();
   }
@@ -47,6 +53,28 @@ export class AdminDashboardComponent implements OnInit {
     if (data.result === 'success' && data.data.length > 0) {
       this.itemsCountData = data.data;
       this.renderItemsCountChart();
+    }
+  }
+
+  async getDashCountstData() {
+    let data: any = await this.dashboardsService.getAdminDashboardCounts();
+    if (data.result === 'success' && data.data.length > 0) {
+      this.dashboardCounts = data.data;
+    }
+
+    const objectWithCliCount = this.dashboardCounts.find((obj: any) => 'cli_count' in obj);
+    if (objectWithCliCount) {
+      this.cliCount = objectWithCliCount.cli_count;
+    }
+
+    const objectWithDevCount = this.dashboardCounts.find((obj: any) => 'dev_count' in obj);
+    if (objectWithDevCount) {
+      this.devCount = objectWithDevCount.dev_count;
+    }
+
+    const objectWithProCount = this.dashboardCounts.find((obj: any) => 'pro_count' in obj);
+    if (objectWithProCount) {
+      this.proCount = objectWithProCount.pro_count;
     }
   }
 
@@ -95,7 +123,7 @@ export class AdminDashboardComponent implements OnInit {
           datasets: [
             {
               data: data,
-              backgroundColor: ['red', 'green']
+              backgroundColor: ['#77B6EA', '#F76C5E']
             }
           ]
         }

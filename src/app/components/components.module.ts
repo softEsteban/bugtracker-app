@@ -28,7 +28,6 @@ import { LandingComponent } from './landing/landing.component';
     AppRoutingModule,
     FormsModule,
     CommonModule,
-    AppRoutingModule,
     ReactiveFormsModule
   ]
 })

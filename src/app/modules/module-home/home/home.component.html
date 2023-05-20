@@ -1,11 +1,7 @@
 <div>
-  <h3 nz-typography>Dashboard</h3>
-  <p>You have access to all features and functionality.</p>
-
   <ng-container *ngIf="userType === 'Admin'">
     <app-admin-dashboard></app-admin-dashboard>
   </ng-container>
-
   <ng-container *ngIf="userType != 'Admin'">
     <h1>You are not admin</h1>
   </ng-container>

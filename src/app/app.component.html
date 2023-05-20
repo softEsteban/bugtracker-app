@@ -15,7 +15,13 @@
       "
       (click)="toggleContent()"
     >
-      <p>Chat</p>
+      <div style="display: flex; width: 20%; justify-content: space-around">
+        <nz-badge nzSize="small" [nzCount]="5">
+          <a class="head-example"></a>
+        </nz-badge>
+        <p>Chat</p>
+      </div>
+
       <span
         nz-icon
         [nzType]="showContent ? 'down' : 'up'"

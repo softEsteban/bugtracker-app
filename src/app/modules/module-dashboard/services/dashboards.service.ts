@@ -31,6 +31,11 @@ export class DashboardsService {
             this.http.get(`${this.host}/items/getItemsCountByType`, { headers: { Authorization: `Bearer ${this.token}` } })
         );
     }
+    async getAdminDashboardCounts() {
+        return await lastValueFrom(
+            this.http.get(`${this.host}/projects/getAdminDashboardCounts`, { headers: { Authorization: `Bearer ${this.token}` } })
+        );
+    }
 
 
 }
