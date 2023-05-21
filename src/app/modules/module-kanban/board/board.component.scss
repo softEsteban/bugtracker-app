@@ -4,29 +4,61 @@
 
   .inputs-bar {
     display: inherit;
+    margin-bottom: 20px;
   }
 
   .buttons-bar {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .buttons-bar button {
+    margin-right: 10px;
   }
 }
 
-// .example-container {
-//   display: flex;
-//   overflow-x: scroll;
-// }
+.boards-table-list {
+  .boards-container {
+    .board-column {
+      .board {
+        .board-title {
+          cursor: grab;
+        }
+        display: flex;
+        justify-content: space-between;
+      }
+      width: 200px;
+      margin-right: 20px;
+    }
 
-// @media only screen and (min-width: 768px) {
-//   .example-container {
-//     flex-wrap: wrap;
-//     justify-content: space-between;
-//   }
+    .board-cards-list {
+      .card {
+        .card-title {
+          font-size: 12px;
+          white-space: pre-wrap;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          max-width: 100%;
+        }
+        .card-user-date {
+          font-size: 10px;
+          display: flex;
+          margin: 5px 0px 6px 3px;
+        }
+        padding: 5px;
+        border-radius: 7px;
+        margin: 7px 5px 12px 0;
+        cursor: grab;
+        background-color: #f4f4f4;
+      }
 
-//   nz-col {
-//     width: 45%;
-//     margin-right: 20px;
-//   }
+      height: 65vh;
+      overflow-y: scroll;
+      border-radius: 9px;
+      margin-bottom: 20px;
+    }
 
-//   nz-col:last-of-type {
-//     margin-right: 0;
-//   }
-// }
+    display: flex;
+    overflow-x: scroll;
+    margin-bottom: 119px;
+  }
+}

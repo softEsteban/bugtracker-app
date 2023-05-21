@@ -1,75 +1,66 @@
 <h3 nz-typography>Kanban</h3>
 
-<div class="options-bar">
-  <div class="inputs-bar">
-    <nz-input-group
-      style="
-        margin-bottom: 16px;
-        margin-right: 10px;
-        width: 25vw;
-        border-radius: 3px;
-        outline: none;
-        width: 50%;
-      "
-    >
+<nz-row class="options-bar">
+  <nz-col class="inputs-bar" nzXs="24" nzSm="12">
+    <nz-input-group style="width: 50%; border-radius: 3px; outline: none">
       <nz-form-control>
-        <nz-col nzXs="12" nzSm="24">
-          <nz-select
-            nzAllowClear
-            nzPlaceHolder="Select a kanban board"
-            formControlName="use_type"
-          >
-            <ng-container *ngFor="let board of boardsList">
-              <nz-option
-                [nzValue]="board.board_id"
-                [nzLabel]="board.board_title"
-              ></nz-option>
-            </ng-container>
-          </nz-select>
-        </nz-col>
+        <nz-select
+          nzAllowClear
+          nzPlaceHolder="Select a kanban board"
+          formControlName="use_type"
+        >
+          <ng-container *ngFor="let board of boardsList">
+            <nz-option
+              [nzValue]="board.board_id"
+              [nzLabel]="board.board_title"
+            ></nz-option>
+          </ng-container>
+        </nz-select>
       </nz-form-control>
     </nz-input-group>
     <nz-input-group style="width: 50%">
       <input
         type="text"
         nz-input
-        placeholder="Filter card items"
+        placeholder="Search in card items"
         [(ngModel)]="searchText"
         (ngModelChange)="filterData(searchText)"
       />
     </nz-input-group>
-  </div>
-  <div class="buttons-bar">
-    <button
-      nz-button
-      nzType="primary"
-      nzShape="circle"
-      style="margin-right: 10px"
-    >
+  </nz-col>
+
+  <nz-col class="buttons-bar" nzXs="24" nzSm="12">
+    <button nz-button nzType="primary" nzShape="circle">
       <span nz-icon nzType="share-alt"></span>
+    </button>
+    <button nz-button nzType="primary" nzShape="circle">
+      <span nz-icon nzType="filter"></span>
     </button>
     <button nz-button nzType="primary" nzShape="circle" (click)="createBoard()">
       <span nz-icon nzType="plus"></span>
     </button>
-  </div>
-</div>
+  </nz-col>
+</nz-row>
 
 <div
   cdkDropListGroup
   cdkDropList
   [cdkDropListData]="board"
   (cdkDropListDropped)="dropBoard($event)"
+  class="boards-table-list"
 >
-  <div class="example-container" style="display: flex; overflow-x: scroll">
+  <div class="boards-container">
     <nz-col
       cdkDrag
       *ngFor="let column of board"
+      class="board-column"
+      nzXs="24"
+      nzSm="12"
+      nzMd="6"
       [nzSpan]="8"
-      style="width: 200px; margin-right: 20px"
     >
-      <div style="display: flex; justify-content: space-between">
-        <h4 style="cursor: grab" nz-typography>{{ column.title }}</h4>
-
+      <div class="board">
+        <h4 class="board-title" nz-typography>{{ column.title }}</h4>
         <nz-space>
           <button
             *nzSpaceItem
@@ -113,36 +104,28 @@
       <div
         cdkDropList
         [cdkDropListData]="column.cards"
-        class="example-list"
+        class="board-cards-list"
         (cdkDropListDropped)="drop($event, column)"
         (click)="setNewCard(column)"
-        style="
-          background-color: #f4f4f4;
-          height: 45vh;
-          overflow-y: scroll;
-          border-radius: 9px;
-        "
       >
+        <!-- [ngStyle]="{ 'background-color': getCardColor(card.card_type) }" -->
         <div
-          class="example-box"
+          class="card"
           *ngFor="let card of column.cards"
           cdkDrag
-          [ngStyle]="{ 'background-color': getCardColor(card.card_type) }"
-          style="padding: 5px; border-radius: 7px; margin: 7px; cursor: grab"
           (contextmenu)="onRightClick($event, card)"
         >
-          <p
-            style="
-              font-size: 12px;
-              white-space: pre-wrap;
-              word-wrap: break-word;
-              overflow-wrap: break-word;
-              max-width: 100%;
-            "
-          >
+          <p class="card-title">
             {{ card.title }}
           </p>
-          <p style="font-size: 10px; display: flex; justify-content: flex-end">
+
+          <nz-tag
+            [nzColor]="getCardColor(card.card_type)"
+            style="border-radius: 10px"
+            >{{ card.card_type }}</nz-tag
+          >
+
+          <p class="card-user-date">
             {{ card.use_name }} - {{ card.card_datins }}
           </p>
         </div>
@@ -162,7 +145,6 @@
       <h4 nz-typography></h4>
       <div
         style="
-          background-color: #f4f4f4;
           height: 48vh;
           width: 190px;
           border-radius: 15px;
@@ -171,7 +153,7 @@
           align-items: center;
         "
       >
-        <div style="display: inline">
+        <div style="display: inline; cursor: pointer">
           <p (click)="showInput()">Add new board</p>
           <div *ngIf="showInputBox">
             <input

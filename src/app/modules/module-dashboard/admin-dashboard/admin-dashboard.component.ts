@@ -121,6 +121,8 @@ export class AdminDashboardComponent implements OnInit {
         data: {
           labels: labels,
           datasets: [
+            // blue - #77B6EA issue
+            // red - #F76C5E ticket
             {
               data: data,
               backgroundColor: ['#77B6EA', '#F76C5E']

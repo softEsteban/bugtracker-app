@@ -193,11 +193,14 @@ export class BoardComponent implements OnInit {
   getCardColor(cardType: string): string {
     switch (cardType) {
       case 'Issue':
-        return '#C5DFF4'; // blue
+        // return '#77B6EA'; // blue
+        return 'blue';
       case 'Ticket':
-        return '#FFC7C3'; // red
+        // return '#F76C5E'; // red
+        return 'red';
       case 'ToDo':
-        return '#C9F2CB'; // green
+        // return '#C9F2CB'; // green
+        return 'green';
       default:
         return '#FFFFFF'; // white (default)
     }
