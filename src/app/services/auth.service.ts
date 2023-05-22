@@ -25,6 +25,13 @@ export class AuthService {
         return response;
     }
 
+    async register(user: any) {
+        const response = await lastValueFrom(
+            this.http.post(`${this.host}/auth/register`, user)
+        );
+        return response;
+    }
+
     get isAuthenticated$(): Observable<boolean> {
         return this.isAuthenticatedSubject.asObservable();
     }

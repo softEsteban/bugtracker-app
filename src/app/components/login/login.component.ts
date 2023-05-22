@@ -55,6 +55,9 @@ export class LoginComponent implements OnInit {
     if (user && user["message"] == "The given user email doesn't exist") {
       return this.createMessage("warning", "User email doesn't exist")
     }
+    if (user && user["message"] == "User email hasn't been confirmed!") {
+      return this.createMessage("warning", "User email hasn't been confirmed!")
+    }
     if (user["message"] == "User password is incorrect") {
       return this.createMessage("error", "Wrong password. Have another go!")
     }
@@ -66,9 +69,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  /**
-   * 
-   */
   public async loginWithGitHub() {
     try {
       await this.githubService.login();
@@ -78,9 +78,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  /**
-   * 
-   */
   public loginWithGoogle() {
 
   }

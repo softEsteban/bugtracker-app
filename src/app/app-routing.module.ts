@@ -13,6 +13,7 @@ import { HomeComponent } from './modules/module-home/home/home.component';
 import { UserDetailComponent } from './modules/module-users/user-detail/user-detail.component';
 import { ProjectDetailComponent } from './modules/module-projects/project-detail/project-detail.component';
 import { ChatGptComponent } from './modules/module-chat-gpt/chat-gpt/chat-gpt.component';
+import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'confirm-email', component: ConfirmEmailComponent },
   {
     path: '**',
     component: NotFoundComponent,

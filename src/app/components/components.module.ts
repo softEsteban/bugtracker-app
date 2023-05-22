@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LandingComponent } from './landing/landing.component';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LandingComponent } from './landing/landing.component';
     LayoutComponent,
     LoginComponent,
     RegisterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     NgZorroModule,

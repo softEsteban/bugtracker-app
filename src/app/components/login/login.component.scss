@@ -1,6 +1,6 @@
 .container {
   padding: 25px;
-  width: 30vw; /* fallback width for larger screens */
+  width: 30vw;
   height: 80vh;
   background-color: #fafaff;
   margin: auto;
@@ -36,7 +36,6 @@
   }
 
   @media (max-width: 768px) {
-    /* Adjust the width for smaller screens */
     width: 80vw;
   }
 }

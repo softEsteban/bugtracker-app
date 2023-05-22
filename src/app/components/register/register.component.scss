@@ -1,11 +1,9 @@
-.container {
-  display: flex;
-  align-items: center;
+.register-container {
   padding: 25px;
-  width: 85vw;
-  height: 80vh;
+  width: 30vw;
+  height: 100%;
   background-color: #fafaff;
-  margin: auto;
+  margin: 20px auto;
   position: absolute;
   top: 0;
   left: 0;
@@ -13,4 +11,44 @@
   right: 0;
   text-align: center;
   border-radius: 7px;
+
+  nz-form-item {
+    text-align: start;
+    display: inline;
+  }
+
+  nz-input-group {
+    margin-bottom: 12px;
+  }
+
+  .register-title {
+    text-align: start;
+    margin-bottom: 33px;
+  }
+
+  .form-input {
+    text-align: start;
+  }
+
+  .register-button {
+    width: 110px;
+    margin-bottom: 12px;
+  }
+
+  .ant-input-group {
+    padding: 0;
+    display: flex;
+    border-collapse: separate;
+    border-spacing: 0;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    width: 80vw;
+  }
+}
+
+.validation-message {
+  color: #ff4d4f;
+  font-size: 12px;
 }
