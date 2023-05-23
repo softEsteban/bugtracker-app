@@ -3,6 +3,7 @@ import { ProjectsService } from '../services/projects.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { CreateItemComponent } from '../create-item/create-item.component';
 import { AddUsersComponent } from '../add-users/add-users.component';
+import { GlobalService } from 'src/app/services/global.service';
 
 interface Item {
   item_code: string;
@@ -42,7 +43,10 @@ export class ProjectDetailComponent implements OnInit {
   constructor(
     private projectsService: ProjectsService,
     private modal: NzModalService,
-    private viewContainerRef: ViewContainerRef) { }
+    private viewContainerRef: ViewContainerRef,
+    private globalService: GlobalService) {
+    globalService.setTitle("Detail");
+  }
 
   ngOnInit(): void {
     this.project = history.state.project;

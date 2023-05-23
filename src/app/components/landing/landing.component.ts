@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-landing',
@@ -13,8 +14,11 @@ export class LandingComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private globalService: GlobalService
+  ) {
+    globalService.setTitle("Mantis");
+  }
 
   goLogin() {
     this.router.navigate(['/login']);

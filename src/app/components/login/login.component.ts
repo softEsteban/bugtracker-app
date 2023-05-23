@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { GithubService } from '../../services/github.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { GlobalService } from 'src/app/services/global.service';
 
 
 @Component({
@@ -21,8 +22,11 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private githubService: GithubService,
-    private message: NzMessageService
-  ) { }
+    private message: NzMessageService,
+    private globalService: GlobalService
+  ) {
+    globalService.setTitle("Login");
+  }
 
   ngOnInit(): void {
     this.initForm();

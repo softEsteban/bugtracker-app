@@ -14,6 +14,7 @@ import { KanbanModule } from './modules/module-kanban/kanban.module';
 import { ChatModule } from './modules/module-chat/chat.module';
 import { HomeModule } from './modules/module-home/home.module';
 import { DashboardModule } from './modules/module-dashboard/dashboard.module';
+import { ChatGptModule } from './modules/module-chat-gpt/chat-gpt.module';
 
 registerLocaleData(en);
 
@@ -33,6 +34,7 @@ registerLocaleData(en);
     UsersModule,
     HomeModule,
     ChatModule,
+    ChatGptModule,
     DashboardModule,
     AppRoutingModule,
     IconsProviderModule,

@@ -5,6 +5,7 @@ import { CreateUserComponent } from '../create-user/create-user.component';
 import { UserDataService } from '../services/user.data.service';
 import { UsersService } from '../services/users.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { GlobalService } from 'src/app/services/global.service';
 
 
 interface UserData {
@@ -34,7 +35,10 @@ export class UsersListComponent implements OnInit {
     private router: Router,
     private modal: NzModalService,
     private viewContainerRef: ViewContainerRef,
-    private message: NzMessageService) { }
+    private message: NzMessageService,
+    private globalService: GlobalService) {
+    globalService.setTitle("Users");
+  }
 
   listOfSelection = [
     {

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { UsersService } from 'src/app/modules/module-users/services/users.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-register',
@@ -20,8 +21,11 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private usersService: UsersService,
     private authService: AuthService,
-    private message: NzMessageService
-  ) { }
+    private message: NzMessageService,
+    private globalService: GlobalService
+  ) {
+    globalService.setTitle("Register")
+  }
 
   ngOnInit(): void {
     this.getCompaniesData();

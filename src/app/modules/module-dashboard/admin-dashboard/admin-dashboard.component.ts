@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { DashboardsService } from '../services/dashboards.service';
+import { GlobalService } from 'src/app/services/global.service';
 
 interface ProjectsCount {
   use_code: string;
@@ -31,7 +32,12 @@ export class AdminDashboardComponent implements OnInit {
   devCount = 0;
   cliCount = 0;
 
-  constructor(private dashboardsService: DashboardsService) { }
+  constructor(
+    private dashboardsService: DashboardsService,
+    private globalService: GlobalService
+  ) {
+    globalService.setTitle("Dashboard")
+  }
 
   ngOnInit(): void {
     this.getDashCountstData()

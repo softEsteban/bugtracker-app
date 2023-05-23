@@ -3,6 +3,7 @@ import { ProjectsService } from '../services/projects.service';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { CreateProjectComponent } from '../create-project/create-project.component';
+import { GlobalService } from 'src/app/services/global.service';
 
 interface UserData {
   use_code: string;
@@ -40,7 +41,11 @@ export class ProjectsListComponent implements OnInit {
     private projectsService: ProjectsService,
     private router: Router,
     private modal: NzModalService,
-    private viewContainerRef: ViewContainerRef) { }
+    private viewContainerRef: ViewContainerRef,
+    private globalService: GlobalService) {
+    globalService.setTitle("Projects");
+
+  }
 
   ngOnInit(): void {
     this.getProjects();

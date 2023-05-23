@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LandingComponent } from './landing/landing.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { GlobalService } from '../services/global.service';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
     FormsModule,
     CommonModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers: []
 })
 export class ComponentsModule { }

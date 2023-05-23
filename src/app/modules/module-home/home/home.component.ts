@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +11,11 @@ export class HomeComponent implements OnInit {
 
   userType = "";
 
-  constructor(private authService: AuthService) {
-    this.userType = this.authService.getSessionUserType()
+  constructor(
+    private authService: AuthService,
+    private globalService: GlobalService) {
+    globalService.setTitle("Home");
+    this.userType = this.authService.getSessionUserType();
   }
 
   ngOnInit(): void {

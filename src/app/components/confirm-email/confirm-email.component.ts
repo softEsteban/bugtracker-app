@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-confirm-email',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmEmailComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private globalService: GlobalService
+  ) {
+    globalService.setTitle("Confirm email")
+  }
 
   ngOnInit(): void {
   }

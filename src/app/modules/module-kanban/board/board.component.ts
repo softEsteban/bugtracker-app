@@ -1,5 +1,6 @@
 import { CdkDragDrop, CdkDropList, DragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { GlobalService } from 'src/app/services/global.service';
 
 interface BoardColumn {
   id: number;
@@ -41,7 +42,9 @@ export class BoardComponent implements OnInit {
   visible: boolean = false;
 
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor(private globalService: GlobalService) {
+    globalService.setTitle("Kanban");
+  }
 
   ngOnInit(): void {
 
