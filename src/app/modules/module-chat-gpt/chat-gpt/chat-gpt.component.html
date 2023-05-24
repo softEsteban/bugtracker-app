@@ -2,7 +2,14 @@
 <p>This is a experimental integration with the OpenAI API and their models</p>
 
 <nz-row class="chat-messages" #chatMessages>
-  <nz-col nzXs="24" nzSm="18" class="chat-wrapper">
+  <nz-row
+    *ngIf="history.length == 0"
+    style="width: 100%; align-items: center; text-align: center"
+  >
+    <p>No mesagges yet!</p>
+  </nz-row>
+
+  <nz-col *ngIf="history.length > 0" nzXs="24" nzSm="18">
     <div
       class="message"
       *ngFor="let message of history"

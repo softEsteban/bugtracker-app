@@ -20,22 +20,24 @@ export class ChatGptComponent implements OnInit {
 
   @ViewChild('chatMessages', { static: true }) chatMessages!: ElementRef;
 
+  userData: any;
+  userName: string = "";
   inputText: string = "";
   history: ChatHistory[] = [
-    {
-      msg_id: "1",
-      msg_text: "Hola",
-      msg_datins: "26/05/23 12:22 PM",
-      use_name: "Esteban",
-      use_code: "estebantoro.greenamn@gmail.com",
-    },
-    {
-      msg_id: "1",
-      msg_text: "¿En que puedo ayudarte?",
-      msg_datins: "26/05/23 12:22 PM",
-      use_name: "Chat GPT",
-      use_code: "chat-gpt",
-    }
+    // {
+    //   msg_id: "1",
+    //   msg_text: "Hola",
+    //   msg_datins: "26/05/23 12:22 PM",
+    //   use_name: "Esteban",
+    //   use_code: "estebantoro.greenamn@gmail.com",
+    // },
+    // {
+    //   msg_id: "1",
+    //   msg_text: "¿En que puedo ayudarte?",
+    //   msg_datins: "26/05/23 12:22 PM",
+    //   use_name: "Chat GPT",
+    //   use_code: "chat-gpt",
+    // }
   ];
 
   constructor(
@@ -46,16 +48,28 @@ export class ChatGptComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUserData();
   }
 
   async sendChat(text: string) {
+
+    const currentDate = new Date();
+
+    const day = currentDate.getDate().toString().padStart(2, '0');
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    const year = currentDate.getFullYear().toString().slice(-2);
+    const hours = currentDate.getHours();
+    const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const formattedTime = `${day}/${month}/${year} ${hours}:${minutes} ${period}`;
+
     //User input
     this.history.push({
       msg_id: "3",
       msg_text: text,
-      msg_datins: "26/05/23 12:22 PM",
-      use_name: "Esteban",
-      use_code: "estebantoro.greenamn@gmail.com"
+      msg_datins: formattedTime,
+      use_name: this.userName,
+      use_code: ""
     })
 
     this.inputText = "";
@@ -73,7 +87,7 @@ export class ChatGptComponent implements OnInit {
       this.history.push({
         msg_id: "3",
         msg_text: response.data,
-        msg_datins: "26/05/23 12:22 PM",
+        msg_datins: formattedTime,
         use_name: "Chat GPT",
         use_code: "chat-gpt"
       })
@@ -83,6 +97,13 @@ export class ChatGptComponent implements OnInit {
     this.scrollToBottom();
   }
 
+  getUserData() {
+    let user = localStorage.getItem("user");
+    if (user != null) {
+      this.userData = JSON.parse(user);
+      this.userName = this.userData.use_name;
+    }
+  }
 
   scrollToBottom() {
     setTimeout(() => {
