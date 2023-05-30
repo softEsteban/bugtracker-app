@@ -6,7 +6,7 @@ import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProjectsService } from '../services/projects.service';
-import { FirebaseService } from 'src/app/services/firabase.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-create-item',
