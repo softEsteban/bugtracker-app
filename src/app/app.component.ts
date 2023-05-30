@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Observable } from 'rxjs';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getStorage } from "firebase/storage";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +23,15 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
+
+    const firebaseConfig = environment.firebaseConfig;
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    // Initialize Cloud Storage and get a reference to the service
+    getStorage(app);
   }
 
   toggleContent() {

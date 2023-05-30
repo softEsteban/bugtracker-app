@@ -7,6 +7,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { CreateItemComponent } from './create-item/create-item.component';
 import { AddUsersComponent } from './add-users/add-users.component';
+import { FirebaseService } from 'src/app/services/firabase.service';
 
 
 
@@ -23,6 +24,9 @@ import { AddUsersComponent } from './add-users/add-users.component';
     NgZorroModule,
     ReactiveFormsModule,
     FormsModule
+  ],
+  providers: [
+    FirebaseService
   ]
 })
 export class ProjectsModule { }

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef } from 'ng-zorro-antd/modal';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProjectsService } from '../services/projects.service';
+import { FirebaseService } from 'src/app/services/firabase.service';
 
 @Component({
   selector: 'app-create-item',
@@ -46,11 +47,13 @@ export class CreateItemComponent implements OnInit {
     private message: NzMessageService,
     private authService: AuthService,
     private projectsService: ProjectsService,
-    private modalRef: NzModalRef
+    private modalRef: NzModalRef,
+    private firebaseService: FirebaseService
   ) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.firebaseService.listAllFiles();
   }
   private initForm(): void {
     this.itemForm = this.fb.group({
@@ -60,6 +63,18 @@ export class CreateItemComponent implements OnInit {
       // item_users: [[]]
     });
   }
+
+  handleFileChange(event: NzUploadChangeParam): void {
+    const fileList: NzUploadFile[] = event.fileList;
+    if (fileList.length > 0) {
+      const file: File = fileList[0].originFileObj!;
+      console.log(file)
+      // Use the file as needed (e.g., pass it to the uploadFile() method)
+      this.firebaseService.uploadFile(file);
+    }
+  }
+
+
 
   async createItem({ value, valid }: { value: any, valid: boolean }) {
 
