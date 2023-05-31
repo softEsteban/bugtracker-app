@@ -11,12 +11,13 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 @Component({
   selector: 'app-create-item',
   templateUrl: './create-item.component.html',
-  styleUrls: ['./create-item.component.css']
+  styleUrls: ['./create-item.component.scss']
 })
 export class CreateItemComponent implements OnInit {
 
   public itemForm!: FormGroup;
 
+  public uploadedFile!: File;
   loading = false;
   avatarUrl?: string;
 
@@ -64,17 +65,22 @@ export class CreateItemComponent implements OnInit {
     });
   }
 
+  previewFile(file: File): void {
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.avatarUrl = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
   handleFileChange(event: NzUploadChangeParam): void {
     const fileList: NzUploadFile[] = event.fileList;
     if (fileList.length > 0) {
       const file: File = fileList[0].originFileObj!;
-      console.log(file)
-      // Use the file as needed (e.g., pass it to the uploadFile() method)
-      this.firebaseService.uploadFile(file);
+      this.previewFile(file);
+      this.uploadedFile = file;
     }
   }
-
-
 
   async createItem({ value, valid }: { value: any, valid: boolean }) {
 
@@ -88,6 +94,14 @@ export class CreateItemComponent implements OnInit {
       item_status: this.itemForm.get('item_status')?.value,
       use_code: userId
     };
+
+    //Uploads file
+    if (this.uploadedFile) {
+      const fileUrl = this.firebaseService.uploadFile(this.uploadedFile, "items/", { "useCode": userId, "proCode": this.proCode, "itemType": this.itemType });
+      console.log("File urll")
+      console.log(fileUrl)
+    }
+
 
     try {
       const data = await this.projectsService.createItem(itemData);

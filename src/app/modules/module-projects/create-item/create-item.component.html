@@ -21,7 +21,9 @@
           </div>
         </nz-col>
       </nz-form-control>
+    </nz-row>
 
+    <nz-row>
       <nz-form-control nzHasFeedback>
         <nz-col nzXs="24" nzSm="24">
           <h5 nz-typography>Description*</h5>
@@ -74,43 +76,26 @@
       </nz-form-control>
     </nz-row>
 
-    <!-- <nz-upload
-      class="avatar-uploader"
-      nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-      nzName="avatar"
-      nzListType="picture-card"
-      [nzShowUploadList]="false"
-      [nzBeforeUpload]="beforeUpload"
-      (nzChange)="handleChange($event)"
-    >
-      <ng-container *ngIf="!avatarUrl">
-        <span
-          class="upload-icon"
-          nz-icon
-          [nzType]="loading ? 'loading' : 'plus'"
-        ></span>
-        <div class="ant-upload-text">Upload</div>
-      </ng-container>
-      <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
-    </nz-upload> -->
-
-    <nz-upload
-      class="avatar-uploader"
-      nzListType="picture-card"
-      [nzShowUploadList]="false"
-      [nzBeforeUpload]="beforeUpload"
-      (nzChange)="handleFileChange($event)"
-    >
-      <ng-container *ngIf="!avatarUrl">
-        <span
-          class="upload-icon"
-          nz-icon
-          [nzType]="loading ? 'loading' : 'plus'"
-        ></span>
-        <div class="ant-upload-text">Upload</div>
-      </ng-container>
-      <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
-    </nz-upload>
+    <nz-row>
+      <h5 nz-typography>Attach a file</h5>
+      <nz-upload
+        class="avatar-uploader"
+        nzListType="picture-card"
+        [nzShowUploadList]="false"
+        [nzBeforeUpload]="beforeUpload"
+        (nzChange)="handleFileChange($event)"
+      >
+        <ng-container *ngIf="!avatarUrl">
+          <span
+            class="upload-icon"
+            nz-icon
+            [nzType]="loading ? 'loading' : 'plus'"
+          ></span>
+          <div class="ant-upload-text">Upload</div>
+        </ng-container>
+        <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+      </nz-upload>
+    </nz-row>
 
     <!--     
     <nz-row>

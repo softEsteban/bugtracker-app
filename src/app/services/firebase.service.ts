@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { getStorage, ref, uploadBytes, listAll } from "firebase/storage";
+import { getStorage, ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+
+interface CustomMetadata {
+    [key: string]: any;
+}
+
 
 @Injectable({
     providedIn: 'root'
 })
+
+
 export class FirebaseService {
 
     host = environment.host;
@@ -16,17 +23,31 @@ export class FirebaseService {
         this.storageRef = ref(this.storage);
     }
 
-    uploadFile(file: File): Promise<any> {
-        const childRef = ref(this.storageRef, 'files/' + file.name);
-        return uploadBytes(childRef, file).then((snapshot) => {
-            console.log('Uploaded a blob or file!');
-        });
+    uploadFile(file: File, path?: string, metadata?: CustomMetadata) {
+        const refUrl = path || "" + file.name;
+        const childRef = ref(this.storageRef, refUrl);
+
+        return uploadBytes(childRef, file, { customMetadata: metadata })
+            .then((snapshot) => {
+                console.log('Uploaded a blob or file!');
+                return getDownloadURL(childRef)
+                    .then((urlUpload) => {
+                        console.log(urlUpload);
+                        return urlUpload;
+                    });
+            })
+            .catch((error) => {
+                console.error('Error uploading file:', error);
+                throw error;
+            });
     }
+
 
     listAllFiles(): Promise<any> {
         return listAll(this.storageRef).then((result) => {
             console.log('List of files:');
             result.items.forEach((itemRef) => {
+                console.log('File obj:', itemRef);
                 console.log('File:', itemRef.name);
             });
         });
