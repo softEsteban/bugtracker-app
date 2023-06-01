@@ -24,7 +24,7 @@ export class FirebaseService {
     }
 
     uploadFile(file: File, path?: string, metadata?: CustomMetadata) {
-        const refUrl = path || "" + file.name;
+        const refUrl = (path || "") + file.name;
         const childRef = ref(this.storageRef, refUrl);
 
         return uploadBytes(childRef, file, { customMetadata: metadata })

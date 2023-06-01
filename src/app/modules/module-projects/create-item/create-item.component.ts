@@ -86,22 +86,21 @@ export class CreateItemComponent implements OnInit {
 
     const userId = this.authService.getSessionUserId();
 
+    // Uploads file
+    let fileUrl: string | undefined;
+    if (this.uploadedFile) {
+      fileUrl = await this.firebaseService.uploadFile(this.uploadedFile, "items/", { "useCode": userId, "proCode": this.proCode, "itemType": this.itemType });
+    }
+
     const itemData = {
       item_title: this.itemForm.get('item_title')?.value,
       item_descri: this.itemForm.get('item_descri')?.value,
       item_type: this.itemType,
       pro_code: this.proCode,
       item_status: this.itemForm.get('item_status')?.value,
-      use_code: userId
+      use_code: userId,
+      item_file: fileUrl
     };
-
-    //Uploads file
-    if (this.uploadedFile) {
-      const fileUrl = this.firebaseService.uploadFile(this.uploadedFile, "items/", { "useCode": userId, "proCode": this.proCode, "itemType": this.itemType });
-      console.log("File urll")
-      console.log(fileUrl)
-    }
-
 
     try {
       const data = await this.projectsService.createItem(itemData);
@@ -125,19 +124,23 @@ export class CreateItemComponent implements OnInit {
 
   beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]): Observable<boolean> =>
     new Observable((observer: Observer<boolean>) => {
-      const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-      if (!isJpgOrPng) {
-        this.message.error('You can only upload JPG file!');
+      const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+
+      const isAllowedType = file.type && allowedTypes.includes(file.type);
+      if (!isAllowedType) {
+        this.message.error('You can only upload JPG, PNG, PDF, Excel, or Word files!');
         observer.complete();
         return;
       }
+
       const isLt2M = file.size! / 1024 / 1024 < 2;
       if (!isLt2M) {
-        this.message.error('Image must smaller than 2MB!');
+        this.message.error('File must smaller than 2MB!');
         observer.complete();
         return;
       }
-      observer.next(isJpgOrPng && isLt2M);
+
+      observer.next(isAllowedType && isLt2M);
       observer.complete();
     });
 
