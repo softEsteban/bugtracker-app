@@ -1,0 +1,34 @@
+<p>files-viewer works!</p>
+
+<!-- <img [src]="myImage" width="100%" />
+<pdf-viewer
+  src="https://firebasestorage.googleapis.com/v0/b/mantis-project-7c277.appspot.com/o/items%2FGA6-220501096-AA1-EV02%20-%20Crea%20modelo%20entidad%20relación%20de%20caso.pdf?alt=media&token=94be9505-6465-429a-abd2-d8d1a7ceec55&_gl=1*b65kui*_ga*ODU4MzgwMDIuMTY3OTg3OTU4NQ..*_ga_CW55HF8NVT*MTY4NTc0OTQ0MC4yMC4xLjE2ODU3NDk4MDIuMC4wLjA."
+  [render-text]="true"
+  [original-size]="false"
+  style="width: 400px; height: 500px"
+></pdf-viewer> -->
+
+<div class="files-container">
+  <div nz-row>
+    <div
+      class="file-card"
+      nz-col
+      nzXs="24"
+      nzSm="5"
+      *ngFor="let data of files; let i = index"
+      style="padding: 50px 15px 35px"
+    >
+      <!-- (click)="viewProjectDetail(data)" -->
+      <a
+        [ngStyle]="{
+          'font-size': '16px',
+          color: 'black',
+          'font-weight': '300'
+        }"
+      >
+        {{ data.doc_name }}
+      </a>
+      <!-- <p [ngStyle]="{ 'font-size': '11px' }">{{ data.doc_url }}</p> -->
+    </div>
+  </div>
+</div>

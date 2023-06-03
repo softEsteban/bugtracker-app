@@ -8,6 +8,7 @@ import { CreateProjectComponent } from './create-project/create-project.componen
 import { CreateItemComponent } from './create-item/create-item.component';
 import { AddUsersComponent } from './add-users/add-users.component';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { GlobalModule } from '../module-global/global.module';
 
 
 
@@ -23,7 +24,8 @@ import { FirebaseService } from 'src/app/services/firebase.service';
     CommonModule,
     NgZorroModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    GlobalModule
   ],
   providers: [
     FirebaseService

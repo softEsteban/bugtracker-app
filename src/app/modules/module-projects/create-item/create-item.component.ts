@@ -43,6 +43,23 @@ export class CreateItemComponent implements OnInit {
     }
   ];
 
+  defaultFileList: NzUploadFile[] = [
+    // {
+    //   uid: '-1',
+    //   name: 'xxx.png',
+    //   status: 'done',
+    //   url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    //   thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+    // },
+    // {
+    //   uid: '-2',
+    //   name: 'yyy.png',
+    //   status: 'error'
+    // }
+  ];
+
+  fileList = [...this.defaultFileList];
+
   constructor(
     private fb: FormBuilder,
     private message: NzMessageService,
@@ -82,6 +99,16 @@ export class CreateItemComponent implements OnInit {
     }
   }
 
+  handleFilesUpload(event: NzUploadChangeParam): void {
+    const fileList: NzUploadFile[] = event.fileList;
+    if (fileList.length > 0) {
+      // const file: File = fileList[0].originFileObj!;
+      console.log(fileList)
+      // this.previewFile(file);
+      // this.uploadedFile = file;
+    }
+  }
+
   async createItem({ value, valid }: { value: any, valid: boolean }) {
 
     const userId = this.authService.getSessionUserId();
@@ -89,7 +116,7 @@ export class CreateItemComponent implements OnInit {
     // Uploads file
     let fileUrl: string | undefined;
     if (this.uploadedFile) {
-      fileUrl = await this.firebaseService.uploadFile(this.uploadedFile, "items/", { "useCode": userId, "proCode": this.proCode, "itemType": this.itemType });
+      fileUrl = await this.firebaseService.uploadFile(this.uploadedFile, "items/", { "useCode": userId, "proCode": this.proCode, "itemType": this.itemType, "docType": this.uploadedFile.type });
     }
 
     const itemData = {

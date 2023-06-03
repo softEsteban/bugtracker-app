@@ -102,18 +102,27 @@
 
       <nz-list nzItemLayout="horizontal">
         <nz-list-item *ngFor="let item of displayedIssues">
-          <nz-skeleton
+          <!-- <nz-skeleton
             [nzLoading]="loading"
             [nzActive]="true"
             [nzAvatar]="true"
+          > -->
+          <nz-list-item-meta
+            nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            [nzTitle]="item.item_title"
+            [nzDescription]="item.item_descri | slice : 0 : 100"
           >
-            <nz-list-item-meta
-              nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              [nzTitle]="item.item_title"
-              [nzDescription]="item.item_descri | slice : 0 : 100"
-            >
-            </nz-list-item-meta>
-          </nz-skeleton>
+          </nz-list-item-meta>
+          <!-- </nz-skeleton> -->
+          <nz-tag
+            *ngIf="item.item_docs.length > 0"
+            color="blue"
+            style="cursor: pointer"
+            (click)="viewFile(item.item_docs)"
+          >
+            <i nz-icon nzType="file"></i>
+            File
+          </nz-tag>
         </nz-list-item>
       </nz-list>
       <nz-pagination

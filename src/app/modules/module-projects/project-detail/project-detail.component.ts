@@ -4,11 +4,13 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { CreateItemComponent } from '../create-item/create-item.component';
 import { AddUsersComponent } from '../add-users/add-users.component';
 import { GlobalService } from 'src/app/services/global.service';
+import { FilesViewerComponent } from '../../module-global/files-viewer/files-viewer.component';
 
 interface Item {
   item_code: string;
   item_title: string;
   item_descri: string;
+  item_docs: [];
 }
 
 @Component({
@@ -165,5 +167,32 @@ export class ProjectDetailComponent implements OnInit {
     });
   }
 
+  async viewFile(files: any) {
+    console.log(files)
+    const modal = this.modal.create({
+      nzTitle: `Files viewer`,
+      nzStyle: {
+        "@media (max-width: 767px)": {
+          width: "560px",
+          top: '0px'
+        },
+        "@media (min-width: 768px)": {
+          width: "900px",
+          top: '0px'
+        }
+      },
+      nzContent: FilesViewerComponent,
+      nzOnCancel: () => { },
+      nzViewContainerRef: this.viewContainerRef,
+      nzComponentParams: {
+        files: files
+      },
+      nzOnOk: () => { },
+      nzFooter: []
+    });
+    await modal.afterClose.subscribe(createdProject => {
+      // this.getProjectItems();
+    });
+  }
 
 }

@@ -76,9 +76,9 @@
       </nz-form-control>
     </nz-row>
 
-    <nz-row>
+    <nz-row style="display: inline">
       <h5 nz-typography>Attach a file</h5>
-      <nz-upload
+      <!-- <nz-upload
         class="avatar-uploader"
         nzListType="picture-card"
         [nzShowUploadList]="false"
@@ -94,6 +94,19 @@
           <div class="ant-upload-text">Upload</div>
         </ng-container>
         <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+      </nz-upload> -->
+      <nz-upload
+        class="upload-list-inline"
+        nzListType="picture"
+        [(nzFileList)]="fileList"
+        (nzChange)="handleFilesUpload($event)"
+      >
+        <button nz-button>
+          <span>
+            <span nz-icon nzType="upload"></span>
+            Upload
+          </span>
+        </button>
       </nz-upload>
     </nz-row>
 

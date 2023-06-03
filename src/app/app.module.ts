@@ -15,6 +15,8 @@ import { ChatModule } from './modules/module-chat/chat.module';
 import { HomeModule } from './modules/module-home/home.module';
 import { DashboardModule } from './modules/module-dashboard/dashboard.module';
 import { ChatGptModule } from './modules/module-chat-gpt/chat-gpt.module';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { GlobalModule } from './modules/module-global/global.module';
 
 registerLocaleData(en);
 
@@ -36,9 +38,11 @@ registerLocaleData(en);
     ChatModule,
     ChatGptModule,
     DashboardModule,
+    // GlobalModule,
     AppRoutingModule,
     IconsProviderModule,
-    NgZorroModule
+    NgZorroModule,
+    PdfViewerModule
   ]
 })
 export class AppModule { }
