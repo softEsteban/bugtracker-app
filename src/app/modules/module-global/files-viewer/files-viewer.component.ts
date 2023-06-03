@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-interface File {
+interface IFile {
   doc_url: string;
   doc_name: string;
+  doc_type: string;
 }
 
 @Component({
@@ -13,11 +14,8 @@ interface File {
 export class FilesViewerComponent implements OnInit {
 
   public myImage: string = "";
-  public files: File[] = [
-    { doc_name: "TEST IMAGE", doc_url: "" },
-    { doc_name: "TEST PDF", doc_url: "" },
-    { doc_name: "TEST PDF", doc_url: "" },
-    { doc_name: "TEST EXCEL", doc_url: "" },
+  public files: IFile[] = [
+
   ];
 
   constructor() { }
@@ -26,6 +24,19 @@ export class FilesViewerComponent implements OnInit {
     if (this.files.length > 0 && this.files[0].doc_url) {
       this.myImage = this.files[0].doc_url;
     }
+  }
+
+  getFileType(fileType: string) {
+    if (fileType.includes("pdf")) {
+      return "PDF";
+    }
+    else if (fileType.includes("png")) {
+      return "PNG";
+    }
+    else if (fileType.includes("jpg")) {
+      return "JPG";
+    }
+    return "";
   }
 
 }

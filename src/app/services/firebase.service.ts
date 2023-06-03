@@ -43,20 +43,13 @@ export class FirebaseService {
     }
 
 
-    uploadFiles(files: File[], path?: string, metadata?: CustomMetadata) {
+    uploadFiles(files: File[], path?: string, metadata?: CustomMetadata): Promise<string[]> {
         const uploadPromises = files.map((file) => {
             const refUrl = (path || "") + file.name;
             const childRef = ref(this.storageRef, refUrl);
 
             return uploadBytes(childRef, file, { customMetadata: metadata })
-                .then((snapshot) => {
-                    console.log('Uploaded a blob or file:', file.name);
-                    return getDownloadURL(childRef)
-                        .then((urlUpload) => {
-                            console.log(urlUpload);
-                            return urlUpload;
-                        });
-                })
+                .then(() => getDownloadURL(childRef))
                 .catch((error) => {
                     console.error('Error uploading file:', file.name, error);
                     throw error;
