@@ -78,28 +78,13 @@
 
     <nz-row style="display: inline; margin-bottom: 12px">
       <h5 nz-typography>Attach a file</h5>
-      <!-- <nz-upload
-        class="avatar-uploader"
-        nzListType="picture-card"
-        [nzShowUploadList]="false"
-        [nzBeforeUpload]="beforeUpload"
-        (nzChange)="handleFileChange($event)"
-      >
-        <ng-container *ngIf="!avatarUrl">
-          <span
-            class="upload-icon"
-            nz-icon
-            [nzType]="loading ? 'loading' : 'plus'"
-          ></span>
-          <div class="ant-upload-text">Upload</div>
-        </ng-container>
-        <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
-      </nz-upload> -->
+
       <nz-upload
         class="upload-list-inline"
         nzListType="picture"
         [(nzFileList)]="fileList"
         (nzChange)="handleFilesUpload($event)"
+        [nzBeforeUpload]="beforeUpload"
       >
         <button nz-button>
           <span>

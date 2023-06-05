@@ -83,7 +83,6 @@ export class CreateItemComponent implements OnInit {
 
   handleFilesUpload(event: NzUploadChangeParam): void {
     const fileList: NzUploadFile[] = event.fileList;
-    console.log(fileList);
     if (fileList.length > 0) {
       const list = fileList
         .map((file) => file.originFileObj as File | undefined)
@@ -92,6 +91,37 @@ export class CreateItemComponent implements OnInit {
       this.uploadedFiles = list;
     }
   }
+
+  beforeUpload = (file: NzUploadFile): boolean => {
+    // Define allowed file types
+    const allowedTypes = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'image/png',
+      'image/jpeg',
+      'application/vnd.ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    ];
+
+    // Define maximum file size in bytes
+    const maxFileSize = 2 * 1024 * 1024;
+
+    // Perform file type and size checks
+    const isValidType = typeof file.type === 'string' && allowedTypes.includes(file.type);
+    const isValidSize = typeof file.size === 'number' && file.size <= maxFileSize;
+
+    if (!isValidType) {
+      this.createMessage("error", "Invalid file type. Please upload an image (JPEG, PNG, PDF, DOC, EXCEL).");
+    }
+
+    if (!isValidSize) {
+      this.createMessage("error", "File size exceeds the maximum limit (2MB).");
+    }
+
+    return isValidType && isValidSize;
+  };
+
 
 
   async createItem({ value, valid }: { value: any, valid: boolean }) {
@@ -144,33 +174,5 @@ export class CreateItemComponent implements OnInit {
   createMessage(type: string, text: string): void {
     this.message.create(type, `${text}`);
   }
-
-  // beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]): Observable<boolean> =>
-  //   new Observable((observer: Observer<boolean>) => {
-  //     const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-
-  //     const isAllowedType = file.type && allowedTypes.includes(file.type);
-  //     if (!isAllowedType) {
-  //       this.message.error('You can only upload JPG, PNG, PDF, Excel, or Word files!');
-  //       observer.complete();
-  //       return;
-  //     }
-
-  //     const isLt2M = file.size! / 1024 / 1024 < 2;
-  //     if (!isLt2M) {
-  //       this.message.error('File must smaller than 2MB!');
-  //       observer.complete();
-  //       return;
-  //     }
-
-  //     observer.next(isAllowedType && isLt2M);
-  //     observer.complete();
-  //   });
-
-  // private getBase64(img: File, callback: (img: string) => void): void {
-  //   const reader = new FileReader();
-  //   reader.addEventListener('load', () => callback(reader.result!.toString()));
-  //   reader.readAsDataURL(img);
-  // }
 
 }
