@@ -5,6 +5,7 @@ import { NgZorroModule } from 'src/app/shared/ng-zorro.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { UsersRoutingModule } from './users-routing.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
   ],
   imports: [
     CommonModule,
+    UsersRoutingModule,
     NgZorroModule,
     ReactiveFormsModule,
     FormsModule

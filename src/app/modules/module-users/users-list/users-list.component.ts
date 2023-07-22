@@ -119,7 +119,7 @@ export class UsersListComponent implements OnInit {
   }
 
   viewUserDetail(user: any) {
-    this.router.navigate(['/user', user.use_code], { state: { user: user } });
+    this.router.navigate(['/users', user.use_code], { state: { user: user } });
   }
 
   /**

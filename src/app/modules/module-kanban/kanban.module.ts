@@ -4,6 +4,7 @@ import { BoardComponent } from './board/board.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgZorroModule } from 'src/app/shared/ng-zorro.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { KanbanRoutingModule } from './kanban-routing.module';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    KanbanRoutingModule,
     NgZorroModule,
     DragDropModule,
     ReactiveFormsModule,

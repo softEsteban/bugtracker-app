@@ -90,4 +90,8 @@ export class LayoutComponent implements OnInit {
     });
   }
 
+  toggleSider() {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
 }

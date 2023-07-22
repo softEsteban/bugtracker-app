@@ -86,7 +86,7 @@ export class ProjectsListComponent implements OnInit {
   }
 
   viewProjectDetail(project: any) {
-    this.router.navigate(['/project', project.pro_code], { state: { project: project } });
+    this.router.navigate(['/projects', project.pro_code], { state: { project: project } });
   }
 
   async createComponentModal(): Promise<void> {
