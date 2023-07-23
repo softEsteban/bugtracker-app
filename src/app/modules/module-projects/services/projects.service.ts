@@ -26,9 +26,9 @@ export class ProjectsService {
         );
     }
 
-    async getDevelopersSelect() {
+    async getUsersSelect() {
         return await lastValueFrom(
-            this.http.get(`${this.host}/domains/getDevelopersSelect`, { headers: { Authorization: `Bearer ${this.token}` } })
+            this.http.get(`${this.host}/domains/getUsersSelect`, { headers: { Authorization: `Bearer ${this.token}` } })
         );
     }
 

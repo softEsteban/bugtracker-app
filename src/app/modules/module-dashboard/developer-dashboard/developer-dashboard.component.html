@@ -1,14 +1,12 @@
-<h3 nz-typography>Developer Dashboard</h3>
+<h3 nz-typography>My projects</h3>
+<h3 class="project-heading">My projects</h3>
 
-<nz-row nzGutter="10" style="margin-bottom: 35px">
-  <nz-col nzXs="8" nzSm="4">
-    <nz-card
-      style="border-radius: 23px; cursor: pointer"
-      routerLink="/projects"
-    >
-      <h3>My Projects</h3>
+<div class="project-container">
+  <div class="project-card" *ngFor="let item of projects">
+    <div class="project-card-inner" routerLink="/projects">
+      <h3>{{ item.pro_title }}</h3>
       <i nz-icon nzType="project" nzTheme="outline"></i>
       <span>Projects</span>
-    </nz-card>
-  </nz-col>
-</nz-row>
+    </div>
+  </div>
+</div>

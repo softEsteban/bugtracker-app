@@ -20,6 +20,12 @@ export class DashboardsService {
         this.token = this.authService.getSessionToken();
     }
 
+    async getProjectsByUser(userId: string) {
+        return await lastValueFrom(
+            this.http.get(`${this.host}/projects/getProjectsByUser/${userId}`, { headers: { Authorization: `Bearer ${this.token}` } })
+        );
+    }
+
     async getProjectsCountByUsers() {
         return await lastValueFrom(
             this.http.get(`${this.host}/projects/getProjectsCountByUsers`, { headers: { Authorization: `Bearer ${this.token}` } })

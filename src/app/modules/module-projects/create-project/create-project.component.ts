@@ -52,7 +52,7 @@ export class CreateProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.getDevelopersData();
+    this.getUsersSelectData();
   }
 
   private initForm(): void {
@@ -66,8 +66,8 @@ export class CreateProjectComponent implements OnInit {
     });
   }
 
-  async getDevelopersData() {
-    let data: any = await this.projectsService.getDevelopersSelect();
+  async getUsersSelectData() {
+    let data: any = await this.projectsService.getUsersSelect();
     if (data.data.length > 0) {
       this.developerSelect = data.data;
       this.projectForm.patchValue({
