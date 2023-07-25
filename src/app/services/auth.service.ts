@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, lastValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { User } from '../interfaces/user.interface';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -31,6 +33,8 @@ export class AuthService {
         );
         return response;
     }
+
+
 
     get isAuthenticated$(): Observable<boolean> {
         return this.isAuthenticatedSubject.asObservable();

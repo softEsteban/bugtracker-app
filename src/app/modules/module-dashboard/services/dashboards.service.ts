@@ -21,9 +21,9 @@ export class DashboardsService {
     }
 
     async getProjectsByUser(userId: string) {
-        return await lastValueFrom(
-            this.http.get(`${this.host}/projects/getProjectsByUser/${userId}`, { headers: { Authorization: `Bearer ${this.token}` } })
-        );
+        // return await lastValueFrom(
+        //     this.http.get(`${this.host}/projects/getProjectsByUser/${userId}`, { headers: { Authorization: `Bearer ${this.token}` } })
+        // );
     }
 
     async getProjectsCountByUsers() {

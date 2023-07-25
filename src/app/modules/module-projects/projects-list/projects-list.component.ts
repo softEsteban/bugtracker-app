@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { CreateProjectComponent } from '../create-project/create-project.component';
 import { GlobalService } from 'src/app/services/global.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 interface UserData {
   use_code: string;
@@ -37,18 +38,33 @@ export class ProjectsListComponent implements OnInit {
   filteredData: ProjectData[] = [];
   searchText: string = '';
 
+  projectsTitle: string = '';
+  userCode: string = '';
+  userType: string = '';
+
   constructor(
     private projectsService: ProjectsService,
     private router: Router,
     private modal: NzModalService,
     private viewContainerRef: ViewContainerRef,
-    private globalService: GlobalService) {
+    private globalService: GlobalService,
+    private authService: AuthService
+  ) {
     globalService.setTitle("Projects");
 
   }
 
   ngOnInit(): void {
-    this.getProjects();
+    this.userType = this.authService.getSessionUserType();
+    this.userCode = this.authService.getSessionUserId();
+
+    if (this.userType === "Admin") {
+      this.getProjects();
+      this.projectsTitle = 'Projects';
+    } else {
+      this.getProjectsByUser();
+      this.projectsTitle = 'My Projects';
+    }
   }
 
   /**
@@ -56,6 +72,14 @@ export class ProjectsListComponent implements OnInit {
    */
   async getProjects() {
     let data: any = await this.projectsService.getAllProjects();
+    if (data.data.length > 0) {
+      this.listOfData = data.data;
+      this.filteredData = data.data;
+    }
+  }
+
+  async getProjectsByUser() {
+    let data: any = await this.projectsService.getProjectsByUser(this.userCode);
     if (data.data.length > 0) {
       this.listOfData = data.data;
       this.filteredData = data.data;
