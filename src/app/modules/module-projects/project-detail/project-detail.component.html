@@ -1,6 +1,22 @@
 <div class="view-user">
   <h3 nz-typography>{{ project?.pro_title }}</h3>
   <p>{{ project?.pro_descri }}</p>
+  <p>
+    by <b> {{ project?.pro_owner }} </b>
+  </p>
+
+  <nz-row>
+    <nz-col
+      ><p>
+        {{ project?.pro_datstart }}
+      </p>
+    </nz-col>
+    <nz-col
+      ><p>
+        {{ project?.pro_datend }}
+      </p>
+    </nz-col>
+  </nz-row>
 
   <nz-row class="buttons-bar" style="margin: 27px 0">
     <nz-col nzXs="24" nzSm="12" nzMd="4">

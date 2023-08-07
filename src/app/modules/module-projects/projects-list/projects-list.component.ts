@@ -13,6 +13,7 @@ interface UserData {
 
 interface ProjectData {
   [key: string]: any;
+  pro_owner: string;
   pro_code: string;
   pro_title: string;
   pro_descri: string;
@@ -67,9 +68,6 @@ export class ProjectsListComponent implements OnInit {
     }
   }
 
-  /**
-   * Gets projects from API
-   */
   async getProjects() {
     let data: any = await this.projectsService.getAllProjects();
     if (data.data.length > 0) {
